@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BabyBeam — privé-babyfoon met twee telefoons</title>
+  <meta name="description" content="Maak van twee iPhones of iPads een privé-videobabyfoon. Geen account, geen abonnement, niets opgeslagen.">
+  <meta property="og:title" content="BabyBeam — privé-babyfoon met twee telefoons">
+  <meta property="og:description" content="Geen account, geen abonnement, niets opgeslagen. Beeld en geluid gaan rechtstreeks en versleuteld van telefoon naar telefoon.">
+  <meta property="og:image" content="https://jimmyrentmeester.github.io/babybeam/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root { color-scheme: light dark;
+      --peri:#6678f5; --violet:#9668f0; --ink:#1c1b2e; --paper:#f4f2fb; }
+    @media (prefers-color-scheme: dark) { :root { --ink:#eceafd; --paper:#12111f; } }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+      color:var(--ink); background:var(--paper);
+      background-image:radial-gradient(60rem 30rem at 50% -12rem, rgba(122,110,243,.28), transparent); }
+    main { max-width:46rem; margin:0 auto; padding:4.5rem 1.4rem 3rem; text-align:center; }
+    .icon { width:104px; height:104px; border-radius:24px;
+      box-shadow:0 12px 34px rgba(150,104,240,.38); }
+    h1 { font-size:clamp(2rem,7vw,2.8rem); margin:.9rem 0 .3rem; letter-spacing:-.5px; }
+    .tag { font-size:1.15rem; opacity:.75; margin:0 0 2rem; }
+    .usps { display:grid; gap: .9rem; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+      margin:0 0 2.4rem; padding:0; list-style:none; text-align:left; }
+    .usps li { background:rgba(122,110,243,.09); border:1px solid rgba(122,110,243,.25);
+      border-radius:16px; padding:1rem 1.1rem; font-size:.95rem; line-height:1.45; }
+    .usps b { display:block; margin-bottom:.2rem; }
+    .cta { display:inline-block; padding:.9rem 1.7rem; border-radius:999px; font-weight:700;
+      color:#fff; text-decoration:none; background:linear-gradient(135deg,var(--peri),var(--violet));
+      box-shadow:0 8px 24px rgba(122,110,243,.4); }
+    .soon { display:block; margin-top:.7rem; font-size:.85rem; opacity:.6; }
+    footer { margin-top:3.2rem; font-size:.85rem; opacity:.65; }
+    footer a { color:var(--peri); }
+  </style>
+</head>
+<body>
+<main>
+  <img class="icon" src="icon.png" alt="BabyBeam-app-icoon: maan met sterren">
+  <h1>BabyBeam</h1>
+  <p class="tag">Maak van twee iPhones of iPads een privé-videobabyfoon.</p>
+
+  <ul class="usps">
+    <li><b>Écht privé</b>Beeld en geluid gaan rechtstreeks en end-to-end versleuteld van telefoon naar telefoon. Er wordt niets opgenomen of bewaard.</li>
+    <li><b>Geen gedoe</b>Geen account, geen abonnement, geen advertenties. Koppelen met één code of een QR-scan — ook oma lukt het.</li>
+    <li><b>Slim alarm</b>Herkent echt huilen (on-device), waarschuwt op je lockscreen en toont batterij en status van de babytelefoon.</li>
+    <li><b>Nachtklaar</b>Nachtzicht, gedimd scherm, white noise en slaapliedjes op afstand, en een alleen-luisteren-stand.</li>
+  </ul>
+
+  <a class="cta" href="#" aria-disabled="true">Binnenkort in de App Store</a>
+  <span class="soon">Nu in besloten test via TestFlight — vraag Jimmy om een uitnodiging.</span>
+
+  <footer>
+    <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a> ·
+    <a href="mailto:madebyjire@icloud.com">Contact</a><br>
+    © 2026 Jimmy Rentmeester
+  </footer>
+</main>
+</body>
+</html>
