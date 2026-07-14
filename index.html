@@ -3,27 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Apps</title>
+<title>Jimmy Rentmeester — Apps</title>
+<meta name="description" content="Small, private, no-nonsense iOS apps by Jimmy Rentmeester. No accounts, no ads, no tracking.">
+<meta property="og:title" content="Jimmy Rentmeester — Apps">
+<meta property="og:description" content="Small, private, no-nonsense iOS apps. No accounts, no ads, no tracking.">
+<meta property="og:type" content="website">
 <style>
-  :root { --cyan:#33f2ff; --magenta:#ff33cc; --bg:#05060c; }
-  body { margin:0; min-height:100vh; background:var(--bg); color:#e8ecf4; display:flex; align-items:center; justify-content:center;
-         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; text-align:center;
-         background-image:linear-gradient(rgba(120,90,200,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,90,200,.07) 1px,transparent 1px); background-size:44px 44px; }
-  .h { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-weight:800; font-size:clamp(26px,7vw,46px); letter-spacing:2px;
-       color:var(--cyan); text-shadow:0 0 26px rgba(51,242,255,.5); margin:0; }
-  .t { color:var(--magenta); font-family:ui-monospace,monospace; margin:8px 0 34px; }
-  a { display:inline-block; margin:6px; padding:11px 20px; border-radius:12px; text-decoration:none; color:var(--cyan);
-      border:1.5px solid var(--cyan); font-family:ui-monospace,monospace; font-weight:700; box-shadow:0 0 14px rgba(51,242,255,.25); }
+  :root { color-scheme: light dark;
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a1c22; --muted:#6a6f7a; --line:#e6e8ec; --accent:#5b6bff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0e0f13; --card:#171922; --ink:#eef0f5; --muted:#9aa0ad; --line:#262933; --accent:#8b97ff; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:52rem; margin:0 auto; padding:4.5rem 1.4rem 4rem; }
+  header { margin-bottom:2.6rem; }
+  h1 { font-size:1.9rem; margin:0 0 .35rem; letter-spacing:-.02em; }
+  header p { margin:0; color:var(--muted); font-size:1.05rem; }
+
+  .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); }
+  .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
+    border-radius:20px; padding:1.25rem; color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(20,22,40,.12); border-color:transparent; }
+  .card .top { display:flex; align-items:center; gap:.85rem; margin-bottom:.9rem; }
+  .card img { width:56px; height:56px; border-radius:14px; flex:none; box-shadow:0 4px 12px rgba(0,0,0,.14); }
+  .card h2 { font-size:1.15rem; margin:0; }
+  .card .cat { font-size:.78rem; color:var(--muted); }
+  .card .desc { margin:0 0 1.1rem; color:var(--muted); font-size:.92rem; line-height:1.5; flex:1; }
+  .card .actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
+  .card .store { display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:600;
+    color:var(--accent); text-decoration:none; }
+  .card .store:hover { text-decoration:underline; }
+  .card .more { font-size:.85rem; color:var(--muted); text-decoration:none; }
+  .card .more:hover { color:var(--ink); }
+
+  footer { margin-top:3rem; padding-top:1.6rem; border-top:1px solid var(--line);
+    color:var(--muted); font-size:.88rem; display:flex; flex-wrap:wrap; gap:.4rem 1rem; }
+  footer a { color:var(--accent); text-decoration:none; }
 </style>
 </head>
 <body>
-  <div>
-    <h1 class="h">APPS</h1>
-    <div class="t">// indie iOS</div>
-    <div>
-      <a href="gridbreaker/">GRID_BREAKER</a>
-      <a href="babybeam/" style="color:#a99bff;border-color:#a99bff;box-shadow:0 0 14px rgba(150,104,240,.35)">BABYBEAM</a>
+  <div class="wrap">
+    <header>
+      <h1>Apps by Jimmy Rentmeester</h1>
+      <p>Small, private, no-nonsense iOS apps. No accounts, no ads, no tracking.</p>
+    </header>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="top">
+          <img src="babybeam/icon.png" alt="">
+          <div>
+            <h2>BabyBeam</h2>
+            <div class="cat">Baby monitor · iPhone &amp; iPad</div>
+          </div>
+        </div>
+        <p class="desc">Turn two phones into a private video baby monitor. Nothing is recorded or stored — just a pairing code.</p>
+        <div class="actions">
+          <a class="store" href="https://apps.apple.com/app/id6783058581">App Store ↗</a>
+          <a class="more" href="babybeam/">Details →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <img src="gridbreaker/assets/icon.png" alt="">
+          <div>
+            <h2>GRID_BREAKER</h2>
+            <div class="cat">Arcade game · iPhone &amp; iPad</div>
+          </div>
+        </div>
+        <p class="desc">A fast neon reflex game. Decode the grid before your RAM runs out, chain clean hits, chase the high score.</p>
+        <div class="actions">
+          <a class="store" href="https://apps.apple.com/app/id6779888720">App Store ↗</a>
+          <a class="more" href="gridbreaker/">Details →</a>
+        </div>
+      </div>
+
     </div>
+
+    <footer>
+      <span>© 2026 Jimmy Rentmeester</span>
+      <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+    </footer>
   </div>
 </body>
 </html>
