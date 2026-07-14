@@ -23,6 +23,14 @@ h1 { font-size:clamp(2rem,7vw,2.8rem); margin:.9rem 0 .3rem; letter-spacing:-.5p
 .usps b { display:block; margin-bottom:.2rem; }
 .cta { display:inline-block; padding:.9rem 1.7rem; border-radius:999px; font-weight:700; color:#fff; text-decoration:none; background:linear-gradient(135deg,var(--peri),var(--violet)); box-shadow:0 8px 24px rgba(122,110,243,.4); }
 .soon { display:block; margin-top:.7rem; font-size:.85rem; opacity:.6; }
+/* Official-style App Store download badge */
+.appstore { display:inline-flex; align-items:center; gap:.6rem; text-decoration:none;
+  color:#fff; background:#000; padding:.6rem 1.2rem .6rem 1rem; border-radius:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.28); }
+.appstore svg { flex:none; }
+.appstore .txt { display:flex; flex-direction:column; line-height:1.05; text-align:left; }
+.appstore .txt small { font-size:.68rem; opacity:.9; letter-spacing:.2px; }
+.appstore .txt strong { font-size:1.25rem; font-weight:600; letter-spacing:.2px; }
 .shots { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); margin:2.8rem 0 0; }
 .shots figure { margin:0; }
 .shots img { width:100%; height:auto; border-radius:22px; box-shadow:0 14px 34px rgba(60,40,140,.28); border:1px solid rgba(122,110,243,.2); }
