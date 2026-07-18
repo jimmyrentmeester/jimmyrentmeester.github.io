@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stillwater</title>
+<style>
+  :root{
+    --ink:#0B1020; --moon:#F2E9D8; --moon55:rgba(242,233,216,.55); --moon30:rgba(242,233,216,.30);
+  }
+  html,body{margin:0;padding:0;background:var(--ink);overflow:hidden;height:100%;}
+  body{touch-action:none;-webkit-user-select:none;user-select:none;cursor:crosshair;}
+  canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;}
+  #glc{z-index:1}
+  #ovl{z-index:2;pointer-events:none}
+  #hud{position:fixed;inset:0;z-index:3;pointer-events:none;
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  #title{position:absolute;top:22px;left:26px;color:var(--moon);
+       font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+       font-size:19px;letter-spacing:.34em;text-transform:uppercase;opacity:.82;}
+  #title small{display:block;font-size:10.5px;letter-spacing:.22em;text-transform:none;
+       font-style:italic;opacity:.62;margin-top:5px;letter-spacing:.08em;}
+  #ctl{position:absolute;top:22px;right:24px;display:flex;gap:10px;align-items:center;pointer-events:auto;}
+  .btn{background:rgba(11,16,32,.5);border:1px solid var(--moon30);color:var(--moon55);
+       font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 13px;border-radius:999px;
+       cursor:pointer;transition:color .25s,border-color .25s;}
+  .btn:hover,.btn:focus-visible{color:var(--moon);border-color:var(--moon55);outline:none;}
+  .btn.on{color:var(--moon);border-color:var(--moon55);}
+  #daywrap{display:flex;align-items:center;gap:8px;color:var(--moon30);font-size:9px;
+       letter-spacing:.18em;text-transform:uppercase;}
+  #day{-webkit-appearance:none;appearance:none;width:92px;height:2px;border-radius:2px;cursor:pointer;
+       background:linear-gradient(90deg,#E8A06B,#24354F 50%,#F3D9A4);outline:none;}
+  #day::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;
+       background:var(--moon);border:none;box-shadow:0 0 6px rgba(242,233,216,.6);}
+  #day::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--moon);border:none;}
+  #day:focus-visible{box-shadow:0 0 0 2px var(--moon30);}
+  #hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+       color:var(--moon55);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+       font-style:italic;font-size:14.5px;letter-spacing:.04em;white-space:nowrap;
+       transition:opacity 1.2s;opacity:0;text-shadow:0 1px 8px rgba(11,16,32,.8);}
+  #fps{position:absolute;bottom:8px;left:10px;color:var(--moon30);font-size:10px;display:none;}
+  #nogl{position:absolute;inset:0;display:none;place-items:center;color:var(--moon55);
+       font-family:Georgia,serif;font-style:italic;font-size:15px;text-align:center;padding:30px;}
+  @media (prefers-reduced-motion:reduce){ .btn{transition:none} #hint{transition:opacity .3s} }
+</style>
+
+<canvas id="glc"></canvas>
+<canvas id="ovl"></canvas>
+<div id="hud">
+  <div id="title">Stillwater<small>a pocket pond — flick a stone across it</small></div>
+  <div id="ctl">
+    <button class="btn on" id="bSound" aria-label="toggle sound">sound</button>
+    <button class="btn" id="bRain" aria-label="toggle rain">rain</button>
+    <span id="daywrap">dusk <input type="range" id="day" min="0" max="1000" value="60" aria-label="time of day"> dawn</span>
+  </div>
+  <div id="hint"></div>
+  <div id="fps"></div>
+  <div id="nogl">this pond needs WebGL2 to hold its water —<br>please try a newer browser.</div>
+</div>
+
+<script>
+'use strict';
+/* ============================================================ *
+ *  STILLWATER — a pocket pond
+ *  CPU wave-equation water · WebGL2 refraction · WebAudio synth
+ * ============================================================ */
+const DEBUG = /[?&]debug/.test(location.search);
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TUNE = window.TUNE = {
+  waveC: 0.42, damp: 0.9955, refr: 0.015, nrm: 0.65, foamLo: 0.015, foamHi: 0.12,
+  gravity: 2300, skipMin: 300, hitStop: 0.30, hitStopMs: 70,
+};
+
+/* ---------- canvases ---------- */
+const glc = document.getElementById('glc');
+const ovl = document.getElementById('ovl');
+const octx = ovl.getContext('2d');
+let W = innerWidth, H = innerHeight;
+let DPR_CAP = 2, dpr = Math.min(devicePixelRatio || 1, DPR_CAP);
+
+/* ---------- wave simulation (CPU) ---------- */
+const SW = 232;
+let SH = Math.max(96, Math.min(200, Math.round(SW * H / W)));
+let U = new Float32Array(SW * SH), V = new Float32Array(SW * SH);
+let sponge = new Float32Array(SW * SH);
+function buildSponge() {
+  const M = 10;
+  for (let y = 0; y < SH; y++) for (let x = 0; x < SW; x++) {
+    const d = Math.min(x, y, SW - 1 - x, SH - 1 - y);
+    sponge[y * SW + x] = d >= M ? 1 : 0.86 + 0.14 * (d / M);
+  }
+}
+buildSponge();
+let waterEnergy = 0;
+function stepWater(scale) {
+  const c = TUNE.waveC * scale, dmp = TUNE.damp;
+  let e = 0;
+  for (let y = 1; y < SH - 1; y++) {
+    let i = y * SW + 1;
+    for (let x = 1; x < SW - 1; x++, i++) {
+      const lap = U[i - 1] + U[i + 1] + U[i - SW] + U[i + SW] - 4 * U[i];
+      V[i] = (V[i] + lap * c) * dmp * sponge[i];
+    }
+  }
+  for (let y = 1; y < SH - 1; y++) {
+    let i = y * SW + 1;
+    for (let x = 1; x < SW - 1; x++, i++) {
+      U[i] = (U[i] + V[i] * scale) * sponge[i];
+      if ((i & 7) === 0) e += Math.abs(V[i]);
+    }
+  }
+  waterEnergy = waterEnergy * 0.92 + e * 0.08;
+}
+function splat(px, py, radius, amp, intoU) {
+  const gx = px / W * SW, gy = py / H * SH;
+  const r = Math.max(1.4, radius), r2 = r * r;
+  const x0 = Math.max(1, Math.floor(gx - r * 2)), x1 = Math.min(SW - 2, Math.ceil(gx + r * 2));
+  const y0 = Math.max(1, Math.floor(gy - r * 2)), y1 = Math.min(SH - 2, Math.ceil(gy + r * 2));
+  const dst = intoU ? U : V;
+  for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+    const dx = x - gx, dy = y - gy, d2 = dx * dx + dy * dy;
+    if (d2 < r2 * 4) dst[y * SW + x] += amp * Math.exp(-d2 / r2);
+  }
+  rippleEvents.push({ x: px, y: py, amp: Math.abs(amp), t: nowS });
+  if (rippleEvents.length > 24) rippleEvents.shift();
+}
+function heightAt(px, py) {
+  let gx = px / W * SW - 0.5, gy = py / H * SH - 0.5;
+  gx = Math.max(0, Math.min(SW - 2, gx)); gy = Math.max(0, Math.min(SH - 2, gy));
+  const x0 = gx | 0, y0 = gy | 0, fx = gx - x0, fy = gy - y0, i = y0 * SW + x0;
+  return (U[i] * (1 - fx) + U[i + 1] * fx) * (1 - fy) + (U[i + SW] * (1 - fx) + U[i + SW + 1] * fx) * fy;
+}
+function slopeAt(px, py) {
+  const e = 6;
+  return [heightAt(px + e, py) - heightAt(px - e, py), heightAt(px, py + e) - heightAt(px, py - e)];
+}
+const rippleEvents = [];
+
+/* ---------- WebGL2 display ---------- */
+const gl = glc.getContext('webgl2', { antialias: false, alpha: false });
+if (!gl) { document.getElementById('nogl').style.display = 'grid'; }
+const VSH = `#version 300 es
+layout(location=0) in vec2 p; out vec2 vUV;
+void main(){ vUV = p*0.5+0.5; gl_Position = vec4(p,0.,1.); }`;
+const FSH = `#version 300 es
+precision highp float;
+in vec2 vUV; out vec4 outC;
+uniform highp sampler2D uH; uniform sampler2D uUnder;
+uniform vec2 uSim; uniform vec2 uRes;
+uniform float uTime, uDay, uRefr, uNrm, uFoamLo, uFoamHi, uMotion;
+float hat(ivec2 c){ c = clamp(c, ivec2(0), ivec2(uSim)-1); return texelFetch(uH,c,0).r; }
+float hbi(vec2 uv){
+  vec2 p = uv*uSim - 0.5; ivec2 i = ivec2(floor(p)); vec2 f = fract(p);
+  return mix(mix(hat(i),hat(i+ivec2(1,0)),f.x), mix(hat(i+ivec2(0,1)),hat(i+ivec2(1,1)),f.x), f.y);
+}
+float hash21(vec2 p){ vec3 q = fract(vec3(p.xyx)*.1031); q += dot(q, q.yzx+33.33); return fract((q.x+q.y)*q.z); }
+vec3 sky(vec2 p, float wD, float wN, float wA){
+  float t = pow(clamp(p.y,0.,1.), 1.35);
+  vec3 dB=vec3(.145,.129,.243), dM=vec3(.42,.28,.44), dT=vec3(.84,.55,.47); // dusk
+  vec3 nB=vec3(.027,.051,.118), nM=vec3(.063,.110,.212), nT=vec3(.141,.208,.310); // night
+  vec3 aB=vec3(.231,.259,.365), aM=vec3(.773,.545,.627), aT=vec3(.953,.851,.643); // dawn
+  vec3 B=dB*wD+nB*wN+aB*wA, M=dM*wD+nM*wN+aM*wA, T=dT*wD+nT*wN+aT*wA;
+  vec3 c = mix(B, M, smoothstep(0., .62, t));
+  c = mix(c, T, smoothstep(.5, 1., t));
+  // stars, only meaningfully at night
+  vec2 sp = floor(p*vec2(170.,105.));
+  float st = hash21(sp);
+  float tw = .6 + .4*sin(uTime*(1.5+3.*hash21(sp+9.)) + hash21(sp+4.)*6.28);
+  c += vec3(.9,.95,1.)*step(.9962, st)*wN*.5*tw;
+  // moon
+  vec2 mp = vec2(.74,.78);
+  float md = length((p-mp)*vec2(uRes.x/uRes.y,1.));
+  float moonI = .22 + wN*.95 + wA*.15;
+  c += vec3(.95,.93,.85)*((1.0-smoothstep(.015,.024,md))*.95 + exp(-md*6.5)*.26)*moonI;
+  return c;
+}
+void main(){
+  vec2 suv = vec2(vUV.x, 1.-vUV.y);           // canvas-space (y down)
+  vec2 e = 1./uSim;
+  float h0  = hbi(suv);
+  float hxp = hbi(suv+vec2(e.x,0.)), hxm = hbi(suv-vec2(e.x,0.));
+  float hyp = hbi(suv+vec2(0.,e.y)), hym = hbi(suv-vec2(0.,e.y));
+  float gx = hxp - hxm;
+  float gy = hyp - hym;
+  // micro shimmer so the pond breathes even when still
+  vec2 mg = vec2(
+    sin(suv.x*150.+uTime*1.25)+sin((suv.x+suv.y)*88.-uTime*.8),
+    cos(suv.y*132.-uTime*1.05)+cos((suv.y-suv.x)*104.+uTime*.65))*.0032*uMotion;
+  vec2 g = vec2(gx,gy) + mg;
+  float wN = clamp(1.-abs(uDay-.5)*2., 0., 1.);
+  float wD = clamp(1.-uDay*2., 0., 1.);
+  float wA = clamp(uDay*2.-1., 0., 1.);
+  // refracted underwater world
+  vec2 ruv = clamp(suv + g*uRefr*22., vec2(.001), vec2(.999));
+  vec3 under = texture(uUnder, ruv).rgb;
+  under *= (0.85 + 0.35*wA + 0.10*wD) * (1.0 - 0.45*wN);
+  // sky reflection — stronger toward the far edge, see-through up close
+  vec3 n3 = normalize(vec3(-g.x*uNrm*20., -g.y*uNrm*20., 1.));
+  vec2 rp = vec2(vUV.x + g.x*2.4, vUV.y - g.y*2.4);
+  vec3 skyC = sky(rp, wD, wN, wA);
+  float slope = clamp(length(g)*12., 0., 1.);
+  float mixAmt = .14 + .34*pow(clamp(vUV.y,0.,1.), 1.6) + .30*slope;
+  vec3 col = mix(under, skyC, mixAmt);
+  // moon glints
+  vec3 L = normalize(vec3(.38,.52,.62));
+  vec3 Hv = normalize(L + vec3(0.,0.,1.));
+  float moonI = .25 + wN*1.0 + wA*.2;
+  col += vec3(.96,.92,.82)*pow(max(dot(n3,Hv),0.), 90.)*moonI*.6;
+  // crest foam + night bioluminescence
+  float lap = hxp+hxm+hyp+hym-4.*h0;
+  float crest = smoothstep(uFoamLo, uFoamHi, abs(lap));
+  col = mix(col, vec3(.85,.88,.86), crest*.14);
+  col += vec3(.25,.85,.66)*crest*crest*wN*.5;
+  // vignette + grain
+  float vd = length(vUV-.5);
+  col *= 1. - .38*smoothstep(.42,.88,vd);
+  col += (hash21(suv*uRes+uTime)-.5)*.014;
+  outC = vec4(pow(max(col,0.), vec3(.96)), 1.);
+}`;
+let prog, texH, texU, uni = {}, glOK = false, texUW = 0, texUH = 0;
+function initGL() {
+  if (!gl) return;
+  glOK = false; texUW = 0; texUH = 0;
+  const mk = (t, s) => { const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh)); return sh; };
+  prog = gl.createProgram();
+  gl.attachShader(prog, mk(gl.VERTEX_SHADER, VSH));
+  gl.attachShader(prog, mk(gl.FRAGMENT_SHADER, FSH));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  for (const n of ['uH','uUnder','uSim','uRes','uTime','uDay','uRefr','uNrm','uFoamLo','uFoamHi','uMotion'])
+    uni[n] = gl.getUniformLocation(prog, n);
+  gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+  texH = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texH);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.R32F, SW, SH, 0, gl.RED, gl.FLOAT, U);
+  texU = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texU);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.uniform1i(uni.uH, 0); gl.uniform1i(uni.uUnder, 1);
+  gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+  gl.viewport(0, 0, glc.width, glc.height);
+  glOK = true;
+  undDirtySize = true;
+}
+glc.addEventListener('webglcontextlost', e => { e.preventDefault(); glOK = false; });
+glc.addEventListener('webglcontextrestored', () => {
+  try { initGL(); } catch (err) { console.error(err); }
+});
+
+/* ---------- underwater world (Canvas2D, half res) ---------- */
+const und = document.createElement('canvas');
+const uctx = und.getContext('2d');
+const bed = document.createElement('canvas');
+let uScale = 0.5, undDirtySize = true, bctx = null;
+function paintBed() {
+  const w = und.width, h = und.height;
+  bed.width = w; bed.height = h;
+  const b = bctx = bed.getContext('2d');
+  const grad = b.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, '#10262B'); grad.addColorStop(0.6, '#0C1E24'); grad.addColorStop(1, '#0A181E');
+  b.fillStyle = grad; b.fillRect(0, 0, w, h);
+  // pebbles — muted, low contrast
+  const rnd = mulberry(7);
+  const cols = ['#20343A','#273530','#2A3A40','#1D3038','#2E3B33','#33403F','#243239'];
+  for (let i = 0; i < 680; i++) {
+    const x = rnd() * w, y = rnd() * h, r = (2 + rnd() * 6) * uScale * 2;
+    b.fillStyle = cols[(rnd() * cols.length) | 0];
+    b.globalAlpha = 0.45 + rnd() * 0.35;
+    b.beginPath(); b.ellipse(x, y, r, r * (0.6 + rnd() * 0.3), rnd() * 3.14, 0, 6.29); b.fill();
+    b.globalAlpha = 0.10;
+    b.fillStyle = '#5A6E6A';
+    b.beginPath(); b.ellipse(x - r * 0.25, y - r * 0.28, r * 0.5, r * 0.3, 0, 0, 6.29); b.fill();
+  }
+  b.globalAlpha = 1;
+  // soft dark pooling
+  for (let i = 0; i < 14; i++) {
+    const x = rnd() * w, y = rnd() * h, r = (40 + rnd() * 120) * uScale * 2;
+    const g = b.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(6,14,18,0.35)'); g.addColorStop(1, 'rgba(6,14,18,0)');
+    b.fillStyle = g; b.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  // the pond's memory: every stone ever sunk, back where it fell
+  for (const st of sunk) stampStone(st);
+}
+function stampStone(st) {
+  if (!bctx) return;
+  const s = und.width / W;
+  const x = st.x * W * s, y = st.y * H * s, r = st.r * s;
+  bctx.save(); bctx.translate(x, y); bctx.rotate(st.a);
+  bctx.fillStyle = st.c; bctx.globalAlpha = 0.92;
+  bctx.beginPath(); bctx.ellipse(0, 0, r, r * 0.72, 0, 0, 6.29); bctx.fill();
+  bctx.globalAlpha = 0.25; bctx.fillStyle = '#AEB9BD';
+  bctx.beginPath(); bctx.ellipse(-r * 0.2, -r * 0.22, r * 0.5, r * 0.3, 0, 0, 6.29); bctx.fill();
+  bctx.restore(); bctx.globalAlpha = 1;
+}
+function mulberry(a) { return function() { a |= 0; a = a + 0x6D2B79F5 | 0;
+  let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+  return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* sunken stones — the pond remembers */
+let sunk = [];
+try { sunk = JSON.parse(localStorage.getItem('stillwater.stones') || '[]').slice(-220); } catch (e) {}
+function saveSunk() { try { localStorage.setItem('stillwater.stones', JSON.stringify(sunk.slice(-220))); } catch (e) {} }
+
+/* koi */
+const KOI_COLS = [['#C96F3F','#E8A87C'], ['#B9552F','#DE9468'], ['#D8C9A8','#EFE6CE']];
+const koi = [];
+function makeKoi(i) {
+  const segs = [];
+  const x = W * (0.2 + Math.random() * 0.6), y = H * (0.2 + Math.random() * 0.6);
+  for (let s = 0; s < 11; s++) segs.push({ x: x - s * 7, y });
+  return { x, y, heading: Math.random() * 6.28, speed: 22, segs, col: KOI_COLS[i % 3],
+    state: 'wander', target: null, wt: Math.random() * 100, nibbleT: 0, fleeV: 0, size: 0.85 + Math.random() * 0.35 };
+}
+for (let i = 0; i < 3; i++) koi.push(makeKoi(i));
+const bubbles = [];
+
+function updateKoi(dt) {
+  for (const k of koi) {
+    k.wt += dt;
+    let desired = null, speed = 22 * k.size;
+    // gentle recent ripples attract; big ones scare
+    if (k.state === 'wander' || k.state === 'investigate') {
+      let cx = 0, cy = 0, n = 0;
+      for (const r of rippleEvents) {
+        if (nowS - r.t > 4) continue;
+        const d = Math.hypot(r.x - k.x, r.y - k.y);
+        if (r.amp < 0.5 && d < 420) { cx += r.x; cy += r.y; n++; }
+      }
+      if (n > 0) { k.state = 'investigate'; k.target = { x: cx / n, y: cy / n }; }
+    }
+    if (holdPt && k.state !== 'flee') { k.state = 'investigate'; k.target = holdPt; }
+    if (k.state === 'investigate' && k.target) {
+      const d = Math.hypot(k.target.x - k.x, k.target.y - k.y);
+      speed = 46 * k.size;
+      desired = Math.atan2(k.target.y - k.y, k.target.x - k.x);
+      if (d < 30) {
+        speed = 6;
+        k.nibbleT += dt;
+        if (k.nibbleT > 0.7) {
+          k.nibbleT = 0;
+          splat(k.x, k.y, 1.8, 0.18, false);
+          bubbles.push({ x: k.x + (Math.random() - 0.5) * 8, y: k.y, r: 1.5 + Math.random() * 2, vy: -14, life: 1.6 });
+          audio.nibble(k.x / W);
+        }
+        if (!holdPt && Math.random() < dt * 0.4) { k.state = 'wander'; k.target = null; }
+      }
+      if (!holdPt && k.target !== holdPt && Math.random() < dt * 0.12) { k.state = 'wander'; k.target = null; }
+    }
+    if (k.state === 'flee') {
+      speed = 90 * k.size + k.fleeV;
+      k.fleeV *= Math.pow(0.25, dt);
+      if (k.fleeV < 10) k.state = 'wander';
+    }
+    if (desired === null) {
+      k.heading += (Math.sin(k.wt * 0.7) + Math.sin(k.wt * 0.31 + 2.1)) * 0.35 * dt * 2;
+      // steer away from edges
+      const m = 90;
+      if (k.x < m) k.heading = lerpAngle(k.heading, 0, dt * 2);
+      if (k.x > W - m) k.heading = lerpAngle(k.heading, Math.PI, dt * 2);
+      if (k.y < m) k.heading = lerpAngle(k.heading, Math.PI / 2, dt * 2);
+      if (k.y > H - m) k.heading = lerpAngle(k.heading, -Math.PI / 2, dt * 2);
+    } else {
+      k.heading = lerpAngle(k.heading, desired, dt * (k.state === 'flee' ? 6 : 2.2));
+    }
+    // night: koi slow and drowsy
+    speed *= 1 - 0.55 * nightW;
+    k.x += Math.cos(k.heading) * speed * dt;
+    k.y += Math.sin(k.heading) * speed * dt;
+    k.x = Math.max(20, Math.min(W - 20, k.x)); k.y = Math.max(20, Math.min(H - 20, k.y));
+    // spine follow
+    k.segs[0].x = k.x; k.segs[0].y = k.y;
+    const sp = 7 * k.size;
+    for (let s = 1; s < k.segs.length; s++) {
+      const p = k.segs[s - 1], q = k.segs[s];
+      const dx = p.x - q.x, dy = p.y - q.y, d = Math.hypot(dx, dy) || 1;
+      q.x += dx / d * (d - sp); q.y += dy / d * (d - sp);
+    }
+  }
+  for (let i = bubbles.length - 1; i >= 0; i--) {
+    const b = bubbles[i]; b.y += b.vy * dt; b.life -= dt; b.x += Math.sin(nowS * 6 + b.r) * 6 * dt;
+    if (b.life <= 0) bubbles.splice(i, 1);
+  }
+}
+function scareKoi(x, y, amp) {
+  for (const k of koi) {
+    const d = Math.hypot(k.x - x, k.y - y);
+    if (d < 230 && amp > 0.7) { k.state = 'flee'; k.fleeV = 160; k.heading = Math.atan2(k.y - y, k.x - x); k.target = null; }
+  }
+}
+function lerpAngle(a, b, t) {
+  let d = (b - a) % (Math.PI * 2);
+  if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2;
+  return a + d * Math.min(1, t);
+}
+function drawKoi(c, s) {
+  for (const k of koi) {
+    const n = k.segs.length;
+    c.save();
+    // shadow
+    c.globalAlpha = 0.25;
+    c.fillStyle = '#04090C';
+    for (let i = 0; i < n; i++) {
+      const w = koiWidth(i, n) * k.size;
+      c.beginPath(); c.arc(k.segs[i].x * s + 3, k.segs[i].y * s + 5, w * s, 0, 6.29); c.fill();
+    }
+    // body
+    c.globalAlpha = 0.9 - nightW * 0.35;
+    for (let i = n - 1; i >= 0; i--) {
+      const w = koiWidth(i, n) * k.size;
+      c.fillStyle = i < 2 ? k.col[1] : k.col[0];
+      c.beginPath(); c.arc(k.segs[i].x * s, k.segs[i].y * s, w * s, 0, 6.29); c.fill();
+    }
+    // tail fin
+    const t1 = k.segs[n - 1], t2 = k.segs[n - 2];
+    const ta = Math.atan2(t1.y - t2.y, t1.x - t2.x);
+    c.fillStyle = k.col[0]; c.globalAlpha = 0.55 - nightW * 0.2;
+    c.beginPath();
+    c.moveTo(t1.x * s, t1.y * s);
+    c.lineTo((t1.x + Math.cos(ta + 0.5) * 11 * k.size) * s, (t1.y + Math.sin(ta + 0.5) * 11 * k.size) * s);
+    c.lineTo((t1.x + Math.cos(ta - 0.5) * 11 * k.size) * s, (t1.y + Math.sin(ta - 0.5) * 11 * k.size) * s);
+    c.closePath(); c.fill();
+    c.restore();
+  }
+  c.globalAlpha = 0.5;
+  c.strokeStyle = '#BFD8D2';
+  for (const b of bubbles) {
+    c.beginPath(); c.arc(b.x * s, b.y * s, b.r * s, 0, 6.29); c.stroke();
+  }
+  c.globalAlpha = 1;
+}
+function koiWidth(i, n) { const t = i / (n - 1); return 7.5 * Math.sin(Math.min(1, t * 1.25 + 0.18) * Math.PI) + 1.2; }
+
+function paintUnder() {
+  if (!glOK) return;
+  if (undDirtySize) {
+    und.width = Math.max(2, Math.round(W * uScale));
+    und.height = Math.max(2, Math.round(H * uScale));
+    paintBed();
+    undDirtySize = false;
+  }
+  if (und.width !== texUW || und.height !== texUH) {
+    // (re)allocate texture storage once per size; per-frame uploads use texSubImage2D
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texU);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, und.width, und.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    texUW = und.width; texUH = und.height;
+  }
+  const s = und.width / W;
+  uctx.setTransform(1, 0, 0, 1, 0, 0);
+  uctx.drawImage(bed, 0, 0);
+  drawKoi(uctx, s);
+}
+
+/* ---------- lilypads ---------- */
+const pads = [];
+const PAD_DEGREES = [4, 3, 2, 1, 0]; // small pad = high note
+function initPads() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem('stillwater.pads') || 'null'); } catch (e) {}
+  const rnd = mulberry(21);
+  for (let i = 0; i < 5; i++) {
+    const r = 24 + i * 6.5;
+    let x = W * (0.18 + rnd() * 0.64), y = H * (0.2 + rnd() * 0.6);
+    if (saved && saved[i]) { x = saved[i][0] * W; y = saved[i][1] * H; }
+    pads.push({ x, y, r, deg: PAD_DEGREES[i], rot: rnd() * 6.28, notch: rnd() * 6.28,
+      wob: 0, wobV: 0, grabbed: false, gox: 0, goy: 0 });
+  }
+}
+function savePads() { try { localStorage.setItem('stillwater.pads', JSON.stringify(pads.map(p => [p.x / W, p.y / H]))); } catch (e) {} }
+function padAt(x, y) { for (const p of pads) if (Math.hypot(p.x - x, p.y - y) < p.r) return p; return null; }
+function strikePad(p, vel) {
+  p.wobV += 6 * vel;
+  splat(p.x, p.y, 3.4, -0.5 * vel, true);
+  audio.marimba(p.deg, Math.min(1, vel), p.x / W);
+}
+function updatePads(dt) {
+  for (const p of pads) {
+    p.rot += dt * 0.03;
+    // spring wobble
+    p.wobV += -p.wob * 46 * dt - p.wobV * 5 * dt;
+    p.wob += p.wobV * dt;
+    if (!p.grabbed) {
+      // drift on the water's slope
+      const [sx, sy] = slopeAt(p.x, p.y);
+      p.x -= sx * 60 * dt; p.y -= sy * 60 * dt;
+      p.x = Math.max(p.r, Math.min(W - p.r, p.x)); p.y = Math.max(p.r, Math.min(H - p.r, p.y));
+    }
+  }
+}
+function drawPads(c) {
+  for (const p of pads) {
+    const h = heightAt(p.x, p.y);
+    const [sx, sy] = slopeAt(p.x, p.y);
+    const bob = 1 + h * 0.10 + p.wob * 0.06;
+    c.save();
+    c.translate(p.x + sx * 14, p.y + sy * 14);
+    c.rotate(p.rot);
+    c.scale(bob, bob * 0.96);
+    // shadow on the water
+    c.save(); c.rotate(-p.rot); c.translate(3, 5); c.rotate(p.rot);
+    c.fillStyle = 'rgba(4,10,12,0.4)';
+    padPath(c, p.r, p.notch); c.fill();
+    c.restore();
+    // pad (gradients are in local space, so they cache per pad)
+    if (!p.gDay) {
+      p.gDay = c.createRadialGradient(-p.r * 0.25, -p.r * 0.3, p.r * 0.1, 0, 0, p.r);
+      p.gDay.addColorStop(0, '#2C5A40'); p.gDay.addColorStop(1, '#1B3D2C');
+      p.gNight = c.createRadialGradient(-p.r * 0.25, -p.r * 0.3, p.r * 0.1, 0, 0, p.r);
+      p.gNight.addColorStop(0, '#20423A'); p.gNight.addColorStop(1, '#122A24');
+    }
+    c.fillStyle = nightW > 0.5 ? p.gNight : p.gDay;
+    padPath(c, p.r, p.notch); c.fill();
+    // veins
+    c.strokeStyle = 'rgba(220,240,220,0.10)'; c.lineWidth = 1;
+    for (let i = 0; i < 7; i++) {
+      const a = p.notch + 0.5 + i * (5.6 / 7);
+      c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(a) * p.r * 0.9, Math.sin(a) * p.r * 0.9); c.stroke();
+    }
+    // moonlit rim
+    c.strokeStyle = `rgba(242,233,216,${0.12 + nightW * 0.22})`; c.lineWidth = 1.4;
+    c.beginPath(); c.arc(0, 0, p.r - 0.8, -2.4, -0.4); c.stroke();
+    c.restore();
+  }
+}
+function padPath(c, r, notch) {
+  c.beginPath();
+  c.moveTo(Math.cos(notch) * r * 0.25, Math.sin(notch) * r * 0.25);
+  c.arc(0, 0, r, notch + 0.28, notch - 0.28 + Math.PI * 2);
+  c.closePath();
+}
+
+/* ---------- stones in flight ---------- */
+const stones = [];
+const STONE_COLS = ['#5E6A72','#6B7178','#57606B','#707A80'];
+function throwStone(x, y, vx, vy, spin) {
+  const sp = Math.hypot(vx, vy);
+  const cap = 1900;
+  if (sp > cap) { vx *= cap / sp; vy *= cap / sp; }
+  stones.push({ x, y, vx, vy, z: 10, vz: 230, spin, rot: Math.random() * 6.28,
+    skips: 0, r: 8 + Math.random() * 3, c: STONE_COLS[(Math.random() * 4) | 0], sinkT: -1 });
+  audio.whoosh(Math.min(1, sp / 1600));
+  idleT = 0;
+}
+function updateStones(dt) {
+  for (let i = stones.length - 1; i >= 0; i--) {
+    const s = stones[i];
+    if (s.sinkT >= 0) {
+      s.sinkT += dt;
+      if (s.sinkT > 0.45) {
+        const st = { x: s.x / W, y: s.y / H, r: s.r, a: s.rot, c: s.c };
+        sunk.push(st);
+        if (sunk.length > 220) sunk.splice(0, sunk.length - 220);
+        saveSunk();
+        stampStone(st);
+        stones.splice(i, 1);
+      }
+      continue;
+    }
+    s.x += s.vx * dt; s.y += s.vy * dt;
+    s.vz -= TUNE.gravity * dt; s.z += s.vz * dt;
+    s.rot += s.spin * 2 * dt;
+    // curve from spin (Magnus-ish)
+    const a = Math.atan2(s.vy, s.vx) + Math.PI / 2;
+    s.vx += Math.cos(a) * s.spin * 46 * dt; s.vy += Math.sin(a) * s.spin * 46 * dt;
+    // pad collision while skimming
+    if (s.z < 16) {
+      const p = padAt(s.x, s.y);
+      if (p && s.vz < 0) {
+        strikePad(p, Math.min(1, Math.hypot(s.vx, s.vy) / 900));
+        s.vz = Math.abs(s.vz) * 0.5 + 120;
+        s.vx *= 0.86; s.vy *= 0.86;
+        s.skips++;
+        continue;
+      }
+    }
+    if (s.z <= 0 && s.vz < 0) {
+      const hs = Math.hypot(s.vx, s.vy);
+      if (hs > TUNE.skipMin && s.skips < 9) {
+        // skip!
+        s.skips++;
+        s.z = 0; s.vz = Math.max(150, -s.vz * 0.62);
+        s.vx *= 0.8; s.vy *= 0.8;
+        splat(s.x, s.y, 2.6, 0.8 * Math.min(1, hs / 1100), false);
+        splashAt(s.x, s.y, Math.min(1, hs / 1100));
+        scareKoi(s.x, s.y, 0.8);
+        audio.skipNote(s.skips, Math.min(1, hs / 1300), s.x / W);
+        hitStop();
+        if (s.skips === 5) streakFlourish(s.x, s.y);
+        markHint('flick');
+      } else {
+        // sink — the pond keeps it
+        s.sinkT = 0;
+        splat(s.x, s.y, 3.2, 0.8, false);
+        splashAt(s.x, s.y, 1);
+        scareKoi(s.x, s.y, 1);
+        audio.sink(s.x / W);
+      }
+    }
+    if (s.x < -60 || s.x > W + 60 || s.y < -60 || s.y > H + 60) stones.splice(i, 1);
+  }
+}
+function drawStones(c) {
+  for (const s of stones) {
+    const sinkK = s.sinkT >= 0 ? 1 - s.sinkT / 0.45 : 1;
+    // shadow on water
+    c.globalAlpha = 0.35 * sinkK * Math.max(0.2, 1 - s.z / 260);
+    c.fillStyle = '#04090C';
+    c.beginPath(); c.ellipse(s.x, s.y, s.r * 1.05, s.r * 0.7, s.rot, 0, 6.29); c.fill();
+    // stone lifted by z
+    const ly = s.y - s.z * 0.55;
+    c.globalAlpha = sinkK;
+    c.save(); c.translate(s.x, ly); c.rotate(s.rot); c.scale(0.5 + 0.5 * sinkK, 0.5 + 0.5 * sinkK);
+    c.fillStyle = s.c;
+    c.beginPath(); c.ellipse(0, 0, s.r, s.r * 0.68, 0, 0, 6.29); c.fill();
+    c.fillStyle = 'rgba(235,240,240,0.35)';
+    c.beginPath(); c.ellipse(-s.r * 0.25, -s.r * 0.22, s.r * 0.45, s.r * 0.26, 0, 0, 6.29); c.fill();
+    c.restore();
+  }
+  c.globalAlpha = 1;
+}
+
+/* splash droplets */
+const drops = [];
+function splashAt(x, y, k) {
+  const n = 5 + (k * 8) | 0;
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * 6.28, sp = 40 + Math.random() * 140 * k;
+    drops.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp * 0.4 - 90 * k - Math.random() * 60,
+      z: 0, life: 0.5, max: 0.5 });
+  }
+}
+function updateDrops(dt) {
+  for (let i = drops.length - 1; i >= 0; i--) {
+    const d = drops[i];
+    d.x += d.vx * dt; d.y += d.vy * dt; d.vy += 700 * dt; d.life -= dt;
+    if (d.life <= 0) drops.splice(i, 1);
+  }
+}
+function drawDrops(c) {
+  c.fillStyle = '#DCE8E4';
+  for (const d of drops) {
+    c.globalAlpha = 0.7 * (d.life / d.max);
+    c.beginPath(); c.arc(d.x, d.y, 1.4, 0, 6.29); c.fill();
+  }
+  c.globalAlpha = 1;
+}
+
+/* fireflies + streak flourish */
+const flies = [];
+function updateFlies(dt) {
+  const want = REDUCE ? 0 : Math.round(nightW * 11);
+  while (flies.length < want) flies.push({ x: Math.random() * W, y: Math.random() * H,
+    t: Math.random() * 100, burst: 0 });
+  for (let i = flies.length - 1; i >= 0; i--) {
+    const f = flies[i];
+    f.t += dt;
+    f.x += Math.sin(f.t * 0.9 + i) * 26 * dt; f.y += Math.cos(f.t * 0.7 + i * 2) * 20 * dt;
+    if (f.burst > 0) { f.burst -= dt; if (f.burst <= 0 && flies.length > want) { flies.splice(i, 1); continue; } }
+    else if (flies.length > want && Math.random() < dt * 0.3) flies.splice(i, 1);
+  }
+}
+let flyGrad = null;
+function drawFlies(c) {
+  if (!flyGrad) {
+    flyGrad = c.createRadialGradient(0, 0, 0, 0, 0, 9);
+    flyGrad.addColorStop(0, 'rgba(226,255,170,0.75)');
+    flyGrad.addColorStop(1, 'rgba(226,255,170,0)');
+  }
+  c.save(); c.globalCompositeOperation = 'lighter';
+  c.fillStyle = flyGrad;
+  for (const f of flies) {
+    const a = (0.35 + 0.65 * Math.abs(Math.sin(f.t * 2.4))) * (f.burst > 0 ? Math.min(1, f.burst) : nightW);
+    c.globalAlpha = a;
+    c.translate(f.x, f.y);
+    c.fillRect(-9, -9, 18, 18);
+    c.translate(-f.x, -f.y);
+  }
+  c.restore();
+}
+function streakFlourish(x, y) {
+  for (let i = 0; i < 7; i++) flies.push({ x: x + (Math.random() - 0.5) * 60, y: y + (Math.random() - 0.5) * 60,
+    t: Math.random() * 100, burst: 4 + Math.random() * 3 });
+  audio.glissando();
+}
+
+/* rain */
+let raining = false;
+const rainStreaks = [];
+function updateRain(dt) {
+  if (!raining) return;
+  if (Math.random() < dt * 2.6) {
+    const x = 30 + Math.random() * (W - 60), y = 30 + Math.random() * (H - 60);
+    splat(x, y, 1.7, -0.35, true);
+    rainStreaks.push({ x, y, life: 0.22 });
+    if (Math.random() < 0.55) audio.rainNote(x / W);
+    else audio.plop(0.25, x / W);
+  }
+  for (let i = rainStreaks.length - 1; i >= 0; i--) {
+    rainStreaks[i].life -= dt;
+    if (rainStreaks[i].life <= 0) rainStreaks.splice(i, 1);
+  }
+}
+function drawRain(c) {
+  c.strokeStyle = 'rgba(220,235,230,0.5)'; c.lineWidth = 1;
+  for (const r of rainStreaks) {
+    c.globalAlpha = r.life / 0.22;
+    const l = 26 * (r.life / 0.22);
+    c.beginPath(); c.moveTo(r.x + 3, r.y - 8 - l); c.lineTo(r.x, r.y - 8); c.stroke();
+  }
+  c.globalAlpha = 1;
+}
+
+/* ---------- audio (pure synthesis) ---------- */
+const audio = (() => {
+  let ctx = null, master, wet, noiseGain, noiseFilt, droneOscs = [], droneGain, comp;
+  let soundOn = true, voices = 0, lastK = -1;
+  const MAXV = 10;
+  function ensure() {
+    if (ctx) { if (ctx.state === 'suspended' && soundOn && !document.hidden) ctx.resume(); return true; }
+    try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
+    comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -18; comp.ratio.value = 6;
+    master = ctx.createGain(); master.gain.value = soundOn ? 0.9 : 0;
+    comp.connect(master); master.connect(ctx.destination);
+    // procedural reverb IR
+    const conv = ctx.createConvolver();
+    const len = ctx.sampleRate * 2.2, ir = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    conv.buffer = ir;
+    wet = ctx.createGain(); wet.gain.value = 0.5;
+    conv.connect(comp);
+    wet.connect(conv);
+    // water-energy noise bed
+    const nb = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+    const nd = nb.getChannelData(0);
+    let lp = 0;
+    for (let i = 0; i < nd.length; i++) { lp = lp * 0.96 + (Math.random() * 2 - 1) * 0.04; nd[i] = lp * 6; }
+    const ns = ctx.createBufferSource(); ns.buffer = nb; ns.loop = true;
+    noiseFilt = ctx.createBiquadFilter(); noiseFilt.type = 'lowpass'; noiseFilt.frequency.value = 500;
+    noiseGain = ctx.createGain(); noiseGain.gain.value = 0;
+    ns.connect(noiseFilt); noiseFilt.connect(noiseGain); noiseGain.connect(comp);
+    ns.start();
+    // drone — two detuned triangles, very quiet
+    droneGain = ctx.createGain(); droneGain.gain.value = 0;
+    const df = ctx.createBiquadFilter(); df.type = 'lowpass'; df.frequency.value = 320;
+    droneGain.connect(df); df.connect(comp); df.connect(wet);
+    for (const det of [0, 0.6]) {
+      const o = ctx.createOscillator(); o.type = 'triangle';
+      o.frequency.value = mtf(rootMidi() - 24) + det;
+      o.connect(droneGain); o.start(); droneOscs.push(o);
+    }
+    droneGain.gain.setTargetAtTime(0.05, ctx.currentTime, 3);
+    return true;
+  }
+  const mtf = m => 440 * Math.pow(2, (m - 69) / 12);
+  function send(node, pan, dry, wetAmt) {
+    const p = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    if (p) { p.pan.value = pan * 2 - 1; node.connect(p); p.connect(comp); if (wetAmt) p.connect(wet); }
+    else { node.connect(comp); if (wetAmt) node.connect(wet); }
+    return p;
+  }
+  function reap(osc, nodes) {
+    osc.onended = () => { for (const n of nodes) if (n) try { n.disconnect(); } catch (e) {} };
+  }
+  function envGain(t0, peak, dur) {
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t0 + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    return g;
+  }
+  function voiceOK() { if (voices >= MAXV) return false; voices++; setTimeout(() => voices--, 1200); return true; }
+  function tone(freq, peak, dur, pan, partial2) {
+    if (!ctx || !voiceOK()) return;
+    const t0 = ctx.currentTime;
+    const g = envGain(t0, peak, dur);
+    const o = ctx.createOscillator(); o.frequency.value = freq; o.connect(g);
+    o.start(t0); o.stop(t0 + dur + 0.1);
+    if (partial2) {
+      const g2 = envGain(t0, peak * 0.28, dur * 0.4);
+      const o2 = ctx.createOscillator(); o2.frequency.value = freq * partial2; o2.connect(g2);
+      o2.start(t0); o2.stop(t0 + dur * 0.4 + 0.1);
+      reap(o2, [g2, send(g2, pan, 1, 1)]);
+    }
+    reap(o, [g, send(g, pan, 1, 1)]);
+  }
+  return {
+    unlock() { return ensure(); },
+    toggle() { soundOn = !soundOn;
+      if (ctx) {
+        if (soundOn) { if (!document.hidden) ctx.resume(); master.gain.setTargetAtTime(0.9, ctx.currentTime, 0.1); }
+        else {
+          master.gain.setTargetAtTime(0, ctx.currentTime, 0.1);
+          setTimeout(() => { if (!soundOn && ctx) ctx.suspend(); }, 350);
+        }
+      }
+      return soundOn; },
+    get on() { return soundOn; },
+    setHidden(hidden) { if (!ctx) return;
+      if (hidden) ctx.suspend();
+      else if (soundOn) ctx.resume(); },
+    setEnergy(e) { if (!ctx || ctx.state !== 'running') return;
+      const k = Math.min(1, e / 18);
+      if (Math.abs(k - lastK) < 0.01) return;
+      lastK = k;
+      noiseGain.gain.setTargetAtTime(k * 0.16, ctx.currentTime, 0.25);
+      noiseFilt.frequency.setTargetAtTime(350 + k * 2400, ctx.currentTime, 0.25); },
+    glideRoot() { if (!ctx) return;
+      const f = mtf(rootMidi() - 24);
+      for (let i = 0; i < droneOscs.length; i++)
+        droneOscs[i].frequency.setTargetAtTime(f + i * 0.6, ctx.currentTime, 1.2); },
+    skipNote(idx, vel, pan) { const s = scale();
+      const m = rootMidi() + 12 + s[Math.min(idx - 1, s.length - 1) % s.length] + (idx > s.length ? 12 : 0);
+      tone(mtf(m), 0.16 + vel * 0.2, 0.9, pan, 4.02); },
+    marimba(deg, vel, pan) { const s = scale();
+      tone(mtf(rootMidi() + 12 + s[deg % s.length]), 0.14 + vel * 0.22, 1.3, pan, 3.98); },
+    rainNote(pan) { const s = scale();
+      const m = rootMidi() + 24 + s[(Math.random() * s.length) | 0];
+      tone(mtf(m), 0.05, 1.6, pan, 4.0); },
+    plop(vel, pan) { if (!ctx || !voiceOK()) return;
+      const t0 = ctx.currentTime;
+      const o = ctx.createOscillator();
+      o.frequency.setValueAtTime(280 + vel * 160, t0);
+      o.frequency.exponentialRampToValueAtTime(70, t0 + 0.14);
+      const g = envGain(t0, 0.10 + vel * 0.18, 0.22);
+      o.connect(g); o.start(t0); o.stop(t0 + 0.32); reap(o, [g, send(g, pan, 1, 1)]); },
+    sink(pan) { if (!ctx || !voiceOK()) return;
+      const t0 = ctx.currentTime;
+      const o = ctx.createOscillator();
+      o.frequency.setValueAtTime(200, t0);
+      o.frequency.exponentialRampToValueAtTime(52, t0 + 0.5);
+      const g = envGain(t0, 0.22, 0.6);
+      o.connect(g); o.start(t0); o.stop(t0 + 0.7); reap(o, [g, send(g, pan, 1, 1)]); },
+    whoosh(k) { if (!ctx) return;
+      noiseGain.gain.cancelScheduledValues(ctx.currentTime);
+      noiseGain.gain.setTargetAtTime(0.1 + k * 0.1, ctx.currentTime, 0.02);
+      noiseGain.gain.setTargetAtTime(0.02, ctx.currentTime + 0.1, 0.3); },
+    nibble(pan) { tone(mtf(rootMidi() + 36), 0.03, 0.25, pan, 0); },
+    glissando() { if (!ctx) return; const s = scale();
+      for (let i = 0; i < 6; i++) {
+        const m = rootMidi() + 12 + s[i % s.length] + 12 * ((i / s.length) | 0);
+        setTimeout(() => tone(mtf(m), 0.12, 1.2, 0.5, 4.0), i * 90);
+      } },
+  };
+})();
+
+/* seasons: dusk → night → dawn, palette + scale together */
+let dayT = 0.06, nightW = 0, seasonIdx = 0, autoDayDir = 1;
+const SEASONS = [
+  { until: 0.34, root: 57, scale: [0, 3, 5, 7, 10] },   // A minor pentatonic
+  { until: 0.70, root: 50, scale: [0, 3, 5, 7, 10] },   // D dorian pentatonic
+  { until: 1.01, root: 48, scale: [0, 2, 4, 7, 9] },    // C major pentatonic
+];
+function rootMidi() { return SEASONS[seasonIdx].root; }
+function scale() { return SEASONS[seasonIdx].scale; }
+function setDay(t, fromUser) {
+  dayT = Math.max(0, Math.min(1, t));
+  nightW = Math.max(0, 1 - Math.abs(dayT - 0.5) * 2);
+  const si = SEASONS.findIndex(s => dayT < s.until);
+  if (si !== seasonIdx) { seasonIdx = si; audio.glideRoot(); }
+  if (fromUser) { dayEl.value = Math.round(dayT * 1000); markHint('day'); }
+}
+
+/* ---------- input FSM ---------- */
+let holdPt = null, idleT = 0, lastTapT = 0, lastTapX = 0, lastTapY = 0;
+const ptr = { down: false, id: -1, sx: 0, sy: 0, x: 0, y: 0, t0: 0, path: 0,
+  trail: [], pad: null, holdTimer: 0, moved: false };
+const extra = new Map();
+function onDown(e) {
+  idleT = 0;
+  audio.unlock();
+  if (ptr.down) { extra.set(e.pointerId, { x: e.clientX, y: e.clientY }); return; }
+  ptr.down = true; ptr.id = e.pointerId;
+  ptr.sx = ptr.x = e.clientX; ptr.sy = ptr.y = e.clientY;
+  ptr.t0 = nowS; ptr.path = 0; ptr.moved = false; ptr.holdTimer = 0;
+  ptr.trail = [{ x: e.clientX, y: e.clientY, t: nowS }];
+  ptr.pad = padAt(e.clientX, e.clientY);
+  if (ptr.pad) { ptr.pad.grabbed = true; ptr.pad.gox = ptr.pad.x - e.clientX; ptr.pad.goy = ptr.pad.y - e.clientY; }
+}
+function onMove(e) {
+  idleT = 0;
+  if (extra.has(e.pointerId)) {
+    const p = extra.get(e.pointerId);
+    const sp = Math.hypot(e.clientX - p.x, e.clientY - p.y);
+    if (sp > 1) splat(e.clientX, e.clientY, 2, Math.min(0.5, sp * 0.02), false);
+    p.x = e.clientX; p.y = e.clientY;
+    return;
+  }
+  if (!ptr.down || e.pointerId !== ptr.id) {
+    // hover wake — the pond answers before you even press
+    if (!ptr.down && e.pointerType === 'mouse') {
+      const last = hoverLast;
+      const sp = last ? Math.hypot(e.clientX - last.x, e.clientY - last.y) : 0;
+      if (sp > 2) splat(e.clientX, e.clientY, 1.5, Math.min(0.12, sp * 0.005), false);
+      hoverLast = { x: e.clientX, y: e.clientY };
+    }
+    return;
+  }
+  const dx = e.clientX - ptr.x, dy = e.clientY - ptr.y;
+  const d = Math.hypot(dx, dy);
+  ptr.path += d;
+  if (ptr.path > 10) ptr.moved = true;
+  if (ptr.pad) {
+    ptr.pad.x = Math.max(ptr.pad.r, Math.min(W - ptr.pad.r, e.clientX + ptr.pad.gox));
+    ptr.pad.y = Math.max(ptr.pad.r, Math.min(H - ptr.pad.r, e.clientY + ptr.pad.goy));
+    if (d > 1) splat(ptr.pad.x, ptr.pad.y, 2.6, Math.min(0.4, d * 0.015), false);
+    markHint('pad');
+  } else if (d > 0.5) {
+    splat(e.clientX, e.clientY, 2.1, Math.min(0.8, d * 0.03), false);
+    if (ptr.moved) markHint('drag');
+  }
+  ptr.x = e.clientX; ptr.y = e.clientY;
+  ptr.trail.push({ x: e.clientX, y: e.clientY, t: nowS });
+  while (ptr.trail.length > 24 || (ptr.trail.length > 2 && nowS - ptr.trail[0].t > 0.24)) ptr.trail.shift();
+  if (holdPt && ptr.moved) holdPt = null;
+}
+let hoverLast = null;
+function onUp(e) {
+  if (extra.has(e.pointerId)) { extra.delete(e.pointerId); return; }
+  if (!ptr.down || e.pointerId !== ptr.id) return;
+  ptr.down = false;
+  holdPt = null;
+  const dur = nowS - ptr.t0;
+  if (ptr.pad) {
+    if (!ptr.moved && dur < 0.25) strikePad(ptr.pad, 0.7);
+    ptr.pad.grabbed = false; ptr.pad = null;
+    savePads();
+    return;
+  }
+  // flick?
+  const tr = ptr.trail;
+  if (tr.length >= 2) {
+    const a = tr[0], b = tr[tr.length - 1];
+    const dt = Math.max(0.016, b.t - a.t);
+    const vx = (b.x - a.x) / dt, vy = (b.y - a.y) / dt;
+    const sp = Math.hypot(vx, vy);
+    if (sp > 850 && ptr.path > 46) {
+      // spin from path curvature
+      let spin = 0;
+      if (tr.length >= 3) {
+        const m = tr[(tr.length / 2) | 0];
+        const a1 = Math.atan2(m.y - a.y, m.x - a.x), a2 = Math.atan2(b.y - m.y, b.x - m.x);
+        let dA = a2 - a1;
+        while (dA > Math.PI) dA -= 6.283; while (dA < -Math.PI) dA += 6.283;
+        spin = Math.max(-2.5, Math.min(2.5, dA * 5));
+      }
+      throwStone(b.x, b.y, vx * 0.82, vy * 0.82, spin);
+      return;
+    }
+  }
+  // tap?
+  if (!ptr.moved && dur < 0.28) {
+    // double-tap toggles rain
+    if (nowS - lastTapT < 0.32 && Math.hypot(ptr.sx - lastTapX, ptr.sy - lastTapY) < 40) {
+      toggleRain();
+      lastTapT = 0;
+      return;
+    }
+    lastTapT = nowS; lastTapX = ptr.sx; lastTapY = ptr.sy;
+    splat(ptr.sx, ptr.sy, 2.0, -0.6, true);
+    audio.plop(0.5, ptr.sx / W);
+  }
+}
+function onCancel(e) {
+  // a gesture claimed by the OS (edge swipe, control centre) is discarded, not classified
+  if (extra.delete(e.pointerId)) return;
+  if (!ptr.down || e.pointerId !== ptr.id) return;
+  ptr.down = false; holdPt = null;
+  if (ptr.pad) { ptr.pad.grabbed = false; ptr.pad = null; savePads(); }
+}
+addEventListener('pointerdown', e => { if (e.target.closest && e.target.closest('#ctl')) return; onDown(e); });
+addEventListener('pointermove', onMove);
+addEventListener('pointerup', onUp);
+addEventListener('pointercancel', onCancel);
+addEventListener('wheel', e => {
+  const k = e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? innerHeight : 1;
+  setDay(dayT + e.deltaY * k * 0.00045, true);
+}, { passive: true });
+addEventListener('keydown', e => {
+  if (e.key === ' ' && !e.repeat &&
+      !(e.target instanceof HTMLButtonElement) && !(e.target instanceof HTMLInputElement)) {
+    e.preventDefault(); toggleRain();
+  }
+});
+
+/* hold detection (runs in main loop) */
+function updateHold(dt) {
+  if (ptr.down && !ptr.pad && !ptr.moved) {
+    ptr.holdTimer += dt;
+    if (ptr.holdTimer > 0.55 && !holdPt) { holdPt = { x: ptr.x, y: ptr.y }; markHint('hold'); }
+    if (holdPt) { holdPt.x = ptr.x; holdPt.y = ptr.y; }
+  } else ptr.holdTimer = 0;
+}
+
+/* ---------- hit-stop ---------- */
+let timeScale = 1, hitStopT = 0;
+function hitStop() { if (REDUCE) return; hitStopT = TUNE.hitStopMs / 1000; }
+
+/* ---------- ambient idle life ---------- */
+let ambT = 0;
+function updateAmbient(dt) {
+  idleT += dt;
+  if (REDUCE || raining) return;
+  if (idleT > 9) {
+    ambT -= dt;
+    if (ambT <= 0) {
+      ambT = 2.4 + Math.random() * 3.5;
+      const r = Math.random();
+      if (r < 0.5) {
+        const x = 60 + Math.random() * (W - 120), y = 60 + Math.random() * (H - 120);
+        splat(x, y, 1.8, -0.35, true);
+        if (Math.random() < 0.4) audio.rainNote(x / W);
+      } else if (r < 0.8) {
+        // a koi kisses the surface
+        const k = koi[(Math.random() * koi.length) | 0];
+        splat(k.x, k.y, 2.4, -0.4, true);
+        audio.plop(0.2, k.x / W);
+      } else {
+        // breeze — a line of cat's-paws
+        const y0 = H * (0.2 + Math.random() * 0.6), x0 = -20;
+        for (let i = 0; i < 14; i++)
+          setTimeout(() => splat(x0 + i * W / 13, y0 + Math.sin(i) * 40, 2.2, 0.12, false), i * 60);
+      }
+    }
+  }
+  // slow day drift — the light breathes even untouched
+  setDay(dayT + autoDayDir * dt / 480, false);
+  if (dayT >= 0.999) autoDayDir = -1;
+  if (dayT <= 0.001) autoDayDir = 1;
+  const v = Math.round(dayT * 1000);
+  if (v !== lastSliderV) { lastSliderV = v; dayEl.value = v; }
+}
+let lastSliderV = -1;
+
+/* ---------- HUD ---------- */
+const hintEl = document.getElementById('hint');
+const dayEl = document.getElementById('day');
+const HINTS = [
+  ['flick', 'flick — skip a stone across the water'],
+  ['drag', 'drag — stir a wake'],
+  ['pad', 'the lilypads ring; drag them to retune the pond'],
+  ['hold', 'hold still — the koi are curious'],
+  ['day', 'scroll, or slide the dial — deepen the night'],
+  ['rain', 'double-tap — let it rain'],
+];
+let hintIdx = 0, hintShownT = 0, hintsDone = false;
+const hintDone = new Set();
+function markHint(key) { hintDone.add(key); }
+function updateHints(dt) {
+  if (hintsDone) return;
+  hintShownT += dt;
+  if (hintIdx >= HINTS.length) { hintsDone = true; hintEl.style.opacity = 0; return; }
+  const [key, text] = HINTS[hintIdx];
+  if (hintDone.has(key) || hintShownT > 12) {
+    hintIdx++; hintShownT = 0;
+    hintEl.style.opacity = 0;
+    const idx = hintIdx;
+    if (idx < HINTS.length)
+      setTimeout(() => {
+        if (idx === hintIdx && idx < HINTS.length) { hintEl.textContent = HINTS[idx][1]; hintEl.style.opacity = 1; }
+      }, 1300);
+  } else if (hintEl.textContent !== text && hintShownT > 1) {
+    hintEl.textContent = text; hintEl.style.opacity = 1;
+  }
+}
+document.getElementById('bSound').addEventListener('click', function() {
+  audio.unlock();
+  this.classList.toggle('on', audio.toggle());
+});
+const rainBtn = document.getElementById('bRain');
+function toggleRain() {
+  raining = !raining;
+  rainBtn.classList.toggle('on', raining);
+  markHint('rain');
+  idleT = 0;
+}
+rainBtn.addEventListener('click', toggleRain);
+dayEl.addEventListener('input', () => { setDay(dayEl.value / 1000, false); markHint('day'); });
+
+/* ---------- resize + perf governor ---------- */
+function resize() {
+  W = innerWidth; H = innerHeight;
+  dpr = Math.min(devicePixelRatio || 1, DPR_CAP);
+  glc.width = Math.round(W * dpr); glc.height = Math.round(H * dpr);
+  ovl.width = Math.round(W * dpr); ovl.height = Math.round(H * dpr);
+  octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (gl) gl.viewport(0, 0, glc.width, glc.height);
+  const nSH = Math.max(96, Math.min(200, Math.round(SW * H / W)));
+  if (nSH !== SH) {
+    SH = nSH;
+    U = new Float32Array(SW * SH); V = new Float32Array(SW * SH);
+    sponge = new Float32Array(SW * SH); buildSponge();
+    if (gl && texH) {
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texH);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.R32F, SW, SH, 0, gl.RED, gl.FLOAT, U);
+    }
+  }
+  undDirtySize = true;
+}
+let rszTimer = 0;
+addEventListener('resize', () => { clearTimeout(rszTimer); rszTimer = setTimeout(resize, 150); });
+let frameAcc = 0, frameN = 0, qLevel = 0, calmN = 0;
+function applyQuality(q) {
+  qLevel = q;
+  DPR_CAP = [2, 1.4, 1][q];
+  uScale = [0.5, 0.42, 0.35][q];
+  resize();
+}
+function govern(dtMs) {
+  frameAcc += dtMs; frameN++;
+  if (frameN >= 90) {
+    const avg = frameAcc / frameN;
+    frameAcc = 0; frameN = 0;
+    if (avg > 24 && qLevel < 2) { applyQuality(qLevel + 1); calmN = 0; }
+    else if (avg < 14 && qLevel > 0) { if (++calmN >= 3) { applyQuality(qLevel - 1); calmN = 0; } }
+    else calmN = 0;
+    if (DEBUG) document.getElementById('fps').textContent =
+      `${(1000 / avg).toFixed(0)} fps · q${qLevel}`;
+  }
+}
+if (DEBUG) document.getElementById('fps').style.display = 'block';
+
+/* ---------- main loop ---------- */
+let nowS = 0, lastT = performance.now(), running = true, simAcc = 0, rafId = 0;
+function frame(tms) {
+  if (!running) return;
+  rafId = requestAnimationFrame(frame);
+  let dtMs = tms - lastT; lastT = tms;
+  govern(dtMs);
+  dtMs = Math.min(dtMs, 34);
+  if (hitStopT > 0) { hitStopT -= dtMs / 1000; timeScale = TUNE.hitStop; }
+  else timeScale = Math.min(1, timeScale + dtMs / 90);
+  const dt = dtMs / 1000 * timeScale;
+  nowS += dtMs / 1000;
+
+  // fixed-timestep water so 60Hz and 120Hz displays ripple at the same speed
+  simAcc += dtMs * timeScale;
+  const maxSteps = qLevel > 0 ? 2 : 4;
+  let steps = 0;
+  while (simAcc >= 8.33 && steps < maxSteps) { stepWater(1); simAcc -= 8.33; steps++; }
+  if (steps === maxSteps) simAcc = 0;
+  updateHold(dt);
+  updateStones(dt);
+  updatePads(dt);
+  updateKoi(dt);
+  updateDrops(dt);
+  updateFlies(dt);
+  updateRain(dt);
+  updateAmbient(dtMs / 1000);
+  updateHints(dtMs / 1000);
+  audio.setEnergy(waterEnergy);
+
+  paintUnder();
+  if (glOK) {
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texH);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, SW, SH, gl.RED, gl.FLOAT, U);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texU);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gl.RGBA, gl.UNSIGNED_BYTE, und);
+    gl.uniform2f(uni.uSim, SW, SH);
+    gl.uniform2f(uni.uRes, glc.width, glc.height);
+    gl.uniform1f(uni.uTime, nowS);
+    gl.uniform1f(uni.uDay, dayT);
+    gl.uniform1f(uni.uRefr, TUNE.refr);
+    gl.uniform1f(uni.uNrm, TUNE.nrm);
+    gl.uniform1f(uni.uFoamLo, TUNE.foamLo);
+    gl.uniform1f(uni.uFoamHi, TUNE.foamHi);
+    gl.uniform1f(uni.uMotion, REDUCE ? 0 : 1);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  octx.clearRect(0, 0, W, H);
+  drawPads(octx);
+  drawStones(octx);
+  drawDrops(octx);
+  drawRain(octx);
+  drawFlies(octx);
+}
+document.addEventListener('visibilitychange', () => {
+  running = !document.hidden;
+  audio.setHidden(document.hidden);
+  if (running) {
+    // a rAF queued before the tab hid survives the hide — cancel it or loops stack up
+    cancelAnimationFrame(rafId);
+    lastT = performance.now();
+    rafId = requestAnimationFrame(frame);
+  }
+});
+
+/* ---------- go ---------- */
+resize();
+initPads();
+try { if (gl) initGL(); } catch (err) {
+  document.getElementById('nogl').style.display = 'grid';
+  console.error(err);
+}
+setDay(0.06, false);
+// a first breath so the pond is alive on arrival
+setTimeout(() => { splat(W * 0.62, H * 0.4, 2.5, -0.5, true); }, 600);
+setTimeout(() => { splat(W * 0.3, H * 0.62, 2.0, -0.4, true); }, 1700);
+hintEl.textContent = HINTS[0][1];
+setTimeout(() => { hintEl.style.opacity = 1; }, 1400);
+rafId = requestAnimationFrame(frame);
+</script>
+
+</html>
