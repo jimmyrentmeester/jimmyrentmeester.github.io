@@ -37,7 +37,9 @@
        color:var(--moon55);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
        font-style:italic;font-size:14.5px;letter-spacing:.04em;white-space:nowrap;
        transition:opacity 1.2s;opacity:0;text-shadow:0 1px 8px rgba(11,16,32,.8);}
-  #fps{position:absolute;bottom:8px;left:10px;color:var(--moon30);font-size:10px;display:none;}
+  #fps{position:absolute;bottom:10px;left:12px;color:var(--moon55);font-size:11px;display:none;
+       font-variant-numeric:tabular-nums;letter-spacing:.05em;background:rgba(11,16,32,.5);
+       padding:3px 8px;border-radius:6px;}
   #nogl{position:absolute;inset:0;display:none;place-items:center;color:var(--moon55);
        font-family:Georgia,serif;font-style:italic;font-size:15px;text-align:center;padding:30px;}
   @media (prefers-reduced-motion:reduce){ .btn{transition:none} #hint{transition:opacity .3s} }
@@ -990,10 +992,9 @@ addEventListener('wheel', e => {
   setDay(dayT + e.deltaY * k * 0.00045, true);
 }, { passive: true });
 addEventListener('keydown', e => {
-  if (e.key === ' ' && !e.repeat &&
-      !(e.target instanceof HTMLButtonElement) && !(e.target instanceof HTMLInputElement)) {
-    e.preventDefault(); toggleRain();
-  }
+  if (e.target instanceof HTMLButtonElement || e.target instanceof HTMLInputElement) return;
+  if (e.key === ' ' && !e.repeat) { e.preventDefault(); toggleRain(); }
+  if ((e.key === 'f' || e.key === 'F') && !e.repeat) setFps(!showFps);
 });
 
 /* hold detection (runs in main loop) */
@@ -1109,6 +1110,10 @@ function resize() {
 let rszTimer = 0;
 addEventListener('resize', () => { clearTimeout(rszTimer); rszTimer = setTimeout(resize, 150); });
 let frameAcc = 0, frameN = 0, qLevel = 0, calmN = 0;
+let mAcc = 0, mN = 0;                        // short window for the live fps readout
+const fpsEl = document.getElementById('fps');
+let showFps = DEBUG;
+function setFps(on) { showFps = on; fpsEl.style.display = on ? 'block' : 'none'; }
 function applyQuality(q) {
   qLevel = q;
   DPR_CAP = [2, 1.4, 1][q];
@@ -1117,17 +1122,22 @@ function applyQuality(q) {
 }
 function govern(dtMs) {
   frameAcc += dtMs; frameN++;
+  if (showFps) {
+    mAcc += dtMs;
+    if (++mN >= 20) {                       // refresh the meter ~3–6×/sec
+      fpsEl.textContent = `${Math.round(1000 / (mAcc / mN))} fps · q${qLevel} · ${dpr.toFixed(2)}×`;
+      mAcc = 0; mN = 0;
+    }
+  }
   if (frameN >= 90) {
     const avg = frameAcc / frameN;
     frameAcc = 0; frameN = 0;
     if (avg > 24 && qLevel < 2) { applyQuality(qLevel + 1); calmN = 0; }
     else if (avg < 14 && qLevel > 0) { if (++calmN >= 3) { applyQuality(qLevel - 1); calmN = 0; } }
     else calmN = 0;
-    if (DEBUG) document.getElementById('fps').textContent =
-      `${(1000 / avg).toFixed(0)} fps · q${qLevel}`;
   }
 }
-if (DEBUG) document.getElementById('fps').style.display = 'block';
+if (DEBUG) setFps(true);
 
 /* ---------- main loop ---------- */
 let nowS = 0, lastT = performance.now(), running = true, simAcc = 0, rafId = 0;
