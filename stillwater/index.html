@@ -67,7 +67,7 @@ const DEBUG = /[?&]debug/.test(location.search);
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TUNE = window.TUNE = {
   waveC: 0.42, damp: 0.9955, refr: 0.015, nrm: 0.65, foamLo: 0.015, foamHi: 0.12,
-  gravity: 2300, skipMin: 300, hitStop: 0.30, hitStopMs: 70,
+  gravity: 2300, skipMin: 300,
 };
 
 /* ---------- canvases ---------- */
@@ -597,7 +597,6 @@ function updateStones(dt) {
         splashAt(s.x, s.y, Math.min(1, hs / 1100));
         scareKoi(s.x, s.y, 0.8);
         audio.skipNote(s.skips, Math.min(1, hs / 1300), s.x / W);
-        hitStop();
         if (s.skips === 5) streakFlourish(s.x, s.y);
         markHint('flick');
       } else {
@@ -1006,10 +1005,6 @@ function updateHold(dt) {
   } else ptr.holdTimer = 0;
 }
 
-/* ---------- hit-stop ---------- */
-let timeScale = 1, hitStopT = 0;
-function hitStop() { if (REDUCE) return; hitStopT = TUNE.hitStopMs / 1000; }
-
 /* ---------- ambient idle life ---------- */
 let ambT = 0;
 function updateAmbient(dt) {
@@ -1142,13 +1137,11 @@ function frame(tms) {
   let dtMs = tms - lastT; lastT = tms;
   govern(dtMs);
   dtMs = Math.min(dtMs, 34);
-  if (hitStopT > 0) { hitStopT -= dtMs / 1000; timeScale = TUNE.hitStop; }
-  else timeScale = Math.min(1, timeScale + dtMs / 90);
-  const dt = dtMs / 1000 * timeScale;
-  nowS += dtMs / 1000;
+  const dt = dtMs / 1000;
+  nowS += dt;
 
   // fixed-timestep water so 60Hz and 120Hz displays ripple at the same speed
-  simAcc += dtMs * timeScale;
+  simAcc += dtMs;
   const maxSteps = qLevel > 0 ? 2 : 4;
   let steps = 0;
   while (simAcc >= 8.33 && steps < maxSteps) { stepWater(1); simAcc -= 8.33; steps++; }
