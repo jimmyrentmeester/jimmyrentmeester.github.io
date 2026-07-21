@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jimmy Rentmeester — Product-minded builder</title>
-<meta name="description" content="I design, build and ship small iOS apps end to end — from the first idea to the App Store listing. Private by default: no accounts, no ads, no tracking.">
-<meta property="og:title" content="Jimmy Rentmeester — Product-minded builder">
-<meta property="og:description" content="I design, build and ship small iOS apps end to end. Private by default: no accounts, no ads, no tracking.">
+<title>Jimmy Rentmeester — Product Manager</title>
+<meta name="description" content="Lead Product Manager at Coolblue. I set product direction for two categories and lead a team of ten — and in my own time I design, build and ship iOS apps end to end.">
+<meta property="og:title" content="Jimmy Rentmeester — Product Manager">
+<meta property="og:description" content="Lead Product Manager at Coolblue, and a solo builder shipping his own iOS apps end to end.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jimmyrentmeester.github.io/">
 <meta name="twitter:card" content="summary">
@@ -51,6 +51,23 @@
   section { margin-top:3.4rem; }
   h2 { font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; color:var(--muted);
     font-weight:700; margin:0 0 1.3rem; }
+
+  /* ── experience timeline ─────────────────────────── */
+  .timeline { list-style:none; margin:0; padding:0; }
+  .timeline > li { position:relative; padding:0 0 1.5rem 1.4rem; border-left:2px solid var(--line); }
+  .timeline > li:last-child { padding-bottom:0; border-left-color:transparent; }
+  .timeline > li::before { content:""; position:absolute; left:-6px; top:.45rem; width:10px;
+    height:10px; border-radius:50%; background:var(--accent); }
+  .timeline .role { display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; }
+  .timeline strong { font-size:1rem; }
+  .timeline .meta { font-size:.85rem; color:var(--muted); }
+  .timeline p { margin:.35rem 0 0; color:var(--muted); font-size:.92rem; max-width:60ch; }
+
+  /* ── education ───────────────────────────────────── */
+  .edu { list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
+  .edu li { display:flex; flex-wrap:wrap; gap:.2rem .6rem; align-items:baseline;
+    font-size:.92rem; }
+  .edu .meta { color:var(--muted); font-size:.85rem; }
 
   /* ── principles ──────────────────────────────────── */
   /* 2×2 net als het werkraster; 3+1 liet een losse kaart achter.
@@ -120,12 +137,52 @@
 
     <header class="hero">
       <h1 data-i18n="hero.name">Jimmy Rentmeester</h1>
-      <p class="tagline" data-i18n="hero.tagline">I turn ideas into finished, shipped products — usually on my own.</p>
+      <p class="tagline" data-i18n="hero.tagline">Product Manager · Tilburg, Netherlands</p>
       <div class="bio">
-        <p data-i18n="hero.bio1">I design, build and release small iOS apps end to end: finding a problem worth solving, cutting the idea down to something shippable, writing it, and taking it all the way through the App Store — listing, pricing, localisation and the paperwork behind it.</p>
-        <p data-i18n="hero.bio2">Working alone means every trade-off is explicit. What goes in version one and what waits. What to charge and how. What to leave out to keep the thing understandable. Those decisions interest me at least as much as the code does.</p>
+        <p data-i18n="hero.bio1">I set product direction for two categories at Coolblue and lead a team of ten. Most of my work is turning strategy into a roadmap people can actually act on, and keeping customer value, commercial impact and feasibility in balance while they do.</p>
+        <p data-i18n="hero.bio2">In my own time I build and release iOS apps end to end — research, design, code, App Store listing, pricing, localisation and the compliance behind it. It is the same craft at a much smaller scale, with nobody to delegate the awkward decisions to. It keeps me honest about what shipping really costs.</p>
       </div>
     </header>
+
+    <section>
+      <h2 data-i18n="exp.heading">Experience</h2>
+      <ol class="timeline">
+        <li>
+          <div class="role">
+            <strong data-i18n="e1.t">Lead Product Manager</strong>
+            <span class="meta">Coolblue · <span data-i18n="e1.p">2022 – present</span></span>
+          </div>
+          <p data-i18n="e1.d">Vision and strategy for the Gaming, Printers &amp; Office categories. I translate strategic goals into roadmaps and quarterly milestones, and coach six product managers and four product editors to make calls based on customer and commercial data.</p>
+        </li>
+        <li>
+          <div class="role">
+            <strong data-i18n="e2.t">Product Manager, Gaming</strong>
+            <span class="meta">Coolblue · <span data-i18n="e2.p">2020 – 2022</span></span>
+          </div>
+          <p data-i18n="e2.d">Owned the commercial result and customer journey for Gaming, including how to fairly offer the most wanted product of 2020 — the PlayStation 5 — under severe scarcity. I turned that scramble into a repeatable process across development, app and marketing, so every later stock batch ran with far less customer contact and a higher NPS.</p>
+        </li>
+        <li>
+          <div class="role">
+            <strong data-i18n="e3.t">SEO Specialist</strong>
+            <span class="meta">BigSpark · <span data-i18n="e3.p">2019 – 2020</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="role">
+            <strong data-i18n="e4.t">Online Marketer, Product Support, Product Editor</strong>
+            <span class="meta">Coolblue · <span data-i18n="e4.p">2016 – 2019</span></span>
+          </div>
+          <p data-i18n="e4.d">Grew from content into the customer journey: SEO and CRO for Gaming and IT accessories, and analysing NPS, returns and feedback to drive product improvements.</p>
+        </li>
+        <li>
+          <div class="role">
+            <strong data-i18n="e5.t">Software Research &amp; Concept Development</strong>
+            <span class="meta">U-Approach · <span data-i18n="e5.p">2014 – 2016</span></span>
+          </div>
+          <p data-i18n="e5.d">Bluetooth beacon concepts for GLOW and VisitBrabant, and research into how people actually interact with mobile apps.</p>
+        </li>
+      </ol>
+    </section>
 
     <section>
       <h2 data-i18n="work.heading">Selected work</h2>
@@ -231,11 +288,28 @@
       </ul>
     </section>
 
+    <section>
+      <h2 data-i18n="edu.heading">Education</h2>
+      <ul class="edu">
+        <li>
+          <span data-i18n="ed1.t">BA Communication &amp; Media Studies — Trendwatching, Futures Research &amp; Storytelling</span>
+          <span class="meta">Fontys Academy for the Creative Economy · 2012 – 2016</span>
+        </li>
+        <li>
+          <span data-i18n="ed2.t">ICT Media &amp; Design</span>
+          <span class="meta">Fontys Hogeschool Eindhoven · 2011 – 2012</span>
+        </li>
+        <li>
+          <span data-i18n="ed3.t">Network Engineer (level 4)</span>
+          <span class="meta">Koning Willem I College · 2008 – 2011</span>
+        </li>
+      </ul>
+    </section>
+
     <footer>
       <span data-i18n="footer.copy">© 2026 Jimmy Rentmeester</span>
       <span class="spacer"></span>
-      <!-- TODO: vervang door je echte LinkedIn-URL -->
-      <a href="https://www.linkedin.com/in/CHANGE-ME" rel="me">LinkedIn ↗</a>
+      <a href="https://www.linkedin.com/in/jimmyrentmeester" rel="me">LinkedIn ↗</a>
     </footer>
   </div>
 
@@ -248,12 +322,33 @@
   var I18N = {
     nl: {
       "hero.name": "Jimmy Rentmeester",
-      "hero.tagline": "Ik maak van ideeën afgeronde producten — meestal in mijn eentje.",
-      "hero.bio1": "Ik ontwerp, bouw en publiceer kleine iOS-apps van begin tot eind: een probleem vinden dat het waard is, het idee terugbrengen tot iets dat te maken valt, het schrijven, en het helemaal door de App Store loodsen — vermelding, prijsstelling, vertalingen en de administratie eromheen.",
-      "hero.bio2": "Alleen werken betekent dat elke afweging expliciet wordt. Wat gaat er in versie één en wat wacht. Wat het mag kosten en op welke manier. Wat eruit moet om het begrijpelijk te houden. Die keuzes boeien me minstens zo erg als de code.",
+      "hero.tagline": "Productmanager · Tilburg",
+      "hero.bio1": "Ik bepaal de productrichting voor twee categorieën bij Coolblue en geef leiding aan een team van tien. Het grootste deel van mijn werk is strategie vertalen naar een roadmap waar mensen daadwerkelijk mee vooruit kunnen, en onderweg klantwaarde, commerciële impact en haalbaarheid in balans houden.",
+      "hero.bio2": "In mijn eigen tijd bouw en publiceer ik iOS-apps van begin tot eind — onderzoek, ontwerp, code, winkelvermelding, prijs, vertalingen en de regelgeving eromheen. Hetzelfde vak op veel kleinere schaal, met niemand aan wie ik de vervelende keuzes kan doorgeven. Dat houdt me eerlijk over wat uitbrengen echt kost.",
 
+      "exp.heading": "Ervaring",
       "work.heading": "Uitgelicht werk",
       "approach.heading": "Hoe ik werk",
+      "edu.heading": "Opleiding",
+
+      "e1.t": "Lead Productmanager",
+      "e1.p": "2022 – heden",
+      "e1.d": "Visie en strategie voor de categorieën Gaming, Printers &amp; Kantoor. Ik vertaal strategische doelen naar roadmaps en kwartaalmijlpalen, en begeleid zes productmanagers en vier productredacteuren om keuzes te maken op basis van klant- en commerciële data.",
+      "e2.t": "Productmanager Gaming",
+      "e2.p": "2020 – 2022",
+      "e2.d": "Verantwoordelijk voor het commerciële resultaat en de klantreis binnen Gaming, inclusief de vraag hoe je het meest gewilde product van 2020 — de PlayStation 5 — eerlijk aanbiedt bij extreme schaarste. Die eerste stormloop heb ik omgezet in een herhaalbaar proces over development, app en marketing, waardoor elke volgende voorraadbatch verliep met fors minder klantcontact en een hogere NPS.",
+      "e3.t": "SEO-specialist",
+      "e3.p": "2019 – 2020",
+      "e4.t": "Online marketeer, productsupport, productredactie",
+      "e4.p": "2016 – 2019",
+      "e4.d": "Doorgegroeid van content naar de klantreis: SEO en CRO voor Gaming en IT-accessoires, en het analyseren van NPS, retouren en klantfeedback om productverbeteringen door te voeren.",
+      "e5.t": "Software Research &amp; Concept Development",
+      "e5.p": "2014 – 2016",
+      "e5.d": "Concepten met Bluetooth-beacons voor onder andere GLOW en VisitBrabant, en onderzoek naar hoe mensen daadwerkelijk met mobiele apps omgaan.",
+
+      "ed1.t": "Bachelor Communicatie &amp; Media — Trendwatching, Futures Research &amp; Storytelling",
+      "ed2.t": "ICT Media &amp; Design",
+      "ed3.t": "Netwerkbeheerder (niveau 4)",
 
       "bb.cat": "Babyfoon · iPhone &amp; iPad",
       "bb.desc": "Maakt van twee iPhones een privé-videobabyfoon. Beeld en geluid gaan rechtstreeks van telefoon naar telefoon, end-to-end versleuteld, en er wordt niets opgenomen of bewaard.",
