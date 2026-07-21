@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jimmy Rentmeester — Lead Product Manager</title>
-<meta name="description" content="Lead Product Manager at Coolblue. I set product direction for two categories and lead a team of ten — and in my own time I design, build and ship iOS apps end to end.">
-<meta property="og:title" content="Jimmy Rentmeester — Lead Product Manager">
-<meta property="og:description" content="Lead Product Manager at Coolblue, and a solo builder shipping his own iOS apps end to end.">
+<title>Jimmy Rentmeester — apps and product work</title>
+<meta name="description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them. Day job: Lead Product Manager at Coolblue.">
+<meta property="og:title" content="Jimmy Rentmeester — apps and product work">
+<meta property="og:description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jimmyrentmeester.github.io/">
 <meta name="twitter:card" content="summary">
@@ -21,14 +21,13 @@
             --accent:#8e99ff; --accent-soft:#1b1e35; --shadow:rgba(0,0,0,.5); }
   }
   * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
   body { margin:0; background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
     line-height:1.6; -webkit-font-smoothing:antialiased; }
   .wrap { max-width:58rem; margin:0 auto; padding:2rem 1.4rem 4rem; }
 
   /* ── language toggle ─────────────────────────────── */
-  .topbar { display:flex; justify-content:flex-end; margin-bottom:2.5rem; }
+  .topbar { display:flex; justify-content:flex-end; margin-bottom:2.2rem; }
   .langswitch { display:inline-flex; background:var(--card); border:1px solid var(--line);
     border-radius:999px; padding:3px; gap:2px; }
   .langswitch button { appearance:none; border:0; background:transparent; cursor:pointer;
@@ -39,53 +38,19 @@
   .langswitch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
   /* ── hero ────────────────────────────────────────── */
-  header.hero { margin-bottom:3.2rem; }
-  .hero h1 { font-size:clamp(2rem,5vw,2.7rem); line-height:1.15; letter-spacing:-.025em;
-    margin:0 0 .6rem; }
-  .hero .tagline { font-size:clamp(1.05rem,2.4vw,1.2rem); color:var(--muted); margin:0 0 1.5rem;
-    max-width:34ch; }
-  .hero .bio > p { margin:0 0 1rem; max-width:62ch; }
-  .hero .bio > p:last-child { margin-bottom:0; }
+  header.hero { margin-bottom:2.8rem; }
+  .hero h1 { font-size:clamp(2rem,5vw,2.6rem); line-height:1.15; letter-spacing:-.025em;
+    margin:0 0 .5rem; }
+  .hero .tagline { font-size:1.02rem; color:var(--muted); margin:0 0 1.2rem; }
+  .hero p.lead { margin:0; max-width:60ch; }
 
   /* ── section headings ────────────────────────────── */
-  section { margin-top:3.4rem; }
+  section { margin-top:3.2rem; }
   h2 { font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; color:var(--muted);
     font-weight:700; margin:0 0 1.3rem; }
 
-  /* ── experience timeline ─────────────────────────── */
-  .timeline { list-style:none; margin:0; padding:0; }
-  .timeline > li { position:relative; padding:0 0 1.5rem 1.4rem; border-left:2px solid var(--line); }
-  .timeline > li:last-child { padding-bottom:0; border-left-color:transparent; }
-  .timeline > li::before { content:""; position:absolute; left:-6px; top:.45rem; width:10px;
-    height:10px; border-radius:50%; background:var(--accent); }
-  .timeline .role { display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; }
-  .timeline strong { font-size:1rem; }
-  .timeline .meta { font-size:.85rem; color:var(--muted); }
-  .timeline p { margin:.35rem 0 0; color:var(--muted); font-size:.92rem; max-width:60ch; }
-
-  /* ── education ───────────────────────────────────── */
-  .edu { list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
-  .edu li { display:flex; flex-wrap:wrap; gap:.2rem .6rem; align-items:baseline;
-    font-size:.92rem; }
-  .edu .meta { color:var(--muted); font-size:.85rem; }
-
-  /* ── principles ──────────────────────────────────── */
-  /* 2×2 net als het werkraster; 3+1 liet een losse kaart achter.
-     De min() voorkomt dat de minimumbreedte groter wordt dan het scherm zelf —
-     zonder dat loopt de kaart op een smalle telefoon buiten beeld. */
-  .principles { display:grid; gap:.9rem;
-    grid-template-columns:repeat(auto-fit,minmax(min(20rem,100%),1fr));
-    list-style:none; padding:0; margin:0; }
-  .principles li { background:var(--card); border:1px solid var(--line); border-radius:14px;
-    padding:1rem 1.1rem; }
-  .principles strong { display:block; font-size:.95rem; margin-bottom:.2rem; }
-  .principles span { font-size:.88rem; color:var(--muted); line-height:1.5; }
-
   /* ── work cards ──────────────────────────────────── */
-  /* minmax 22rem → twee kolommen op desktop; smaller stapelt vanzelf. Drie
-     kolommen maakte de tekstblokken te smal om prettig te lezen.
-     De min(...,100%) is nodig: zonder dat blijft de kolom 22rem breed op een
-     telefoon van 390px en loopt de kaart buiten beeld. */
+  /* min(...,100%) voorkomt dat de kolom breder blijft dan een smal scherm. */
   .grid { display:grid; gap:1.1rem;
     grid-template-columns:repeat(auto-fill,minmax(min(22rem,100%),1fr)); }
   .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
@@ -97,11 +62,8 @@
   .card h3 { font-size:1.1rem; margin:0 0 .1rem; letter-spacing:-.01em; }
   .card .cat { font-size:.76rem; color:var(--muted); }
   .card .desc { margin:0 0 .85rem; color:var(--muted); font-size:.9rem; }
-  /* Geen flex:1 op .note — dan rekt het gekleurde vlak uit tot een grote lege
-     vlek. De actiebalk zakt met margin-top:auto naar de onderkant. */
   .card .note { margin:0 0 1.1rem; font-size:.86rem; padding:.7rem .85rem; border-radius:10px;
     background:var(--accent-soft); color:var(--ink); line-height:1.55; }
-  .card .note b { font-weight:600; }
   .card .actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem;
     flex-wrap:wrap; margin-top:auto; }
   .card .store { font-size:.85rem; font-weight:600; color:var(--accent); text-decoration:none; }
@@ -110,8 +72,28 @@
   .card .more { font-size:.85rem; color:var(--muted); text-decoration:none; }
   .card .more:hover { color:var(--ink); }
 
+  /* ── about ───────────────────────────────────────── */
+  .about p { margin:0 0 1rem; max-width:62ch; }
+  .about p:last-child { margin-bottom:0; }
+
+  /* ── experience timeline ─────────────────────────── */
+  .timeline { list-style:none; margin:1.8rem 0 0; padding:0; }
+  .timeline > li { position:relative; padding:0 0 1.5rem 1.4rem; border-left:2px solid var(--line); }
+  .timeline > li:last-child { padding-bottom:0; border-left-color:transparent; }
+  .timeline > li::before { content:""; position:absolute; left:-6px; top:.45rem; width:10px;
+    height:10px; border-radius:50%; background:var(--accent); }
+  .timeline .role { display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; }
+  .timeline strong { font-size:1rem; }
+  .timeline .meta { font-size:.85rem; color:var(--muted); }
+  .timeline p { margin:.35rem 0 0; color:var(--muted); font-size:.92rem; max-width:60ch; }
+
+  /* ── education ───────────────────────────────────── */
+  /* Ruim los van de tijdlijn: anders plakt deze regel tegen het laatste item. */
+  .edu { margin:2.2rem 0 0; padding-top:1.4rem; border-top:1px solid var(--line);
+    font-size:.88rem; color:var(--muted); max-width:62ch; }
+
   /* ── footer ──────────────────────────────────────── */
-  footer { margin-top:3.6rem; padding-top:1.6rem; border-top:1px solid var(--line);
+  footer { margin-top:3.4rem; padding-top:1.6rem; border-top:1px solid var(--line);
     display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.2rem;
     color:var(--muted); font-size:.88rem; }
   footer a { color:var(--accent); text-decoration:none; font-weight:600; }
@@ -119,7 +101,6 @@
   footer .spacer { flex:1; }
 
   @media (prefers-reduced-motion:reduce) {
-    html { scroll-behavior:auto; }
     * { transition:none !important; }
     .card:hover { transform:none; }
   }
@@ -137,67 +118,24 @@
 
     <header class="hero">
       <h1 data-i18n="hero.name">Jimmy Rentmeester</h1>
-      <p class="tagline" data-i18n="hero.tagline">Lead Product Manager · Tilburg, Netherlands</p>
-      <div class="bio">
-        <p data-i18n="hero.bio1">I set product direction for two categories at Coolblue and lead a team of ten. Day to day that is product owner work at scale: translating strategy into roadmaps people can actually act on, prioritising the backlog on customer value, and keeping commercial impact and feasibility in balance while multidisciplinary teams build it.</p>
-        <p data-i18n="hero.bio2">In my own time I build and release iOS apps end to end — research, design, code, App Store listing, pricing, localisation and the compliance behind it. It is the same craft at a much smaller scale, with nobody to delegate the awkward decisions to. It keeps me honest about what shipping really costs.</p>
-      </div>
+      <p class="tagline" data-i18n="hero.tagline">Lead Product Manager at Coolblue · Tilburg</p>
+      <p class="lead" data-i18n="hero.lead">I run e-commerce for two categories at Coolblue. Outside that I build and release iOS apps, which is where I get to do the whole product job myself. That part is what this page is mostly about.</p>
     </header>
 
     <section>
-      <h2 data-i18n="exp.heading">Experience</h2>
-      <ol class="timeline">
-        <li>
-          <div class="role">
-            <strong data-i18n="e1.t">Lead Product Manager</strong>
-            <span class="meta">Coolblue · <span data-i18n="e1.p">2022 – present</span></span>
-          </div>
-          <p data-i18n="e1.d">Vision and strategy for the Gaming, Printers &amp; Office categories. I translate strategic goals into roadmaps and quarterly milestones, and coach six product managers and four product editors to make calls based on customer and commercial data.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e2.t">Product Manager, Gaming</strong>
-            <span class="meta">Coolblue · <span data-i18n="e2.p">2020 – 2022</span></span>
-          </div>
-          <p data-i18n="e2.d">Owned the commercial result and customer journey for Gaming, including how to fairly offer the most wanted product of 2020 — the PlayStation 5 — under severe scarcity. I turned that scramble into a repeatable process across development, app and marketing, so every later stock batch ran with far less customer contact and a higher NPS.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e3.t">SEO Specialist</strong>
-            <span class="meta">BigSpark · <span data-i18n="e3.p">2019 – 2020</span></span>
-          </div>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e4.t">Online Marketer, Product Support, Product Editor</strong>
-            <span class="meta">Coolblue · <span data-i18n="e4.p">2016 – 2019</span></span>
-          </div>
-          <p data-i18n="e4.d">Grew from content into the customer journey: SEO and CRO for Gaming and IT accessories, and analysing NPS, returns and feedback to drive product improvements.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e5.t">Software Research &amp; Concept Development</strong>
-            <span class="meta">U-Approach · <span data-i18n="e5.p">2014 – 2016</span></span>
-          </div>
-          <p data-i18n="e5.d">Bluetooth beacon concepts for GLOW and VisitBrabant, and research into how people actually interact with mobile apps.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section>
-      <h2 data-i18n="work.heading">Selected work</h2>
+      <h2 data-i18n="work.heading">Apps</h2>
       <div class="grid">
 
         <!--
           NIEUWE APP TOEVOEGEN? Kopieer één <div class="card">…</div> en vul in:
-            • <img src="…/icon.png">          → app-icoon
-            • <h3> naam, <div class="cat">    → categorie · platform
-            • <p class="desc">                → wat het is (één regel)
-            • <p class="note">                → de productkeuze erachter
-            • App Store-link                  → https://apps.apple.com/app/id<APP-ID>
-            • Details-link                    → map van de app, bijv. appnaam/
+            • <img src="…/icon.png">   → app-icoon
+            • <h3> naam · <div class="cat"> categorie · platform
+            • <p class="desc">         → wat het is
+            • <p class="note">         → de afweging erachter
+            • App Store-link           → https://apps.apple.com/app/id<APP-ID>
+          Alle app-links openen in een nieuw tabblad (target/rel staan al goed).
           Vertaling: geef elk tekstelement een uniek data-i18n en vul de NL-string
-          aan in het I18N-object onderaan deze pagina.
+          aan in het I18N-object onderaan.
         -->
 
         <div class="card">
@@ -208,11 +146,11 @@
               <div class="cat" data-i18n="gb.cat">Arcade game · iPhone &amp; iPad</div>
             </div>
           </div>
-          <p class="desc" data-i18n="gb.desc">A neon one-thumb reflex game: decode the grid before it vanishes, chain clean hits, chase the score.</p>
-          <p class="note" data-i18n="gb.note"><b>The call:</b> a sixteen-level campaign where each level introduces exactly one mechanic — so the game teaches itself instead of opening with a tutorial nobody reads.</p>
+          <p class="desc" data-i18n="gb.desc">A one-thumb reflex game. Decode the grid before it disappears, chain hits, chase a score.</p>
+          <p class="note" data-i18n="gb.note">Sixteen campaign levels, each one introducing a single mechanic. The game explains itself while you play it, so it opens without a tutorial.</p>
           <div class="actions">
-            <a class="store" href="https://apps.apple.com/app/id6779888720">App Store ↗</a>
-            <a class="more" href="gridbreaker/" data-i18n="link.details">Details →</a>
+            <a class="store" href="https://apps.apple.com/app/id6779888720" target="_blank" rel="noopener">App Store ↗</a>
+            <a class="more" href="gridbreaker/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -224,11 +162,11 @@
               <div class="cat" data-i18n="bb.cat">Baby monitor · iPhone &amp; iPad</div>
             </div>
           </div>
-          <p class="desc" data-i18n="bb.desc">Turns two iPhones into a private video baby monitor. Audio and video go straight from phone to phone, end-to-end encrypted, and nothing is recorded or stored.</p>
-          <p class="note" data-i18n="bb.note"><b>The call:</b> every competitor routes video through a cloud account. Keeping the stream strictly between two devices meant giving up remote viewing — and became the entire reason to pick this one.</p>
+          <p class="desc" data-i18n="bb.desc">Turns two iPhones into a video baby monitor. Sound and picture go straight from one device to the other, encrypted, and nothing is stored.</p>
+          <p class="note" data-i18n="bb.note">Every competing app routes the stream through a cloud account. Keeping it device to device meant giving up watching from outside the house. I decided that trade-off was the point of the app.</p>
           <div class="actions">
-            <a class="store" href="https://apps.apple.com/app/id6783058581">App Store ↗</a>
-            <a class="more" href="babybeam/" data-i18n="link.details">Details →</a>
+            <a class="store" href="https://apps.apple.com/app/id6783058581" target="_blank" rel="noopener">App Store ↗</a>
+            <a class="more" href="babybeam/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -240,11 +178,11 @@
               <div class="cat" data-i18n="wv.cat">Watch collection · iPhone &amp; iPad</div>
             </div>
           </div>
-          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance-ready PDF. Everything stays on the device.</p>
-          <p class="note" data-i18n="wv.note"><b>The call:</b> pay once, never subscribe — in a category that has drifted to monthly fees. The free tier stays genuinely usable rather than crippled, so the paid unlock has to earn itself.</p>
+          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance PDF. The data stays on the phone.</p>
+          <p class="note" data-i18n="wv.note">One payment instead of a subscription, in a category that has been moving the other way. The free version holds three watches and still exports, so the paid unlock has to be worth buying on its own.</p>
           <div class="actions">
-            <a class="store soon" href="wristvault/" data-i18n="link.soon">Coming to the App Store</a>
-            <a class="more" href="wristvault/" data-i18n="link.details">Details →</a>
+            <a class="store soon" href="wristvault/" target="_blank" rel="noopener" data-i18n="link.soon">Coming to the App Store</a>
+            <a class="more" href="wristvault/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -256,60 +194,67 @@
               <div class="cat" data-i18n="sw.cat">Browser experiment</div>
             </div>
           </div>
-          <p class="desc" data-i18n="sw.desc">A twilight pond that lives in a browser tab. Skip stones, ring the lilypads, meet the koi — every stone you sink stays.</p>
-          <p class="note" data-i18n="sw.note"><b>The call:</b> no goal, no score, no install. A small place to work on feel — timing, weight, water — without a store or a roadmap attached.</p>
+          <p class="desc" data-i18n="sw.desc">A pond in a browser tab. Skip stones across it, ring the lilypads, watch the koi.</p>
+          <p class="note" data-i18n="sw.note">No score, no install, no roadmap. Somewhere to work on timing and weight without a store attached to it.</p>
           <div class="actions">
-            <a class="store" href="stillwater/" data-i18n="link.open">Open ↗</a>
+            <a class="store" href="stillwater/" target="_blank" rel="noopener" data-i18n="link.open">Open ↗</a>
           </div>
         </div>
-</div>
+
+      </div>
     </section>
 
-    <section>
-      <h2 data-i18n="approach.heading">How I work</h2>
-      <ul class="principles">
-        <li>
-          <strong data-i18n="p1.t">Ship it, then judge it</strong>
-          <span data-i18n="p1.d">A finished version one beats a perfect plan. Everything I have learned about these apps, I learned after release.</span>
-        </li>
-        <li>
-          <strong data-i18n="p2.t">Cut until it is clear</strong>
-          <span data-i18n="p2.d">Most features are deferred, not rejected. A first version that explains itself is worth more than a complete one that does not.</span>
-        </li>
-        <li>
-          <strong data-i18n="p3.t">Private by default</strong>
-          <span data-i18n="p3.d">No accounts, no ads, no tracking, in every app. It rules out easy growth tactics, which is precisely what makes it a promise.</span>
-        </li>
-        <li>
-          <strong data-i18n="p4.t">Own the whole path</strong>
-          <span data-i18n="p4.d">Research, design, code, store listing, pricing, localisation, tax and compliance. Knowing what it takes to release changes what you decide to build.</span>
-        </li>
-      </ul>
-    </section>
+    <section class="about">
+      <h2 data-i18n="about.heading">About</h2>
+      <p data-i18n="about.p1">My title at Coolblue is Lead Product Manager, but the job is closer to e-commerce than to product ownership as most companies use the word. I carry the commercial result for the Gaming and Office categories and I am responsible for a customer journey that stays ahead of the competition, with a team of nine specialists.</p>
+      <p data-i18n="about.p2">The product side is the part I like most, and the apps are where I get all of it: deciding what version one contains, what it costs, what gets left out. Moving into a product owner role is the direction I want to take next.</p>
 
-    <section>
-      <h2 data-i18n="edu.heading">Education</h2>
-      <ul class="edu">
+      <ol class="timeline">
         <li>
-          <span data-i18n="ed1.t">BA Communication &amp; Media Studies — Trendwatching, Futures Research &amp; Storytelling</span>
-          <span class="meta">Fontys Academy for the Creative Economy · 2012 – 2016</span>
+          <div class="role">
+            <strong data-i18n="e1.t">Lead Product Manager</strong>
+            <span class="meta">Coolblue · <span data-i18n="e1.p">2022 – present</span></span>
+          </div>
+          <p data-i18n="e1.d">Commercial results and customer journey for Gaming and Office. I turn targets into quarterly plans, run two-week sprints with the team, and coach nine specialists on making decisions from customer and sales data.</p>
         </li>
         <li>
-          <span data-i18n="ed2.t">ICT Media &amp; Design</span>
-          <span class="meta">Fontys Hogeschool Eindhoven · 2011 – 2012</span>
+          <div class="role">
+            <strong data-i18n="e2.t">Product Manager, Gaming</strong>
+            <span class="meta">Coolblue · <span data-i18n="e2.p">2020 – 2022</span></span>
+          </div>
+          <p data-i18n="e2.d">Responsible for the commercial result in Gaming, including how to sell the PlayStation 5 fairly while almost nobody could get one. The first launch was chaotic, so I turned it into a process that development, the app team and marketing could all follow. Later stock drops ran with far less customer contact and a better NPS.</p>
         </li>
         <li>
-          <span data-i18n="ed3.t">Network Engineer (level 4)</span>
-          <span class="meta">Koning Willem I College · 2008 – 2011</span>
+          <div class="role">
+            <strong data-i18n="e3.t">SEO Specialist</strong>
+            <span class="meta">BigSpark · <span data-i18n="e3.p">2019 – 2020</span></span>
+          </div>
+          <p data-i18n="e3.d">Technical and content SEO for client websites. I worked from traffic and ranking data to decide what was worth fixing first, then checked whether it actually moved.</p>
         </li>
-      </ul>
+        <li>
+          <div class="role">
+            <strong data-i18n="e4.t">Online Marketer, Product Support, Product Editor</strong>
+            <span class="meta">Coolblue · <span data-i18n="e4.p">2016 – 2019</span></span>
+          </div>
+          <p data-i18n="e4.d">Three roles in three years, from writing product content to owning parts of the customer journey: SEO and CRO for Gaming and IT accessories, and reading NPS, returns and customer feedback to find what needed changing.</p>
+        </li>
+        <li>
+          <div class="role">
+            <strong data-i18n="e5.t">Software Research &amp; Concept Development</strong>
+            <span class="meta">U-Approach · <span data-i18n="e5.p">2014 – 2016</span></span>
+          </div>
+          <p data-i18n="e5.d">Bluetooth beacon concepts for GLOW and VisitBrabant, and research into how people use mobile apps in public spaces.</p>
+        </li>
+      </ol>
+
+      <p class="edu" data-i18n="edu.line">Studied Communication &amp; Media at Fontys Academy for the Creative Economy (2012–2016), specialising in trendwatching and futures research, after ICT Media &amp; Design and a network engineering diploma.</p>
     </section>
 
     <footer>
       <span data-i18n="footer.copy">© 2026 Jimmy Rentmeester</span>
       <span class="spacer"></span>
-      <a href="mailto:jimmy.rentmeester@gmail.com">jimmy.rentmeester@gmail.com</a>
-      <a href="https://www.linkedin.com/in/jimmyrentmeester" rel="me">LinkedIn ↗</a>
+      <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+      <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
     </footer>
   </div>
 
@@ -322,62 +267,52 @@
   var I18N = {
     nl: {
       "hero.name": "Jimmy Rentmeester",
-      "hero.tagline": "Lead Productmanager · Tilburg",
-      "hero.bio1": "Ik bepaal de productrichting voor twee categorieën bij Coolblue en geef leiding aan een team van tien. In de praktijk is dat product owner-werk op schaal: strategie vertalen naar roadmaps waar mensen daadwerkelijk mee vooruit kunnen, de backlog prioriteren op klantwaarde, en commerciële impact en haalbaarheid in balans houden terwijl multidisciplinaire teams het bouwen.",
-      "hero.bio2": "In mijn eigen tijd bouw en publiceer ik iOS-apps van begin tot eind — onderzoek, ontwerp, code, winkelvermelding, prijs, vertalingen en de regelgeving eromheen. Hetzelfde vak op veel kleinere schaal, met niemand aan wie ik de vervelende keuzes kan doorgeven. Dat houdt me eerlijk over wat uitbrengen echt kost.",
+      "hero.tagline": "Lead Product Manager bij Coolblue · Tilburg",
+      "hero.lead": "Ik stuur de e-commerce van twee categorieën bij Coolblue aan. Daarnaast bouw en publiceer ik iOS-apps, en dat is waar ik het hele productvak zelf doe. Over dat laatste gaat deze pagina vooral.",
 
-      "exp.heading": "Ervaring",
-      "work.heading": "Uitgelicht werk",
-      "approach.heading": "Hoe ik werk",
-      "edu.heading": "Opleiding",
-
-      "e1.t": "Lead Productmanager",
-      "e1.p": "2022 – heden",
-      "e1.d": "Visie en strategie voor de categorieën Gaming, Printers &amp; Kantoor. Ik vertaal strategische doelen naar roadmaps en kwartaalmijlpalen, en begeleid zes productmanagers en vier productredacteuren om keuzes te maken op basis van klant- en commerciële data.",
-      "e2.t": "Productmanager Gaming",
-      "e2.p": "2020 – 2022",
-      "e2.d": "Verantwoordelijk voor het commerciële resultaat en de klantreis binnen Gaming, inclusief de vraag hoe je het meest gewilde product van 2020 — de PlayStation 5 — eerlijk aanbiedt bij extreme schaarste. Die eerste stormloop heb ik omgezet in een herhaalbaar proces over development, app en marketing, waardoor elke volgende voorraadbatch verliep met fors minder klantcontact en een hogere NPS.",
-      "e3.t": "SEO-specialist",
-      "e3.p": "2019 – 2020",
-      "e4.t": "Online marketeer, productsupport, productredactie",
-      "e4.p": "2016 – 2019",
-      "e4.d": "Doorgegroeid van content naar de klantreis: SEO en CRO voor Gaming en IT-accessoires, en het analyseren van NPS, retouren en klantfeedback om productverbeteringen door te voeren.",
-      "e5.t": "Software Research &amp; Concept Development",
-      "e5.p": "2014 – 2016",
-      "e5.d": "Concepten met Bluetooth-beacons voor onder andere GLOW en VisitBrabant, en onderzoek naar hoe mensen daadwerkelijk met mobiele apps omgaan.",
-
-      "ed1.t": "Bachelor Communicatie &amp; Media — Trendwatching, Futures Research &amp; Storytelling",
-      "ed2.t": "ICT Media &amp; Design",
-      "ed3.t": "Netwerkbeheerder (niveau 4)",
-
-      "bb.cat": "Babyfoon · iPhone &amp; iPad",
-      "bb.desc": "Maakt van twee iPhones een privé-videobabyfoon. Beeld en geluid gaan rechtstreeks van telefoon naar telefoon, end-to-end versleuteld, en er wordt niets opgenomen of bewaard.",
-      "bb.note": "<b>De keuze:</b> elke concurrent stuurt het beeld via een cloudaccount. De stream strikt tussen twee toestellen houden kostte het meekijken op afstand — en werd precies de reden om voor deze te kiezen.",
-
-      "wv.cat": "Horlogecollectie · iPhone &amp; iPad",
-      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. Alles blijft op het toestel.",
-      "wv.note": "<b>De keuze:</b> eenmalig betalen, nooit een abonnement — in een categorie die richting maandbedragen is geschoven. De gratis versie blijft echt bruikbaar in plaats van uitgekleed, zodat de betaalde ontgrendeling zichzelf moet verdienen.",
+      "work.heading": "Apps",
+      "about.heading": "Over mij",
 
       "gb.cat": "Arcadespel · iPhone &amp; iPad",
-      "gb.desc": "Een neon reflexspel voor één duim: ontcijfer het grid voor het verdwijnt, rijg treffers aaneen, jaag op de score.",
-      "gb.note": "<b>De keuze:</b> een campagne van zestien levels waarin elk level precies één mechaniek introduceert — zo leert het spel zichzelf uit, in plaats van te openen met uitleg die niemand leest.",
+      "gb.desc": "Een reflexspel voor één duim. Ontcijfer het grid voordat het verdwijnt, rijg treffers aaneen, jaag op een score.",
+      "gb.note": "Zestien campagnelevels, elk met één nieuwe mechaniek. Het spel legt zichzelf uit terwijl je speelt, dus het opent zonder uitleg vooraf.",
+
+      "bb.cat": "Babyfoon · iPhone &amp; iPad",
+      "bb.desc": "Maakt van twee iPhones een videobabyfoon. Beeld en geluid gaan rechtstreeks van het ene toestel naar het andere, versleuteld, en er wordt niets bewaard.",
+      "bb.note": "Elke concurrent stuurt de stream via een cloudaccount. Het tussen twee toestellen houden betekende dat meekijken van buiten het huis verviel. Die afweging is wat mij betreft het hele punt van de app.",
+
+      "wv.cat": "Horlogecollectie · iPhone &amp; iPad",
+      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. De gegevens blijven op de telefoon.",
+      "wv.note": "Eenmalig betalen in plaats van een abonnement, in een categorie die juist de andere kant op beweegt. De gratis versie houdt drie horloges bij en exporteert gewoon, dus de betaalde versie moet het op eigen kracht waard zijn.",
 
       "sw.cat": "Browser-experiment",
-      "sw.desc": "Een schemervijver in een browsertabblad. Keil stenen, laat de waterlelies rinkelen, ontmoet de koi — elke steen die zinkt blijft liggen.",
-      "sw.note": "<b>De keuze:</b> geen doel, geen score, geen installatie. Een plek om aan gevoel te werken — timing, gewicht, water — zonder winkel of routekaart eromheen.",
+      "sw.desc": "Een vijver in een browsertabblad. Keil er stenen overheen, laat de waterlelies rinkelen, kijk naar de koi.",
+      "sw.note": "Geen score, geen installatie, geen routekaart. Een plek om aan timing en gewicht te werken zonder winkel eromheen.",
 
       "link.details": "Details →",
       "link.soon": "Binnenkort in de App Store",
       "link.open": "Openen ↗",
 
-      "p1.t": "Uitbrengen, dan pas oordelen",
-      "p1.d": "Een afgeronde versie één wint van een perfect plan. Alles wat ik over deze apps weet, heb ik ná de release geleerd.",
-      "p2.t": "Schrappen tot het klopt",
-      "p2.d": "De meeste functies zijn uitgesteld, niet afgewezen. Een eerste versie die zichzelf uitlegt is meer waard dan een complete die dat niet doet.",
-      "p3.t": "Privé als uitgangspunt",
-      "p3.d": "Geen accounts, geen advertenties, geen tracking — in elke app. Dat sluit makkelijke groeitrucs uit, en juist daarom is het een belofte.",
-      "p4.t": "De hele weg zelf lopen",
-      "p4.d": "Onderzoek, ontwerp, code, winkelvermelding, prijs, vertalingen, belasting en regelgeving. Weten wat uitbrengen kost, verandert wat je besluit te bouwen.",
+      "about.p1": "Mijn functietitel bij Coolblue is Lead Product Manager, maar het werk ligt dichter bij e-commerce dan bij product ownership zoals de meeste bedrijven dat bedoelen. Ik draag het commerciële resultaat van de categorieën Gaming en Kantoor en ben verantwoordelijk voor een klantreis die voorop blijft lopen, met een team van negen specialisten.",
+      "about.p2": "Het productdeel is wat me het meest trekt, en in de apps krijg ik dat helemaal: bepalen wat er in versie één zit, wat het kost, wat eruit blijft. Doorgroeien naar een rol als product owner is de richting die ik op wil.",
+
+      "e1.t": "Lead Product Manager",
+      "e1.p": "2022 – heden",
+      "e1.d": "Commercieel resultaat en klantreis voor Gaming en Kantoor. Ik vertaal doelstellingen naar kwartaalplannen, werk met het team in sprints van twee weken en begeleid negen specialisten in het maken van keuzes op basis van klant- en verkoopdata.",
+      "e2.t": "Productmanager Gaming",
+      "e2.p": "2020 – 2022",
+      "e2.d": "Verantwoordelijk voor het commerciële resultaat binnen Gaming, inclusief de vraag hoe je de PlayStation 5 eerlijk verkoopt terwijl vrijwel niemand eraan kon komen. De eerste lancering verliep chaotisch, dus heb ik er een proces van gemaakt dat development, het app-team en marketing konden volgen. Latere voorraaddrops verliepen met veel minder klantcontact en een betere NPS.",
+      "e3.t": "SEO-specialist",
+      "e3.p": "2019 – 2020",
+      "e3.d": "Technische en content-SEO voor websites van klanten. Ik werkte vanuit verkeers- en positiedata om te bepalen wat het eerst aandacht verdiende, en controleerde daarna of het ook echt iets deed.",
+      "e4.t": "Online marketeer, productsupport, productredactie",
+      "e4.p": "2016 – 2019",
+      "e4.d": "Drie rollen in drie jaar, van productteksten schrijven naar delen van de klantreis beheren: SEO en CRO voor Gaming en IT-accessoires, en NPS, retouren en klantfeedback lezen om te vinden wat er moest veranderen.",
+      "e5.t": "Software Research &amp; Concept Development",
+      "e5.p": "2014 – 2016",
+      "e5.d": "Concepten met Bluetooth-beacons voor onder andere GLOW en VisitBrabant, plus onderzoek naar hoe mensen mobiele apps gebruiken in de openbare ruimte.",
+
+      "edu.line": "Communicatie &amp; Media gestudeerd aan Fontys Academy for the Creative Economy (2012–2016), met trendwatching en futures research als specialisatie, na ICT Media &amp; Design en een opleiding tot netwerkbeheerder.",
 
       "footer.copy": "© 2026 Jimmy Rentmeester"
     }
