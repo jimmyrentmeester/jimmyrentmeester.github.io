@@ -3,135 +3,323 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jimmy Rentmeester — Apps</title>
-<meta name="description" content="Small, private, no-nonsense iOS apps by Jimmy Rentmeester. No accounts, no ads, no tracking.">
-<meta property="og:title" content="Jimmy Rentmeester — Apps">
-<meta property="og:description" content="Small, private, no-nonsense iOS apps. No accounts, no ads, no tracking.">
+<title>Jimmy Rentmeester — Product-minded builder</title>
+<meta name="description" content="I design, build and ship small iOS apps end to end — from the first idea to the App Store listing. Private by default: no accounts, no ads, no tracking.">
+<meta property="og:title" content="Jimmy Rentmeester — Product-minded builder">
+<meta property="og:description" content="I design, build and ship small iOS apps end to end. Private by default: no accounts, no ads, no tracking.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://jimmyrentmeester.github.io/">
+<meta name="twitter:card" content="summary">
 <style>
-  :root { color-scheme: light dark;
-    --bg:#f6f7f9; --card:#ffffff; --ink:#1a1c22; --muted:#6a6f7a; --line:#e6e8ec; --accent:#5b6bff; }
+  :root {
+    color-scheme: light dark;
+    --bg:#f7f8fa; --card:#ffffff; --ink:#15171d; --muted:#666c78; --line:#e4e7ec;
+    --accent:#4d5dfb; --accent-soft:#eef0ff; --shadow:rgba(20,22,40,.10);
+  }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0e0f13; --card:#171922; --ink:#eef0f5; --muted:#9aa0ad; --line:#262933; --accent:#8b97ff; }
+    :root { --bg:#0d0e12; --card:#16181f; --ink:#eceef3; --muted:#969cab; --line:#242832;
+            --accent:#8e99ff; --accent-soft:#1b1e35; --shadow:rgba(0,0,0,.5); }
   }
   * { box-sizing:border-box; }
-  body { margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased; }
-  .wrap { max-width:52rem; margin:0 auto; padding:4.5rem 1.4rem 4rem; }
-  header { margin-bottom:2.6rem; }
-  h1 { font-size:1.9rem; margin:0 0 .35rem; letter-spacing:-.02em; }
-  header p { margin:0; color:var(--muted); font-size:1.05rem; }
+    line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:58rem; margin:0 auto; padding:2rem 1.4rem 4rem; }
 
-  .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); }
+  /* ── language toggle ─────────────────────────────── */
+  .topbar { display:flex; justify-content:flex-end; margin-bottom:2.5rem; }
+  .langswitch { display:inline-flex; background:var(--card); border:1px solid var(--line);
+    border-radius:999px; padding:3px; gap:2px; }
+  .langswitch button { appearance:none; border:0; background:transparent; cursor:pointer;
+    font:inherit; font-size:.78rem; font-weight:600; letter-spacing:.03em; color:var(--muted);
+    padding:.3rem .7rem; border-radius:999px; transition:background .15s, color .15s; }
+  .langswitch button[aria-pressed="true"] { background:var(--accent); color:#fff; }
+  .langswitch button:hover:not([aria-pressed="true"]) { color:var(--ink); }
+  .langswitch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+
+  /* ── hero ────────────────────────────────────────── */
+  header.hero { margin-bottom:3.2rem; }
+  .hero h1 { font-size:clamp(2rem,5vw,2.7rem); line-height:1.15; letter-spacing:-.025em;
+    margin:0 0 .6rem; }
+  .hero .tagline { font-size:clamp(1.05rem,2.4vw,1.2rem); color:var(--muted); margin:0 0 1.5rem;
+    max-width:34ch; }
+  .hero .bio > p { margin:0 0 1rem; max-width:62ch; }
+  .hero .bio > p:last-child { margin-bottom:0; }
+
+  /* ── section headings ────────────────────────────── */
+  section { margin-top:3.4rem; }
+  h2 { font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; color:var(--muted);
+    font-weight:700; margin:0 0 1.3rem; }
+
+  /* ── principles ──────────────────────────────────── */
+  /* 2×2 net als het werkraster; 3+1 liet een losse kaart achter.
+     De min() voorkomt dat de minimumbreedte groter wordt dan het scherm zelf —
+     zonder dat loopt de kaart op een smalle telefoon buiten beeld. */
+  .principles { display:grid; gap:.9rem;
+    grid-template-columns:repeat(auto-fit,minmax(min(20rem,100%),1fr));
+    list-style:none; padding:0; margin:0; }
+  .principles li { background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:1rem 1.1rem; }
+  .principles strong { display:block; font-size:.95rem; margin-bottom:.2rem; }
+  .principles span { font-size:.88rem; color:var(--muted); line-height:1.5; }
+
+  /* ── work cards ──────────────────────────────────── */
+  /* minmax 22rem → twee kolommen op desktop; smaller stapelt vanzelf. Drie
+     kolommen maakte de tekstblokken te smal om prettig te lezen.
+     De min(...,100%) is nodig: zonder dat blijft de kolom 22rem breed op een
+     telefoon van 390px en loopt de kaart buiten beeld. */
+  .grid { display:grid; gap:1.1rem;
+    grid-template-columns:repeat(auto-fill,minmax(min(22rem,100%),1fr)); }
   .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
-    border-radius:20px; padding:1.25rem; color:inherit;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
-  .card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(20,22,40,.12); border-color:transparent; }
-  .card .top { display:flex; align-items:center; gap:.85rem; margin-bottom:.9rem; }
-  .card img { width:56px; height:56px; border-radius:14px; flex:none; box-shadow:0 4px 12px rgba(0,0,0,.14); }
-  .card h2 { font-size:1.15rem; margin:0; }
-  .card .cat { font-size:.78rem; color:var(--muted); }
-  .card .desc { margin:0 0 1.1rem; color:var(--muted); font-size:.92rem; line-height:1.5; flex:1; }
-  .card .actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
-  .card .store { display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:600;
-    color:var(--accent); text-decoration:none; }
+    border-radius:20px; padding:1.3rem; transition:transform .16s ease, box-shadow .16s ease; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 14px 32px var(--shadow); }
+  .card .top { display:flex; align-items:center; gap:.85rem; margin-bottom:.85rem; }
+  .card img { width:54px; height:54px; border-radius:13px; flex:none;
+    box-shadow:0 3px 10px rgba(0,0,0,.16); }
+  .card h3 { font-size:1.1rem; margin:0 0 .1rem; letter-spacing:-.01em; }
+  .card .cat { font-size:.76rem; color:var(--muted); }
+  .card .desc { margin:0 0 .85rem; color:var(--muted); font-size:.9rem; }
+  /* Geen flex:1 op .note — dan rekt het gekleurde vlak uit tot een grote lege
+     vlek. De actiebalk zakt met margin-top:auto naar de onderkant. */
+  .card .note { margin:0 0 1.1rem; font-size:.86rem; padding:.7rem .85rem; border-radius:10px;
+    background:var(--accent-soft); color:var(--ink); line-height:1.55; }
+  .card .note b { font-weight:600; }
+  .card .actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+    flex-wrap:wrap; margin-top:auto; }
+  .card .store { font-size:.85rem; font-weight:600; color:var(--accent); text-decoration:none; }
   .card .store:hover { text-decoration:underline; }
+  .card .store.soon { color:var(--muted); font-weight:500; }
   .card .more { font-size:.85rem; color:var(--muted); text-decoration:none; }
   .card .more:hover { color:var(--ink); }
 
-  footer { margin-top:3rem; padding-top:1.6rem; border-top:1px solid var(--line);
-    color:var(--muted); font-size:.88rem; display:flex; flex-wrap:wrap; gap:.4rem 1rem; }
-  footer a { color:var(--accent); text-decoration:none; }
+  /* ── footer ──────────────────────────────────────── */
+  footer { margin-top:3.6rem; padding-top:1.6rem; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.2rem;
+    color:var(--muted); font-size:.88rem; }
+  footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+  footer a:hover { text-decoration:underline; }
+  footer .spacer { flex:1; }
+
+  @media (prefers-reduced-motion:reduce) {
+    html { scroll-behavior:auto; }
+    * { transition:none !important; }
+    .card:hover { transform:none; }
+  }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <h1>Apps by Jimmy Rentmeester</h1>
-      <p>Small, private, no-nonsense iOS apps. No accounts, no ads, no tracking.</p>
-    </header>
 
-    <div class="grid">
-
-      <!--
-        NIEUWE APP TOEVOEGEN? Kopieer één <div class="card">…</div> hieronder en
-        vul in:
-          • <img src="…/icon.png">   → pad naar het app-icoon (map van de app)
-          • <h2>Appnaam</h2>
-          • <div class="cat">Categorie · iPhone &amp; iPad</div>
-          • <p class="desc">Eén regel uitleg.</p>
-          • App Store-link  → https://apps.apple.com/app/id<APP-ID>
-          • Details-link    → map van de app, bijv. appnaam/
-        (App-ID vind je in App Store Connect, of via
-         https://itunes.apple.com/lookup?bundleId=<bundle-id> )
-      -->
-
-      <div class="card">
-        <div class="top">
-          <img src="wristvault/icon.png" alt="">
-          <div>
-            <h2>WristVault</h2>
-            <div class="cat">Watch collection · iPhone &amp; iPad</div>
-          </div>
-        </div>
-        <p class="desc">Catalog your watch collection, log what you wear, and export an insurance report. Everything stays on your device.</p>
-        <div class="actions">
-          <a class="store" href="wristvault/">Binnenkort in de App Store</a>
-          <a class="more" href="wristvault/">Details →</a>
-        </div>
+    <div class="topbar">
+      <div class="langswitch" role="group" aria-label="Language / Taal">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="nl" aria-pressed="false">NL</button>
       </div>
-
-      <div class="card">
-        <div class="top">
-          <img src="babybeam/icon.png" alt="">
-          <div>
-            <h2>BabyBeam</h2>
-            <div class="cat">Baby monitor · iPhone &amp; iPad</div>
-          </div>
-        </div>
-        <p class="desc">Turn two phones into a private video baby monitor. Nothing is recorded or stored — just a pairing code.</p>
-        <div class="actions">
-          <a class="store" href="https://apps.apple.com/app/id6783058581">App Store ↗</a>
-          <a class="more" href="babybeam/">Details →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="top">
-          <img src="gridbreaker/assets/icon.png" alt="">
-          <div>
-            <h2>GRID_BREAKER</h2>
-            <div class="cat">Arcade game · iPhone &amp; iPad</div>
-          </div>
-        </div>
-        <p class="desc">A fast neon reflex game. Decode the grid before your RAM runs out, chain clean hits, chase the high score.</p>
-        <div class="actions">
-          <a class="store" href="https://apps.apple.com/app/id6779888720">App Store ↗</a>
-          <a class="more" href="gridbreaker/">Details →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="top">
-          <img src="stillwater/icon.svg" alt="">
-          <div>
-            <h2>Stillwater</h2>
-            <div class="cat">Pocket pond · Any browser</div>
-          </div>
-        </div>
-        <p class="desc">A twilight pond that lives in your browser. Skip stones, ring the lilypads, meet the koi — every stone you sink stays.</p>
-        <div class="actions">
-          <a class="store" href="stillwater/">Open ↗</a>
-        </div>
-      </div>
-
     </div>
 
+    <header class="hero">
+      <h1 data-i18n="hero.name">Jimmy Rentmeester</h1>
+      <p class="tagline" data-i18n="hero.tagline">I turn ideas into finished, shipped products — usually on my own.</p>
+      <div class="bio">
+        <p data-i18n="hero.bio1">I design, build and release small iOS apps end to end: finding a problem worth solving, cutting the idea down to something shippable, writing it, and taking it all the way through the App Store — listing, pricing, localisation and the paperwork behind it.</p>
+        <p data-i18n="hero.bio2">Working alone means every trade-off is explicit. What goes in version one and what waits. What to charge and how. What to leave out to keep the thing understandable. Those decisions interest me at least as much as the code does.</p>
+      </div>
+    </header>
+
+    <section>
+      <h2 data-i18n="work.heading">Selected work</h2>
+      <div class="grid">
+
+        <!--
+          NIEUWE APP TOEVOEGEN? Kopieer één <div class="card">…</div> en vul in:
+            • <img src="…/icon.png">          → app-icoon
+            • <h3> naam, <div class="cat">    → categorie · platform
+            • <p class="desc">                → wat het is (één regel)
+            • <p class="note">                → de productkeuze erachter
+            • App Store-link                  → https://apps.apple.com/app/id<APP-ID>
+            • Details-link                    → map van de app, bijv. appnaam/
+          Vertaling: geef elk tekstelement een uniek data-i18n en vul de NL-string
+          aan in het I18N-object onderaan deze pagina.
+        -->
+
+        <div class="card">
+          <div class="top">
+            <img src="babybeam/icon.png" alt="">
+            <div>
+              <h3>BabyBeam</h3>
+              <div class="cat" data-i18n="bb.cat">Baby monitor · iPhone &amp; iPad</div>
+            </div>
+          </div>
+          <p class="desc" data-i18n="bb.desc">Turns two iPhones into a private video baby monitor. Audio and video go straight from phone to phone, end-to-end encrypted, and nothing is recorded or stored.</p>
+          <p class="note" data-i18n="bb.note"><b>The call:</b> every competitor routes video through a cloud account. Keeping the stream strictly between two devices meant giving up remote viewing — and became the entire reason to pick this one.</p>
+          <div class="actions">
+            <a class="store" href="https://apps.apple.com/app/id6783058581">App Store ↗</a>
+            <a class="more" href="babybeam/" data-i18n="link.details">Details →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <img src="wristvault/icon.png" alt="">
+            <div>
+              <h3>WristVault</h3>
+              <div class="cat" data-i18n="wv.cat">Watch collection · iPhone &amp; iPad</div>
+            </div>
+          </div>
+          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance-ready PDF. Everything stays on the device.</p>
+          <p class="note" data-i18n="wv.note"><b>The call:</b> pay once, never subscribe — in a category that has drifted to monthly fees. The free tier stays genuinely usable rather than crippled, so the paid unlock has to earn itself.</p>
+          <div class="actions">
+            <a class="store soon" href="wristvault/" data-i18n="link.soon">Coming to the App Store</a>
+            <a class="more" href="wristvault/" data-i18n="link.details">Details →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <img src="gridbreaker/assets/icon.png" alt="">
+            <div>
+              <h3>GRID_BREAKER</h3>
+              <div class="cat" data-i18n="gb.cat">Arcade game · iPhone &amp; iPad</div>
+            </div>
+          </div>
+          <p class="desc" data-i18n="gb.desc">A neon one-thumb reflex game: decode the grid before it vanishes, chain clean hits, chase the score.</p>
+          <p class="note" data-i18n="gb.note"><b>The call:</b> a sixteen-level campaign where each level introduces exactly one mechanic — so the game teaches itself instead of opening with a tutorial nobody reads.</p>
+          <div class="actions">
+            <a class="store" href="https://apps.apple.com/app/id6779888720">App Store ↗</a>
+            <a class="more" href="gridbreaker/" data-i18n="link.details">Details →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <img src="stillwater/icon.svg" alt="">
+            <div>
+              <h3>Stillwater</h3>
+              <div class="cat" data-i18n="sw.cat">Browser experiment</div>
+            </div>
+          </div>
+          <p class="desc" data-i18n="sw.desc">A twilight pond that lives in a browser tab. Skip stones, ring the lilypads, meet the koi — every stone you sink stays.</p>
+          <p class="note" data-i18n="sw.note"><b>The call:</b> no goal, no score, no install. A small place to work on feel — timing, weight, water — without a store or a roadmap attached.</p>
+          <div class="actions">
+            <a class="store" href="stillwater/" data-i18n="link.open">Open ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="approach.heading">How I work</h2>
+      <ul class="principles">
+        <li>
+          <strong data-i18n="p1.t">Ship it, then judge it</strong>
+          <span data-i18n="p1.d">A finished version one beats a perfect plan. Everything I have learned about these apps, I learned after release.</span>
+        </li>
+        <li>
+          <strong data-i18n="p2.t">Cut until it is clear</strong>
+          <span data-i18n="p2.d">Most features are deferred, not rejected. A first version that explains itself is worth more than a complete one that does not.</span>
+        </li>
+        <li>
+          <strong data-i18n="p3.t">Private by default</strong>
+          <span data-i18n="p3.d">No accounts, no ads, no tracking, in every app. It rules out easy growth tactics, which is precisely what makes it a promise.</span>
+        </li>
+        <li>
+          <strong data-i18n="p4.t">Own the whole path</strong>
+          <span data-i18n="p4.d">Research, design, code, store listing, pricing, localisation, tax and compliance. Knowing what it takes to release changes what you decide to build.</span>
+        </li>
+      </ul>
+    </section>
+
     <footer>
-      <span>© 2026 Jimmy Rentmeester</span>
-      <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+      <span data-i18n="footer.copy">© 2026 Jimmy Rentmeester</span>
+      <span class="spacer"></span>
+      <!-- TODO: vervang door je echte LinkedIn-URL -->
+      <a href="https://www.linkedin.com/in/CHANGE-ME" rel="me">LinkedIn ↗</a>
     </footer>
   </div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Engels staat in de HTML zelf, zodat bezoekers zonder JS (en zoekmachines)
+  // altijd een volledige pagina zien. Alleen Nederlands komt uit dit object.
+  var I18N = {
+    nl: {
+      "hero.name": "Jimmy Rentmeester",
+      "hero.tagline": "Ik maak van ideeën afgeronde producten — meestal in mijn eentje.",
+      "hero.bio1": "Ik ontwerp, bouw en publiceer kleine iOS-apps van begin tot eind: een probleem vinden dat het waard is, het idee terugbrengen tot iets dat te maken valt, het schrijven, en het helemaal door de App Store loodsen — vermelding, prijsstelling, vertalingen en de administratie eromheen.",
+      "hero.bio2": "Alleen werken betekent dat elke afweging expliciet wordt. Wat gaat er in versie één en wat wacht. Wat het mag kosten en op welke manier. Wat eruit moet om het begrijpelijk te houden. Die keuzes boeien me minstens zo erg als de code.",
+
+      "work.heading": "Uitgelicht werk",
+      "approach.heading": "Hoe ik werk",
+
+      "bb.cat": "Babyfoon · iPhone &amp; iPad",
+      "bb.desc": "Maakt van twee iPhones een privé-videobabyfoon. Beeld en geluid gaan rechtstreeks van telefoon naar telefoon, end-to-end versleuteld, en er wordt niets opgenomen of bewaard.",
+      "bb.note": "<b>De keuze:</b> elke concurrent stuurt het beeld via een cloudaccount. De stream strikt tussen twee toestellen houden kostte het meekijken op afstand — en werd precies de reden om voor deze te kiezen.",
+
+      "wv.cat": "Horlogecollectie · iPhone &amp; iPad",
+      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. Alles blijft op het toestel.",
+      "wv.note": "<b>De keuze:</b> eenmalig betalen, nooit een abonnement — in een categorie die richting maandbedragen is geschoven. De gratis versie blijft echt bruikbaar in plaats van uitgekleed, zodat de betaalde ontgrendeling zichzelf moet verdienen.",
+
+      "gb.cat": "Arcadespel · iPhone &amp; iPad",
+      "gb.desc": "Een neon reflexspel voor één duim: ontcijfer het grid voor het verdwijnt, rijg treffers aaneen, jaag op de score.",
+      "gb.note": "<b>De keuze:</b> een campagne van zestien levels waarin elk level precies één mechaniek introduceert — zo leert het spel zichzelf uit, in plaats van te openen met uitleg die niemand leest.",
+
+      "sw.cat": "Browser-experiment",
+      "sw.desc": "Een schemervijver in een browsertabblad. Keil stenen, laat de waterlelies rinkelen, ontmoet de koi — elke steen die zinkt blijft liggen.",
+      "sw.note": "<b>De keuze:</b> geen doel, geen score, geen installatie. Een plek om aan gevoel te werken — timing, gewicht, water — zonder winkel of routekaart eromheen.",
+
+      "link.details": "Details →",
+      "link.soon": "Binnenkort in de App Store",
+      "link.open": "Openen ↗",
+
+      "p1.t": "Uitbrengen, dan pas oordelen",
+      "p1.d": "Een afgeronde versie één wint van een perfect plan. Alles wat ik over deze apps weet, heb ik ná de release geleerd.",
+      "p2.t": "Schrappen tot het klopt",
+      "p2.d": "De meeste functies zijn uitgesteld, niet afgewezen. Een eerste versie die zichzelf uitlegt is meer waard dan een complete die dat niet doet.",
+      "p3.t": "Privé als uitgangspunt",
+      "p3.d": "Geen accounts, geen advertenties, geen tracking — in elke app. Dat sluit makkelijke groeitrucs uit, en juist daarom is het een belofte.",
+      "p4.t": "De hele weg zelf lopen",
+      "p4.d": "Onderzoek, ontwerp, code, winkelvermelding, prijs, vertalingen, belasting en regelgeving. Weten wat uitbrengen kost, verandert wat je besluit te bouwen.",
+
+      "footer.copy": "© 2026 Jimmy Rentmeester"
+    }
+  };
+
+  var EN = {};                       // vult zich met de originele HTML-tekst
+  var nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (el) { EN[el.dataset.i18n] = el.innerHTML; });
+
+  var buttons = document.querySelectorAll(".langswitch button");
+
+  function apply(lang) {
+    var dict = lang === "nl" ? I18N.nl : EN;
+    nodes.forEach(function (el) {
+      var val = dict[el.dataset.i18n];
+      if (val !== undefined) el.innerHTML = val;
+      else if (lang !== "nl") el.innerHTML = EN[el.dataset.i18n];
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+
+  // Voorkeur: ?lang= in de URL (zo is een taal te delen) > eerdere keuze >
+  // browsertaal > Engels.
+  var param = new URLSearchParams(location.search).get("lang");
+  var stored = null;
+  try { stored = localStorage.getItem("lang"); } catch (e) {}
+  var guess = (navigator.language || "").toLowerCase().indexOf("nl") === 0 ? "nl" : "en";
+  apply(param === "nl" || param === "en" ? param : (stored || guess));
+
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.dataset.lang); });
+  });
+})();
+</script>
 </body>
 </html>
