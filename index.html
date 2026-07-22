@@ -75,6 +75,11 @@
   /* ── about ───────────────────────────────────────── */
   .about p { margin:0 0 1rem; max-width:62ch; }
   .about p:last-child { margin-bottom:0; }
+  /* Afsluitende regel: hoort erbij, maar mag niet als cv-blok lezen. */
+  .about p.standing { margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid var(--line);
+    font-size:.9rem; color:var(--muted); }
+  .about p.standing a { color:var(--accent); text-decoration:none; font-weight:600; }
+  .about p.standing a:hover { text-decoration:underline; }
 
   /* ── footer ──────────────────────────────────────── */
   footer { margin-top:3.4rem; padding-top:1.6rem; border-top:1px solid var(--line);
@@ -194,6 +199,8 @@
       <p data-i18n="about.p2">Every app here started with that question. I look for something people already complain about, check whether the apps that exist actually fix it, then write down the smallest version worth downloading and hold that line while I build. WristVault went to the store without half the features I had sketched. The rest is a list, not a regret.</p>
       <p data-i18n="about.p3">Scope is only part of it. I also set the price, write the store listing, sort out the translations and the compliance paperwork, and decide what the free version gives away. Those are product owner calls, and making all of them myself is the quickest way I know to learn what each one costs.</p>
       <p data-i18n="about.p4">The one thing I do not cut is how the app feels to use. Something that does less but needs no explaining beats something complete that does.</p>
+
+      <p class="standing" data-i18n="about.standing">Ten years in e-commerce, four of them leading a team. I have never held a product owner title. What I do have is a decade of being accountable for whether something actually worked commercially, and four apps where every product call was mine to make. Full work history is on <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </section>
 
     <footer>
@@ -243,6 +250,7 @@
       "about.p2": "Elke app hier begon met die vraag. Ik zoek iets waar mensen al over klagen, kijk of de bestaande apps het echt oplossen, schrijf dan de kleinste versie op die het downloaden waard is en houd die lijn vast tijdens het bouwen. WristVault ging de winkel in zonder de helft van wat ik eerst had bedacht. De rest is een lijst, geen spijt.",
       "about.p3": "Scope is maar een deel ervan. Ik bepaal ook de prijs, schrijf de winkelvermelding, regel de vertalingen en het papierwerk rond regelgeving, en beslis wat de gratis versie weggeeft. Dat zijn keuzes van een product owner, en ze allemaal zelf maken is de snelste manier die ik ken om te leren wat elke keuze kost.",
       "about.p4": "Het enige waar ik niet op inlever is hoe de app aanvoelt in gebruik. Iets dat minder doet maar geen uitleg nodig heeft, wint van iets compleets dat dat wel heeft.",
+      "about.standing": "Tien jaar e-commerce, waarvan vier jaar leidinggevend. De titel product owner heb ik nooit gehad. Wat ik wel heb: tien jaar verantwoordelijk zijn voor of iets commercieel werkte, en vier apps waarin elke productkeuze van mij was. Het volledige loopbaanoverzicht staat op <a href=\"https://www.linkedin.com/in/jimmyrentmeester\" target=\"_blank\" rel=\"noopener\">LinkedIn</a>.",
 
       "footer.copy": "© 2026 Jimmy Rentmeester"
     }
