@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WristVault — The private watch collection app</title>
+<meta name="description" content="Catalog your watches, log what you wear, export an insurance report. One-time purchase, no subscription, no account — your collection stays in your own iCloud.">
+<link rel="canonical" href="https://jimmyrentmeester.github.io/wristvault/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:title" content="WristVault — The private watch collection app">
-<meta property="og:description" content="Catalog your watches, log what you wear, export an insurance report. One-time purchase, no subscription, everything stays on your device.">
+<meta property="og:description" content="Catalog your watches, log what you wear, export an insurance report. One-time purchase, no subscription, and no account.">
 <meta property="og:image" content="https://jimmyrentmeester.github.io/wristvault/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jimmyrentmeester.github.io/wristvault/">
+<meta name="twitter:card" content="summary">
 <style>
   :root { color-scheme: light dark; }
   body { max-width: 640px; margin: 0 auto; padding: 56px 22px 80px; text-align: center;
@@ -17,8 +24,11 @@
   h1 { font-size: 2rem; margin: 20px 0 6px; }
   .tag { color: #8a8f99; margin: 0 0 26px; }
   .pitch { max-width: 46ch; margin: 0 auto 30px; }
-  .badge { display: inline-block; padding: 12px 22px; border-radius: 12px; background: #8a6d2f;
-    color: #fff; text-decoration: none; font-weight: 600; }
+  /* Nog geen App Store-link: een status-pil, geen knop die niets doet. */
+  .badge { display: inline-block; padding: 12px 22px; border-radius: 12px;
+    border: 1.5px solid #8a6d2f; color: #8a6d2f; font-weight: 600; }
+  @media (prefers-color-scheme: dark) { .badge { border-color: #c9a659; color: #c9a659; } }
+  .notify { margin: 14px 0 0; font-size: .92rem; color: #8a8f99; }
   ul.feats { list-style: none; padding: 0; margin: 34px auto; max-width: 40ch; text-align: left; }
   ul.feats li { margin: 10px 0; padding-left: 26px; position: relative; }
   ul.feats li::before { content: "✓"; position: absolute; left: 0; color: #8a6d2f; font-weight: 700; }
@@ -31,8 +41,11 @@
   <h1>WristVault</h1>
   <p class="tag">The private watch collection app</p>
   <p class="pitch">Catalog every watch, log what you wear, and export an insurance-ready report.
-  One-time purchase, no subscription — and your collection never leaves your device.</p>
-  <a class="badge" href="#">Coming soon to the App&nbsp;Store</a>
+  One-time purchase, no subscription — and no account: your collection lives on your device and
+  syncs through your own iCloud, where nobody else can reach it.</p>
+  <span class="badge">Coming soon to the App&nbsp;Store</span>
+  <p class="notify">Want a note when it launches?
+  <a href="mailto:madebyjire@icloud.com?subject=WristVault%20launch">Email me</a>.</p>
   <ul class="feats">
     <li>Your whole collection with photos, specs and purchase details</li>
     <li>Two-tap wear logging with streaks and cost-per-wear</li>
@@ -42,7 +55,8 @@
   </ul>
   <footer>
     <a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a> ·
-    <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+    <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a><br>
+    <a href="/">Made by Jimmy Rentmeester</a>
   </footer>
 </body>
 </html>
