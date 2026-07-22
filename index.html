@@ -9,7 +9,17 @@
 <meta property="og:description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jimmyrentmeester.github.io/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://jimmyrentmeester.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jimmy Rentmeester — GRID_BREAKER, BabyBeam, WristVault, Stillwater">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jimmyrentmeester.github.io/og.jpg">
+<link rel="canonical" href="https://jimmyrentmeester.github.io/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0e12" media="(prefers-color-scheme: dark)">
 <style>
   :root {
     color-scheme: light dark;
@@ -122,7 +132,10 @@
             • <p class="desc">         → wat het is
             • <p class="note">         → de afweging erachter
             • App Store-link           → https://apps.apple.com/app/id<APP-ID>
-          Alle app-links openen in een nieuw tabblad (target/rel staan al goed).
+          Externe links (App Store) openen in een nieuw tabblad met rel="noopener";
+          links naar eigen detailpagina's blijven in hetzelfde tabblad.
+          Nog geen App Store-link? Gebruik <span class="store soon"> in plaats van
+          een <a href="#"> — een knop die niets doet leest als een bug.
           Vertaling: geef elk tekstelement een uniek data-i18n en vul de NL-string
           aan in het I18N-object onderaan.
         -->
@@ -139,7 +152,7 @@
           <p class="note" data-i18n="gb.note">Sixteen campaign levels, each one introducing a single mechanic. The game explains itself while you play it, so it opens without a tutorial.</p>
           <div class="actions">
             <a class="store" href="https://apps.apple.com/app/id6779888720" target="_blank" rel="noopener">App Store ↗</a>
-            <a class="more" href="gridbreaker/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
+            <a class="more" href="gridbreaker/" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -155,7 +168,7 @@
           <p class="note" data-i18n="bb.note">Every competing app routes the stream through a cloud account. Keeping it device to device meant giving up watching from outside the house. I decided that trade-off was the point of the app.</p>
           <div class="actions">
             <a class="store" href="https://apps.apple.com/app/id6783058581" target="_blank" rel="noopener">App Store ↗</a>
-            <a class="more" href="babybeam/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
+            <a class="more" href="babybeam/" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -167,11 +180,11 @@
               <div class="cat" data-i18n="wv.cat">Watch collection · iPhone &amp; iPad</div>
             </div>
           </div>
-          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance PDF. The data stays on the phone.</p>
+          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance PDF. No account — it syncs through your own iCloud and nowhere else.</p>
           <p class="note" data-i18n="wv.note">One payment instead of a subscription, in a category that has been moving the other way. The free version holds three watches and still exports, so the paid unlock has to be worth buying on its own.</p>
           <div class="actions">
-            <a class="store soon" href="wristvault/" target="_blank" rel="noopener" data-i18n="link.soon">Coming to the App Store</a>
-            <a class="more" href="wristvault/" target="_blank" rel="noopener" data-i18n="link.details">Details →</a>
+            <span class="store soon" data-i18n="link.soon">Coming to the App Store</span>
+            <a class="more" href="wristvault/" data-i18n="link.details">Details →</a>
           </div>
         </div>
 
@@ -235,7 +248,7 @@
       "bb.note": "Elke concurrent stuurt de stream via een cloudaccount. Het tussen twee toestellen houden betekende dat meekijken van buiten het huis verviel. Die afweging is wat mij betreft het hele punt van de app.",
 
       "wv.cat": "Horlogecollectie · iPhone &amp; iPad",
-      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. De gegevens blijven op de telefoon.",
+      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. Geen account — het synct via je eigen iCloud en verder nergens heen.",
       "wv.note": "Eenmalig betalen in plaats van een abonnement, in een categorie die juist de andere kant op beweegt. De gratis versie houdt drie horloges bij en exporteert gewoon, dus de betaalde versie moet het op eigen kracht waard zijn.",
 
       "sw.cat": "Browser-experiment",

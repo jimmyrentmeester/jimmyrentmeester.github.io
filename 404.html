@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Jimmy Rentmeester</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0e12" media="(prefers-color-scheme: dark)">
+<style>
+  /* Zelfde tokens als de hub, zodat een misklik niet op een vreemde site voelt. */
+  :root {
+    color-scheme: light dark;
+    --bg:#f7f8fa; --ink:#15171d; --muted:#666c78; --line:#e4e7ec; --accent:#4d5dfb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0d0e12; --ink:#eceef3; --muted:#969cab; --line:#242832; --accent:#8e99ff; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; padding:2rem 1.4rem;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; }
+  main { max-width:34rem; }
+  .code { font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; color:var(--muted);
+    font-weight:700; margin:0 0 .8rem; }
+  h1 { font-size:clamp(1.6rem,4vw,2.2rem); line-height:1.2; letter-spacing:-.02em; margin:0 0 .8rem; }
+  p { color:var(--muted); margin:0 0 1.6rem; }
+  ul { list-style:none; padding:0; margin:0 0 1.8rem; display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; }
+  a { color:var(--accent); text-decoration:none; font-weight:600; }
+  a:hover { text-decoration:underline; }
+  .home { display:inline-block; padding-top:1.3rem; border-top:1px solid var(--line); width:100%; }
+</style>
+</head>
+<body>
+  <main>
+    <p class="code">404</p>
+    <h1>That page isn’t here.</h1>
+    <p>Either the link is old or I moved something. The apps are all still where they belong:</p>
+    <ul>
+      <li><a href="/gridbreaker/">GRID_BREAKER</a></li>
+      <li><a href="/babybeam/">BabyBeam</a></li>
+      <li><a href="/wristvault/">WristVault</a></li>
+      <li><a href="/stillwater/">Stillwater</a></li>
+    </ul>
+    <span class="home"><a href="/">← Back to the start</a></span>
+  </main>
+</body>
+</html>

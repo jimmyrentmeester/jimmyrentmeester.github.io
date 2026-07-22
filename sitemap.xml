@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/gridbreaker/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/gridbreaker/support.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/gridbreaker/privacy.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/babybeam/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/babybeam/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/babybeam/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/index-en.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/babybeam/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/babybeam/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/babybeam/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/support.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/support-en.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/privacy.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/babybeam/privacy-en.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/wristvault/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/wristvault/support.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/wristvault/privacy.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/stillwater/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

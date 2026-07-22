@@ -2,7 +2,16 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stillwater</title>
+<link rel="canonical" href="https://jimmyrentmeester.github.io/stillwater/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Stillwater — a pocket pond in a browser tab</title>
+<meta name="description" content="A pond in a browser tab. Skip stones across it, ring the lilypads, watch the koi. No score, no install, nothing to sign up for.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stillwater — a pocket pond in a browser tab">
+<meta property="og:description" content="Skip stones across a pond, ring the lilypads, watch the koi. No score, no install, nothing to sign up for.">
+<meta property="og:url" content="https://jimmyrentmeester.github.io/stillwater/">
+<meta name="theme-color" content="#0B1020">
 <style>
   :root{
     --ink:#0B1020; --moon:#F2E9D8; --moon55:rgba(242,233,216,.55); --moon30:rgba(242,233,216,.30);
@@ -42,7 +51,11 @@
        padding:3px 8px;border-radius:6px;}
   #nogl{position:absolute;inset:0;display:none;place-items:center;color:var(--moon55);
        font-family:Georgia,serif;font-style:italic;font-size:15px;text-align:center;padding:30px;}
-  @media (prefers-reduced-motion:reduce){ .btn{transition:none} #hint{transition:opacity .3s} }
+  #back{position:absolute;bottom:14px;right:20px;pointer-events:auto;color:var(--moon30);
+       font-size:10px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+       transition:color .25s;}
+  #back:hover,#back:focus-visible{color:var(--moon55);outline:none;}
+  @media (prefers-reduced-motion:reduce){ .btn,#back{transition:none} #hint{transition:opacity .3s} }
 </style>
 
 <canvas id="glc"></canvas>
@@ -55,6 +68,7 @@
     <span id="daywrap">dusk <input type="range" id="day" min="0" max="1000" value="60" aria-label="time of day"> dawn</span>
   </div>
   <div id="hint"></div>
+  <a id="back" href="/">Jimmy Rentmeester</a>
   <div id="fps"></div>
   <div id="nogl">this pond needs WebGL2 to hold its water —<br>please try a newer browser.</div>
 </div>
