@@ -6,6 +6,34 @@
     <loc>https://jimmyrentmeester.github.io/</loc>
     <lastmod>2026-07-22</lastmod>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/nl/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/"/>
+  </url>
+
+  <url>
+    <loc>https://jimmyrentmeester.github.io/cv/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/cv/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/cv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/cv/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/nl/cv/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/cv/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/cv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/cv/"/>
   </url>
 
   <url>

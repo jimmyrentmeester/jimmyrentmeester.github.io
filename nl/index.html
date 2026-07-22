@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jimmy Rentmeester — vier iOS-apps en de keuzes erachter</title>
+<meta name="description" content="Ik ontwerp, bouw en publiceer iOS-apps in mijn eentje. Het werklog, één case volledig uitgewerkt, en een eerlijk verhaal over waar AI helpt en waar het stilletjes de mist in gaat.">
+<link rel="canonical" href="https://jimmyrentmeester.github.io/nl/">
+<link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/">
+<link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/">
+<link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jimmy Rentmeester — vier iOS-apps en de keuzes erachter">
+<meta property="og:description" content="Vier iOS-apps die ik alleen ontwierp, bouwde en publiceerde — met wat ik er telkens uit schrapte, één case volledig, en een eerlijk verhaal over mijn AI-gebruik.">
+<meta property="og:url" content="https://jimmyrentmeester.github.io/nl/">
+<meta property="og:image" content="https://jimmyrentmeester.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jimmy Rentmeester — GRID_BREAKER, BabyBeam, WristVault, Stillwater">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jimmyrentmeester.github.io/og.jpg">
+<meta name="theme-color" content="#0b0c10">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<!-- ══ COVER ══════════════════════════════════════════════════
+     Het canvas is decoratie. Zonder JS blijft dit een egaal
+     donker paneel en verandert er verder niets.
+     ═══════════════════════════════════════════════════════════ -->
+<header class="cover">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="cover-inner">
+
+    <div class="topbar">
+      <nav class="langswitch" aria-label="Taal">
+        <a href="/" hreflang="en" lang="en">EN</a>
+        <span aria-current="true">NL</span>
+      </nav>
+    </div>
+
+    <h1>Jimmy Rentmeester</h1>
+    <p class="role">Lead Product Manager bij Coolblue · Tilburg</p>
+    <p class="lead">Het bouwen is het lastige deel niet meer. Bepalen wat er níét in moet wel.</p>
+    <p class="sub">Ik ontwerp, bouw en publiceer iOS-apps in mijn eentje: het hele traject, van
+    de eerste vraag tot de App Store-listing en de supportmail daarna. Hieronder staat wat ik heb
+    opgeleverd, wat ik er telkens uit heb geschrapt, en waar deze manier van werken stukloopt.</p>
+
+    <ul class="chips">
+      <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
+      <li class="app-bb"><a href="#work"><span class="dot"></span>BabyBeam</a></li>
+      <li class="app-wv"><a href="#work"><span class="dot"></span>WristVault</a></li>
+      <li class="app-sw"><a href="/stillwater/" target="_blank" rel="noopener"><span class="dot"></span>Stillwater</a></li>
+    </ul>
+
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ══ WERKLOG ══════════════════════════════════════════════
+       Elke entry kiest zijn kleur met één klasse (.app-gb enz.).
+       Nieuwe app? Kopieer één <li>, hernummer, kies een klasse.
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="sec" id="work">
+    <h2>Werk</h2>
+    <div class="body">
+      <ol class="log">
+
+        <li class="entry app-gb reveal">
+          <span class="num" aria-hidden="true">01</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/gridbreaker-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
+            <div>
+              <h3>GRID_BREAKER</h3>
+              <p class="meta">Arcadespel · iPhone &amp; iPad · <span class="status">Live</span></p>
+            </div>
+          </div>
+          <div class="cols">
+            <div>
+              <p class="desc">Een reflexspel voor één duim. Ontcijfer het grid voordat het
+              verdwijnt, rijg treffers aaneen, jaag op een score.</p>
+              <dl class="cut">
+                <dt>Geschrapt</dt>
+                <dd>De uitleg vooraf. Zestien campagnelevels introduceren elk één mechaniek, dus
+                het spel legt zichzelf uit terwijl je speelt en valt er vooraf niets te lezen.</dd>
+              </dl>
+              <p class="stat"><!--rating:6779888720--><span class="score">5,0</span> ★ · 7 ratings<!--/rating--></p>
+              <p class="links">
+                <a href="https://apps.apple.com/app/id6779888720" target="_blank" rel="noopener">App&nbsp;Store ↗</a>
+                <a href="/gridbreaker/">Detail</a>
+              </p>
+            </div>
+            <img class="shot" src="/assets/img/gridbreaker-shot.png" alt="GRID_BREAKER campagnescherm: zestien datakernen verdeeld over vier hoofdstukken" width="168" height="365" loading="lazy" decoding="async">
+          </div>
+        </li>
+
+        <li class="entry app-bb reveal">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/babybeam-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
+            <div>
+              <h3>BabyBeam</h3>
+              <p class="meta">Babyfoon · iPhone &amp; iPad · <span class="status">Live</span></p>
+            </div>
+          </div>
+          <div class="cols">
+            <div>
+              <p class="desc">Maakt van twee iPhones een videobabyfoon. Beeld en geluid gaan
+              rechtstreeks van het ene toestel naar het andere, versleuteld, en er wordt niets
+              bewaard.</p>
+              <dl class="cut">
+                <dt>Geschrapt</dt>
+                <dd>Meekijken van buiten het huis, precies waar elke concurrent mee opent. Het
+                tussen de twee telefoons houden betekende dat die functie verviel, en die
+                afweging ís het product.</dd>
+              </dl>
+              <p class="stat"><!--rating:6783058581--><span class="none">Nog geen ratings</span><!--/rating--></p>
+              <p class="links">
+                <a href="https://apps.apple.com/app/id6783058581" target="_blank" rel="noopener">App&nbsp;Store ↗</a>
+                <a href="/babybeam/">Detail</a>
+                <a href="#case">Hele case ↓</a>
+              </p>
+            </div>
+            <img class="shot" src="/assets/img/babybeam-shot.png" alt="BabyBeam baby-unit met koppelcode en QR-code" width="168" height="365" loading="lazy" decoding="async">
+          </div>
+        </li>
+
+        <li class="entry app-wv reveal">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/wristvault-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
+            <div>
+              <h3>WristVault</h3>
+              <p class="meta">Horlogecollectie · iPhone &amp; iPad · <span class="status soon">Binnenkort</span></p>
+            </div>
+          </div>
+          <p class="desc">Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert
+          een verzekeringsrapport als pdf. Geen account — het synct via je eigen iCloud en verder
+          nergens heen.</p>
+          <dl class="cut">
+            <dt>Geschrapt</dt>
+            <dd>De helft van wat ik had bedacht; het ging zonder die helft naar de App Store.
+            Wat bleef: eenmalig betalen in plaats van een abonnement, in een categorie die juist
+            de andere kant op beweegt, en een gratis versie die drie horloges bijhoudt en gewoon
+            exporteert, zodat de betaalde versie zijn geld op eigen kracht moet verdienen.</dd>
+          </dl>
+          <p class="links">
+            <a href="/wristvault/">Detail</a>
+          </p>
+        </li>
+
+        <li class="entry app-sw reveal">
+          <span class="num" aria-hidden="true">04</span>
+          <div class="head">
+            <img class="icon svg" src="/stillwater/icon.svg" alt="" width="60" height="60" loading="lazy" decoding="async">
+            <div>
+              <h3>Stillwater</h3>
+              <p class="meta">Browser-experiment · <span class="status">Open</span></p>
+            </div>
+          </div>
+          <p class="desc">Een vijver in een browsertabblad. Keil er stenen overheen, laat de
+          waterlelies rinkelen, kijk naar de koi. Vanaf nul geschreven in WebGL.</p>
+          <dl class="cut">
+            <dt>Geschrapt</dt>
+            <dd>Score, installatie, routekaart. Een plek om aan timing en gewicht te werken
+            zonder winkel eromheen.</dd>
+          </dl>
+          <p class="links">
+            <a href="/stillwater/" target="_blank" rel="noopener">Openen ↗</a>
+          </p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══ CASE ═════════════════════════════════════════════════ -->
+  <section class="sec" id="case">
+    <h2>Eén case</h2>
+    <div class="body">
+      <div class="case-panel app-bb reveal">
+        <div class="case prose">
+          <p class="kicker">BabyBeam — hoe het opgeven van de belangrijkste functie het product werd.</p>
+
+          <h3>Het probleem</h3>
+          <p>Een babyfoon is ofwel losse hardware die je twee jaar gebruikt en daarna in een la
+          legt, ofwel een app die de kamer van je kind via het cloudaccount van een bedrijf laat
+          lopen. Dat tweede is wat de markt verkoopt, en dat komt door één functie: overal kunnen
+          meekijken. Precies die functie is ook de reden dat het beeld het huis überhaupt moet
+          verlaten.</p>
+
+          <h3>De keuze</h3>
+          <p>Beeld en geluid gaan rechtstreeks tussen de twee telefoons via WebRTC, end-to-end
+          versleuteld met DTLS-SRTP. Er wordt niets opgenomen en niets bewaard, want er is geen
+          server om het op te bewaren. Het enige dat het tweetal ooit verlaat is een kleine
+          koppel-handshake, die kort via iCloud gaat, versleuteld met een sleutel die van de
+          koppelcode is afgeleid — een sleutel die ik niet heb en niet kan achterhalen.</p>
+          <p>De prijs van die architectuur is meteen zichtbaar en valt niet te verbergen: je kunt
+          niet meekijken van buiten het huis. Ik vond dat geen ontbrekende functie maar de reden
+          om het te bouwen. Een app die een camera in een babykamer zet en vervolgens uitlegt
+          waarom er een account nodig is, heeft het probleem van de ouder opgelost en er een
+          nieuw probleem bij gemaakt.</p>
+
+          <h3>Wat het kostte</h3>
+          <ul class="prices">
+            <li>
+              <b>Een drempel bij het instellen</b>
+              <span>Beide telefoons moeten bij iCloud zijn ingelogd. Niet met dezelfde Apple
+              Account, maar wel ingelogd. Elke concurrent met een cloud mag die zin overslaan in
+              zijn onboarding.</span>
+            </li>
+            <li>
+              <b>Techniek in het instellingenscherm</b>
+              <span>Twee telefoons op hetzelfde wifi-netwerk verbinden rechtstreeks. Zit er één
+              op mobiel internet, dan lukt dat soms niet, en de oplossing is een TURN-relay die je
+              zelf toevoegt onder het tandwiel. Dat is netwerkengineering in een consumenten-app,
+              en het staat daar omdat ik de architectuur heb geweigerd die het verstopt zou
+              hebben.</span>
+            </li>
+            <li>
+              <b>Het reikt tot in de marketing</b>
+              <span>De koppelcode is de beveiligingsgrens, dus hij mag nergens te zien zijn, ook
+              niet op mijn eigen App Store-screenshots. Die moesten opnieuw gemaakt worden met de
+              code onleesbaar. Een beperking die je serieus neemt houdt niet op bij de code.</span>
+            </li>
+          </ul>
+
+          <h3>Waar het nu staat</h3>
+          <p>Live en gratis te downloaden. Hij staat pas een paar weken in de winkel, dus het
+          eerlijke antwoord op “werkte het” is dat ik het nog niet weet. De ratingregel in het log
+          hierboven komt uit de App Store en zal het zeggen zodra er iets te zeggen valt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AI ═══════════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Over AI</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>AI schrijft het meeste van de code in deze apps. Dat is niet het interessante deel;
+        dat hield ergens in 2024 op onderscheidend te zijn, en een opsomming van de tools die ik
+        gebruik zegt je niets over de vraag of ik ze kan aansturen.</p>
+
+        <p class="pull">Het gaat niet mis op de code. Het gaat mis op de <em>naad</em> tussen de
+        tekst en het product.</p>
+
+        <p>Drie voorbeelden van deze site zelf. Alle drie van mij, alle drie live, wekenlang. De
+        doorgestreepte regel is wat de pagina beweerde, eronder staat wat waar was:</p>
+
+        <ul class="faults">
+          <li class="app-err">
+            <span class="where">GRID_BREAKER · privacybeleid</span>
+            <span class="claim">“No network connections, servers, or cloud services.”</span>
+            <span class="truth">Het spel gebruikt Game Center-leaderboards. Het document was vlot
+            geschreven, overtuigend en onwaar over mijn eigen app, onder een live
+            App Store-listing.</span>
+          </li>
+          <li class="app-err">
+            <span class="where">WristVault · landingspagina</span>
+            <span class="claim">“Your collection never leaves your device.”</span>
+            <span class="truth">De privacypagina er direct onder beschreef iCloud-sync. Beide
+            zinnen waren geschreven om gerust te stellen en maar één ervan klopte.</span>
+          </li>
+          <li class="app-err">
+            <span class="where">WristVault · knop</span>
+            <span class="claim">“Binnenkort in de App Store”</span>
+            <span class="truth">Het was een <code>href="#"</code>. De knop deed niets, en hij
+            ging live.</span>
+          </li>
+        </ul>
+
+        <p>Geen van deze drie is een bug. Het zijn beweringen die klopten qua toon en niet qua
+        feit, op de enige plek waar alleen degene die het gebouwd heeft ze kan controleren. En ik
+        heb ze niet vóór het publiceren gevangen; ik vond ze weken later bij een review. Dat heeft
+        mijn werkwijze veranderd: gegenereerde teksten krijgen nu dezelfde behandeling als
+        gegenereerde code, en er gaat niets naar buiten voordat het is nagelopen tegen wat het
+        product werkelijk doet, inclusief de juridische pagina's die niemand leest.</p>
+
+        <p>De andere helft van het werk zit aan de voorkant. In plaats van me per app opnieuw
+        door prompts heen te werken, heb ik een herbruikbare projectstructuur en een set
+        opgeschreven standaarden gebouwd die met elk project meereizen: wat “goed” betekent voor
+        dit soort werk, concreet genoeg opgeschreven om na te volgen. De tiende app begint waar
+        de negende ophield.</p>
+        <p>Dat is één op één overdraagbaar naar werken in een team, want het is dezelfde
+        vaardigheid. Opschrijven wat “goed” betekent, precies genoeg dat iemand anders ermee aan
+        de slag kan zonder dat jij erbij zit, is zo ongeveer het hele vak.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WERKWIJZE ════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Hoe ik werk</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Elke app hier begon met dezelfde vraag: is dit probleem het oplossen waard, wie heeft
+        het precies, en wat moet een eerste versie kunnen voordat iemand er iets om geeft? Ik
+        zoek iets waar mensen al over klagen, kijk of de bestaande apps het echt oplossen, schrijf
+        dan de kleinste versie op die het downloaden waard is en houd die lijn vast tijdens het
+        bouwen.</p>
+        <p>Scope is maar een deel ervan. Ik bepaal ook de prijs, schrijf de App Store-listing,
+        regel de vertalingen en het papierwerk rond regelgeving, en beslis wat de gratis versie
+        weggeeft. Dat zijn keuzes van een product owner, en ze allemaal zelf maken is de snelste
+        manier die ik ken om te leren wat elke keuze kost.</p>
+        <p>Uiteindelijk telt vooral hoe het aanvoelt in gebruik. Iets dat minder doet maar geen
+        uitleg nodig heeft, wint van iets compleets dat dat wel heeft.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACHTERGROND ══════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Achtergrond</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Tien jaar e-commerce, waarvan vier jaar leidinggevend. Op dit moment ben ik Lead
+        Productmanager voor Gaming, Printers &amp; Kantoor bij Coolblue, waar ik verantwoordelijk
+        ben voor de strategie en de commerciële resultaten van die categorieën en zes
+        productmanagers en vier productredacteuren begeleid.</p>
+        <p>De titel product owner heb ik nooit gehad. Wat ik wel heb: tien jaar verantwoordelijk
+        zijn voor of iets commercieel werkte, en vier apps waarin elke productkeuze van mij was.</p>
+        <p class="contact-links">
+          <a href="/nl/cv/">Volledig cv</a>
+          <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Contact</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Ik zoek op dit moment niets. Maar over productwerk, alleen bouwen, of hoe dit tot
+        stand is gekomen praat ik graag.</p>
+        <p class="contact-links">
+          <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+          <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Jimmy Rentmeester</span>
+    <span class="spacer"></span>
+    <span class="colophon">Eén HTML-bestand per pagina, één stylesheet, één klein script voor de
+    animatie in de kop. Geen framework, geen buildstap, geen analytics, geen cookies. De letter
+    die je nu leest stond al op je toestel, en er wordt op deze pagina niets van andermans server
+    geladen. Ongeveer 14 kB voordat de screenshots laden, 123 kB met alles erbij. Met JavaScript
+    uit leest hij gewoon door.</span>
+  </footer>
+
+</div>
+
+<script src="/assets/hero.js" defer></script>
+</body>
+</html>

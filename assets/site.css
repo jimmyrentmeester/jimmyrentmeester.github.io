@@ -1,0 +1,498 @@
+/* ──────────────────────────────────────────────────────────────
+   jimmyrentmeester.github.io — hub stylesheet
+   Gedeeld door / , /nl/ , /cv/ en /nl/cv/.
+
+   Idee: de chrome is stil (kleine mono-labels, grijs, veel wit), de
+   inhoud is luid. Alle kleur op deze pagina komt uit de apps zelf —
+   elke log-entry zet zijn eigen --app en kleurt daarmee zijn nummer,
+   zijn label en zijn randen. Zo hangt de hub visueel samen met de
+   vier detailpagina's zonder ze na te doen.
+
+   Geen webfonts: de serif hieronder staat al op het toestel.
+   ────────────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light dark;
+
+  --bg:      #faf9f7;
+  --surface: #ffffff;
+  --raise:   #f3f1ec;
+  --ink:     #14161c;
+  --muted:   #5a616e;
+  --faint:   #8b91a0;
+  --line:    #e7e4de;
+  --accent:  #4d5dfb;
+  --shadow:  20 22 40;
+
+  /* Vaste kleur voor de donkere "cover", in beide modi gelijk. */
+  --cover:   #0b0c10;
+  --moon:    #f2e9d8;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+           Georgia, "Times New Roman", serif;
+  --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #0b0c10;
+    --surface: #131519;
+    --raise:   #191c22;
+    --ink:     #edeff4;
+    --muted:   #98a0af;
+    --faint:   #6b7280;
+    --line:    #22252e;
+    --accent:  #8e99ff;
+    --shadow:  0 0 0;
+  }
+}
+
+/* ── app-paletten ───────────────────────────────────────────────
+   Elk blok kiest zijn kleur via een van deze klassen. In lichte modus
+   donkerder (leesbaar op papier), in donkere modus het neon uit de app
+   zelf. Binnen de cover altijd de heldere variant — die is altijd zwart.
+   ─────────────────────────────────────────────────────────────── */
+.app-gb { --app: #0d93a6; }   /* GRID_BREAKER — cyaan   */
+.app-bb { --app: #5b4ee0; }   /* BabyBeam     — perigrijs-paars */
+.app-wv { --app: #8a6d2f; }   /* WristVault   — goud    */
+.app-sw { --app: #3f76a8; }   /* Stillwater   — maanblauw */
+.app-err{ --app: #c2352b; }   /* foutenlijst            */
+
+@media (prefers-color-scheme: dark) {
+  .app-gb { --app: #33f2ff; }
+  .app-bb { --app: #8e83ff; }
+  .app-wv { --app: #c9a659; }
+  .app-sw { --app: #8fb3d9; }
+  .app-err{ --app: #ff7d72; }
+}
+
+.cover .app-gb { --app: #33f2ff; }
+.cover .app-bb { --app: #8e83ff; }
+.cover .app-wv { --app: #c9a659; }
+.cover .app-sw { --app: #8fb3d9; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.03rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+.wrap { max-width: 66rem; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+/* ══ COVER ════════════════════════════════════════════════════
+   Donker paneel over de volle breedte, in licht én donker. Het
+   canvas erachter is decoratie: valt het weg, dan blijft dit een
+   nette donkere kop.
+   ══════════════════════════════════════════════════════════════ */
+.cover {
+  position: relative; isolation: isolate;
+  background: var(--cover); color: var(--moon);
+  margin-bottom: 5.5rem;
+  overflow: hidden;
+}
+.cover::after {           /* lichtval linksboven, geeft de kop diepte */
+  content: ""; position: absolute; top: -30%; left: -5%;
+  width: 45rem; height: 45rem; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle, rgba(122,110,243,.16), transparent 62%);
+  pointer-events: none;
+}
+#field {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; display: block;
+}
+.cover-inner {
+  position: relative; z-index: 1;
+  max-width: 66rem; margin: 0 auto; padding: 4.5rem 1.5rem 5.5rem;
+}
+
+.cover .topbar { display: flex; justify-content: flex-end; margin-bottom: 5rem; }
+.langswitch {
+  display: inline-flex; gap: .15rem; font-family: var(--mono);
+  font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+}
+.langswitch a, .langswitch span {
+  padding: .35rem .65rem; border-radius: 999px; text-decoration: none;
+  color: color-mix(in srgb, var(--moon) 45%, transparent);
+  transition: color .2s, background .2s, border-color .2s;
+  border: 1px solid transparent;
+}
+.langswitch a:hover { color: var(--moon); border-color: color-mix(in srgb, var(--moon) 30%, transparent); }
+.langswitch [aria-current="true"] {
+  color: var(--cover); background: var(--moon);
+}
+.langswitch a:focus-visible { outline: 2px solid var(--moon); outline-offset: 2px; }
+
+.cover h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(3.2rem, 11vw, 7rem); line-height: .93;
+  letter-spacing: -.035em; margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+.cover .role {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .18em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--moon) 52%, transparent);
+  margin: 0 0 2.2rem;
+}
+.cover .lead {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem); line-height: 1.35;
+  max-width: 22ch; margin: 0 0 1.8rem; color: var(--moon);
+  text-wrap: balance;
+}
+.cover .sub {
+  max-width: 54ch; margin: 0; font-size: 1rem; line-height: 1.65;
+  color: color-mix(in srgb, var(--moon) 68%, transparent);
+}
+
+/* Rij app-namen onder de kop, elk in zijn eigen kleur. */
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2.6rem 0 0; padding: 0; list-style: none; }
+.chips a {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; text-decoration: none;
+  padding: .45rem .85rem; border-radius: 999px;
+  color: var(--app); border: 1px solid color-mix(in srgb, var(--app) 32%, transparent);
+  background: color-mix(in srgb, var(--app) 9%, transparent);
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.chips a:hover {
+  background: color-mix(in srgb, var(--app) 20%, transparent);
+  border-color: color-mix(in srgb, var(--app) 60%, transparent);
+  transform: translateY(-2px);
+}
+.chips .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--app); flex: none; }
+
+/* ══ SECTIES ══════════════════════════════════════════════════ */
+section { margin-bottom: 6rem; }
+.sec { display: grid; grid-template-columns: 9rem 1fr; gap: 0 3rem; align-items: start; }
+.sec > h2 {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--faint); font-weight: 400;
+  margin: .55rem 0 0; position: sticky; top: 1.5rem;
+}
+.sec > .body { min-width: 0; padding-left: var(--gutter, 0rem); }
+@media (max-width: 54rem) {
+  .sec { grid-template-columns: 1fr; gap: 0; }
+  .sec > h2 { position: static; margin: 0 0 1.4rem; padding-bottom: .7rem;
+              border-bottom: 1px solid var(--line); }
+}
+
+.prose p { max-width: 64ch; margin: 0 0 1.15rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose a { color: var(--accent); text-decoration: none;
+           border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.prose a:hover { border-bottom-color: var(--accent); }
+
+/* ══ WERKLOG ══════════════════════════════════════════════════
+   Elke entry zet zelf --app. Alles wat kleur heeft leest van die
+   variabele, dus een nieuwe app = één regel style="--app:#xxx".
+   ══════════════════════════════════════════════════════════════ */
+.log { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4rem; }
+
+.entry {
+  position: relative; isolation: isolate;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 2rem 2rem 1.7rem;
+  overflow: hidden;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+.entry::before {          /* kleurstreep bovenaan */
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--app), color-mix(in srgb, var(--app) 15%, transparent));
+}
+.entry::after {           /* zachte gloed rechtsboven */
+  content: ""; position: absolute; top: -40%; right: -10%;
+  width: 26rem; height: 26rem; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle, color-mix(in srgb, var(--app) 13%, transparent), transparent 65%);
+  opacity: .8; transition: opacity .35s;
+  pointer-events: none;
+}
+/* De inhoud staat boven de gloed en het spooknummer; de kaartachtergrond
+   eronder. Zonder deze regel schilderen ::after en .num onzichtbaar. */
+.entry > .head, .entry > .cols, .entry > .desc,
+.entry > .cut, .entry > .stat, .entry > .links { position: relative; z-index: 1; }
+.entry:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--app) 42%, var(--line));
+  box-shadow: 0 18px 40px -18px rgb(var(--shadow) / .35);
+}
+.entry:hover::after { opacity: 1.4; }
+
+/* Reusachtig spooknummer rechtsboven; de screenshot schuift er deels
+   overheen, wat de kaart diepte geeft. */
+.entry .num {
+  position: absolute; right: 1.6rem; top: 0; z-index: 0;
+  font-family: var(--serif); font-size: 7.5rem; line-height: .95;
+  color: color-mix(in srgb, var(--app) 17%, transparent);
+  font-variant-numeric: tabular-nums; pointer-events: none;
+  transition: color .35s;
+}
+.entry:hover .num { color: color-mix(in srgb, var(--app) 26%, transparent); }
+
+.entry .head { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.1rem; }
+.entry .icon {
+  width: 60px; height: 60px; border-radius: 15px; flex: none;
+  box-shadow: 0 6px 18px -6px rgb(var(--shadow) / .5);
+}
+.entry .icon.svg { padding: 0; background: var(--cover); }
+.entry h3 {
+  font-family: var(--serif); font-weight: 400; font-size: 1.75rem;
+  letter-spacing: -.02em; margin: 0 0 .2rem; line-height: 1.1;
+}
+.meta {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--faint); margin: 0;
+}
+.meta .status { color: var(--app); font-weight: 600; }
+.meta .status.soon { color: var(--faint); font-weight: 400; }
+
+.entry .cols { display: grid; grid-template-columns: 1fr auto; gap: 0 2rem; align-items: start; }
+.entry .shot {
+  width: 168px; border-radius: 14px; flex: none;
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 34px -14px rgb(var(--shadow) / .55);
+  transition: transform .3s;
+}
+.entry:hover .shot { transform: translateY(-4px) rotate(-1deg); }
+/* Smal scherm: geen ruimte voor een reuzencijfer naast de titel — het
+   botste met de kop. Wordt daar een klein label boven de app. */
+@media (max-width: 46rem) {
+  .entry .cols { grid-template-columns: 1fr; }
+  .entry .shot { display: none; }
+  .entry { padding: 1.6rem 1.4rem 1.4rem; }
+  .entry .num {
+    position: static; display: block; margin-bottom: .7rem;
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .12em;
+    color: var(--app); line-height: 1;
+  }
+}
+
+.entry .desc { margin: 0 0 1.1rem; color: var(--muted); max-width: 52ch; }
+
+/* Het "geschrapt"-veld: de kern van elke entry, dus krijgt de kleur. */
+.cut {
+  margin: 0 0 1.2rem; max-width: 54ch;
+  border-left: 2px solid color-mix(in srgb, var(--app) 55%, transparent);
+  padding: .1rem 0 .1rem 1.1rem;
+}
+.cut dt {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--app); margin-bottom: .3rem; font-weight: 700;
+}
+.cut dd { margin: 0; color: var(--ink); }
+
+.stat {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
+  color: var(--muted); margin: 0 0 1.2rem; font-variant-numeric: tabular-nums;
+}
+.stat .score {
+  color: var(--app); font-size: 1.15rem; font-weight: 700; letter-spacing: 0;
+}
+.stat .none { color: var(--faint); font-style: italic; }
+
+.entry .links { display: flex; flex-wrap: wrap; gap: .5rem .6rem; margin: 0; }
+.entry .links a {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; text-decoration: none;
+  padding: .4rem .8rem; border-radius: 999px;
+  color: var(--app); border: 1px solid color-mix(in srgb, var(--app) 28%, transparent);
+  transition: background .2s, border-color .2s;
+}
+.entry .links a:hover {
+  background: color-mix(in srgb, var(--app) 13%, transparent);
+  border-color: color-mix(in srgb, var(--app) 60%, transparent);
+}
+
+/* ══ CASE ═════════════════════════════════════════════════════ */
+.case-panel {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 18px; padding: 2.2rem 2.2rem 2rem; position: relative;
+  overflow: hidden; isolation: isolate;
+}
+.case-panel::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--app), color-mix(in srgb, var(--app) 15%, transparent));
+}
+.case-panel::after {
+  content: ""; position: absolute; top: -30%; left: -10%; z-index: 0;
+  width: 30rem; height: 30rem; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--app) 11%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.case-panel > .case { position: relative; z-index: 1; }
+.case { max-width: 64ch; }
+.case h3 {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--app); font-weight: 700;
+  margin: 2.2rem 0 .6rem;
+}
+.case h3:first-child { margin-top: 0; }
+.case p { margin: 0 0 1.05rem; }
+.case .kicker {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem); line-height: 1.4;
+  color: var(--ink); margin-bottom: 2rem; max-width: 26ch;
+}
+
+/* De drie prijzen als genummerde kaarten. */
+.prices { display: grid; gap: 1rem; margin: 1.2rem 0 0; padding: 0; list-style: none;
+          grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.prices li {
+  background: var(--raise); border-radius: 13px; padding: 1.1rem 1.2rem;
+  border: 1px solid var(--line); position: relative;
+}
+.prices b { display: block; margin-bottom: .35rem; color: var(--ink); font-size: .97rem; }
+.prices span { color: var(--muted); font-size: .92rem; line-height: 1.55; display: block; }
+.prices li::before {
+  content: counter(price); counter-increment: price;
+  font-family: var(--mono); font-size: .62rem; color: var(--app);
+  position: absolute; top: .85rem; right: 1rem; font-weight: 700;
+}
+.prices { counter-reset: price; }
+
+/* ══ FOUTENLIJST ══════════════════════════════════════════════
+   De onware zin doorgestreept, de werkelijkheid eronder.
+   ══════════════════════════════════════════════════════════════ */
+.pull {
+  font-family: var(--serif); font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  line-height: 1.3; margin: 2.4rem 0; max-width: 20ch;
+  color: var(--ink); letter-spacing: -.02em; text-wrap: balance;
+}
+.pull em { font-style: italic; color: var(--accent); }
+
+.faults { list-style: none; margin: 2rem 0; padding: 0; display: grid; gap: 1rem; }
+.faults li {
+  background: var(--surface); border: 1px solid var(--line);
+  border-left: 3px solid color-mix(in srgb, var(--app) 60%, transparent);
+  border-radius: 12px; padding: 1.1rem 1.3rem;
+}
+.faults .where {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--app); font-weight: 700;
+  display: block; margin-bottom: .5rem;
+}
+.faults .claim {
+  display: block; font-family: var(--serif); font-size: 1.08rem;
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--app) 70%, transparent);
+  text-decoration-thickness: 1.5px;
+  color: var(--faint); margin-bottom: .45rem;
+}
+.faults .truth { display: block; color: var(--ink); font-size: .95rem; line-height: 1.6; }
+.faults code {
+  font-family: var(--mono); font-size: .88em;
+  background: var(--raise); padding: .1em .35em; border-radius: 4px;
+}
+
+/* ══ CONTACT / CV ═════════════════════════════════════════════ */
+.contact-links { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.5rem 0 0; }
+.contact-links a {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; text-decoration: none;
+  padding: .55rem 1rem; border-radius: 999px;
+  color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.contact-links a:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: var(--accent); transform: translateY(-2px);
+}
+
+.role-entry { padding: 0 0 1.9rem; }
+.role-entry:last-child { padding-bottom: 0; }
+.role-entry h3 {
+  font-family: var(--serif); font-weight: 400; font-size: 1.35rem;
+  margin: 0 0 .15rem; line-height: 1.25; letter-spacing: -.015em;
+}
+.role-entry .when {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--faint); margin: 0 0 .7rem;
+}
+.role-entry p { margin: 0 0 .7rem; color: var(--muted); max-width: 62ch; }
+.role-entry ul { margin: 0; padding-left: 1.1rem; color: var(--muted); max-width: 62ch; }
+.role-entry li { margin: 0 0 .35rem; }
+.role-entry li::marker { color: var(--accent); }
+
+.emp {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 1.6rem 1.8rem; margin-bottom: 1.2rem;
+}
+.emp > .who {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 1.3rem; font-weight: 700;
+}
+.emp > .who span { color: var(--faint); font-weight: 400; }
+
+.plain { list-style: none; margin: 0; padding: 0; }
+.plain li {
+  margin: 0 0 .7rem; color: var(--muted); padding-left: 1rem; position: relative;
+}
+.plain li::before {
+  content: ""; position: absolute; left: 0; top: .65em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .55;
+}
+.plain li b { color: var(--ink); font-weight: 600; }
+.plain li .when {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .08em;
+  color: var(--faint); display: block;
+}
+
+/* ══ FOOTER ═══════════════════════════════════════════════════ */
+footer {
+  margin-top: 6rem; padding-top: 1.8rem; border-top: 1px solid var(--line);
+  color: var(--faint); font-size: .82rem;
+  display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; align-items: baseline;
+}
+footer a { color: var(--faint); text-decoration: none; border-bottom: 1px solid var(--line); }
+footer a:hover { color: var(--ink); border-bottom-color: var(--faint); }
+footer .spacer { flex: 1 1 auto; }
+footer .colophon { flex: 0 1 44rem; max-width: 76ch; line-height: 1.6; }
+
+/* ══ MOTION ═══════════════════════════════════════════════════ */
+@view-transition { navigation: auto; }
+
+/* Binnenschuiven bij scrollen.
+   Niets is standaard onzichtbaar. Het script zet .pre alleen op wat bij
+   het laden ónder de vouw staat, en haalt het er weer af zodra het in
+   beeld komt — met een failsafe-timer eroverheen. Faalt het script op
+   welk moment dan ook, dan is het ergste wat er gebeurt dat de animatie
+   uitblijft. Er verdwijnt nooit tekst. */
+.reveal.pre { opacity: 0; transform: translateY(18px); }
+.reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1),
+              transform .7s cubic-bezier(.22,.61,.36,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .reveal, .reveal.pre { opacity: 1 !important; transform: none !important; }
+  .entry:hover { transform: none; }
+  .entry:hover .shot { transform: none; }
+  @view-transition { navigation: none; }
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;
+}
+
+@media print {
+  .cover { background: none; color: #000; }
+  #field, .topbar, .chips, .entry .links, .entry .shot { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .sec { grid-template-columns: 1fr; }
+  .entry, .emp, .case-panel, .faults li { border: 1px solid #ccc; box-shadow: none; }
+}

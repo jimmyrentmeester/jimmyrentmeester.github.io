@@ -3,304 +3,357 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jimmy Rentmeester — apps and product work</title>
-<meta name="description" content="Four iOS apps I designed, built and released on my own, and the thinking behind them: the need, the scope, the trade-offs and the user experience.">
-<meta property="og:title" content="Jimmy Rentmeester — apps and product work">
-<meta property="og:description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them.">
-<meta property="og:type" content="website">
+<title>Jimmy Rentmeester — four iOS apps, and the decisions behind them</title>
+<meta name="description" content="I design, build and release iOS apps on my own. The work log, one case in full, and an honest account of where AI helps and where it quietly gets things wrong.">
+<link rel="canonical" href="https://jimmyrentmeester.github.io/">
+<link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/">
+<link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/">
+<link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jimmy Rentmeester — four iOS apps, and the decisions behind them">
+<meta property="og:description" content="Four iOS apps I designed, built and released on my own — with what I cut from each, one case in full, and an honest account of how I use AI.">
 <meta property="og:url" content="https://jimmyrentmeester.github.io/">
 <meta property="og:image" content="https://jimmyrentmeester.github.io/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Jimmy Rentmeester — GRID_BREAKER, BabyBeam, WristVault, Stillwater">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="nl_NL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jimmyrentmeester.github.io/og.jpg">
-<link rel="canonical" href="https://jimmyrentmeester.github.io/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d0e12" media="(prefers-color-scheme: dark)">
-<style>
-  :root {
-    color-scheme: light dark;
-    --bg:#f7f8fa; --card:#ffffff; --ink:#15171d; --muted:#666c78; --line:#e4e7ec;
-    --accent:#4d5dfb; --accent-soft:#eef0ff; --shadow:rgba(20,22,40,.10);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0d0e12; --card:#16181f; --ink:#eceef3; --muted:#969cab; --line:#242832;
-            --accent:#8e99ff; --accent-soft:#1b1e35; --shadow:rgba(0,0,0,.5); }
-  }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
-    line-height:1.6; -webkit-font-smoothing:antialiased; }
-  .wrap { max-width:58rem; margin:0 auto; padding:2rem 1.4rem 4rem; }
-
-  /* ── language toggle ─────────────────────────────── */
-  .topbar { display:flex; justify-content:flex-end; margin-bottom:2.2rem; }
-  .langswitch { display:inline-flex; background:var(--card); border:1px solid var(--line);
-    border-radius:999px; padding:3px; gap:2px; }
-  .langswitch button { appearance:none; border:0; background:transparent; cursor:pointer;
-    font:inherit; font-size:.78rem; font-weight:600; letter-spacing:.03em; color:var(--muted);
-    padding:.3rem .7rem; border-radius:999px; transition:background .15s, color .15s; }
-  .langswitch button[aria-pressed="true"] { background:var(--accent); color:#fff; }
-  .langswitch button:hover:not([aria-pressed="true"]) { color:var(--ink); }
-  .langswitch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-
-  /* ── hero ────────────────────────────────────────── */
-  header.hero { margin-bottom:2.8rem; }
-  .hero h1 { font-size:clamp(2rem,5vw,2.6rem); line-height:1.15; letter-spacing:-.025em;
-    margin:0 0 .5rem; }
-  .hero .tagline { font-size:1.02rem; color:var(--muted); margin:0 0 1.2rem; }
-  .hero p.lead { margin:0; max-width:60ch; }
-
-  /* ── section headings ────────────────────────────── */
-  section { margin-top:3.2rem; }
-  h2 { font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; color:var(--muted);
-    font-weight:700; margin:0 0 1.3rem; }
-
-  /* ── work cards ──────────────────────────────────── */
-  /* min(...,100%) voorkomt dat de kolom breder blijft dan een smal scherm. */
-  .grid { display:grid; gap:1.1rem;
-    grid-template-columns:repeat(auto-fill,minmax(min(22rem,100%),1fr)); }
-  .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
-    border-radius:20px; padding:1.3rem; transition:transform .16s ease, box-shadow .16s ease; }
-  .card:hover { transform:translateY(-3px); box-shadow:0 14px 32px var(--shadow); }
-  .card .top { display:flex; align-items:center; gap:.85rem; margin-bottom:.85rem; }
-  .card img { width:54px; height:54px; border-radius:13px; flex:none;
-    box-shadow:0 3px 10px rgba(0,0,0,.16); }
-  .card h3 { font-size:1.1rem; margin:0 0 .1rem; letter-spacing:-.01em; }
-  .card .cat { font-size:.76rem; color:var(--muted); }
-  .card .desc { margin:0 0 .85rem; color:var(--muted); font-size:.9rem; }
-  .card .note { margin:0 0 1.1rem; font-size:.86rem; padding:.7rem .85rem; border-radius:10px;
-    background:var(--accent-soft); color:var(--ink); line-height:1.55; }
-  .card .actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem;
-    flex-wrap:wrap; margin-top:auto; }
-  .card .store { font-size:.85rem; font-weight:600; color:var(--accent); text-decoration:none; }
-  .card .store:hover { text-decoration:underline; }
-  .card .store.soon { color:var(--muted); font-weight:500; }
-  .card .more { font-size:.85rem; color:var(--muted); text-decoration:none; }
-  .card .more:hover { color:var(--ink); }
-
-  /* ── about ───────────────────────────────────────── */
-  .about p { margin:0 0 1rem; max-width:62ch; }
-  .about p:last-child { margin-bottom:0; }
-  /* Afsluitende regel: hoort erbij, maar mag niet als cv-blok lezen. */
-  .about p.standing { margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid var(--line);
-    font-size:.9rem; color:var(--muted); }
-  .about p.standing a { color:var(--accent); text-decoration:none; font-weight:600; }
-  .about p.standing a:hover { text-decoration:underline; }
-
-  /* ── footer ──────────────────────────────────────── */
-  footer { margin-top:3.4rem; padding-top:1.6rem; border-top:1px solid var(--line);
-    display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.2rem;
-    color:var(--muted); font-size:.88rem; }
-  footer a { color:var(--accent); text-decoration:none; font-weight:600; }
-  footer a:hover { text-decoration:underline; }
-  footer .spacer { flex:1; }
-
-  @media (prefers-reduced-motion:reduce) {
-    * { transition:none !important; }
-    .card:hover { transform:none; }
-  }
-</style>
+<meta name="theme-color" content="#0b0c10">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-  <div class="wrap">
+
+<!-- ══ COVER ══════════════════════════════════════════════════
+     Het canvas is decoratie. Zonder JS blijft dit een egaal
+     donker paneel en verandert er verder niets.
+     ═══════════════════════════════════════════════════════════ -->
+<header class="cover">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="cover-inner">
 
     <div class="topbar">
-      <div class="langswitch" role="group" aria-label="Language / Taal">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="nl" aria-pressed="false">NL</button>
-      </div>
+      <nav class="langswitch" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="/nl/" hreflang="nl" lang="nl">NL</a>
+      </nav>
     </div>
 
-    <header class="hero">
-      <h1 data-i18n="hero.name">Jimmy Rentmeester</h1>
-      <p class="tagline" data-i18n="hero.tagline">Lead Product Manager at Coolblue · Tilburg</p>
-      <p class="lead" data-i18n="hero.lead">I design, build and release iOS apps on my own. Working out what to build, what to leave out, and how it should feel is the part I care about most.</p>
-    </header>
+    <h1>Jimmy Rentmeester</h1>
+    <p class="role">Lead Product Manager at Coolblue · Tilburg</p>
+    <p class="lead">The building stopped being the hard part. Deciding what not to build did not.</p>
+    <p class="sub">I design, build and release iOS apps on my own: the whole thing, from the
+    first question through to the App Store listing and the support mail afterwards. Below is
+    what I shipped, what I cut from each one, and where this way of working breaks.</p>
 
-    <section>
-      <h2 data-i18n="work.heading">Apps</h2>
-      <div class="grid">
+    <ul class="chips">
+      <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
+      <li class="app-bb"><a href="#work"><span class="dot"></span>BabyBeam</a></li>
+      <li class="app-wv"><a href="#work"><span class="dot"></span>WristVault</a></li>
+      <li class="app-sw"><a href="/stillwater/" target="_blank" rel="noopener"><span class="dot"></span>Stillwater</a></li>
+    </ul>
 
-        <!--
-          NIEUWE APP TOEVOEGEN? Kopieer één <div class="card">…</div> en vul in:
-            • <img src="…/icon.png">   → app-icoon
-            • <h3> naam · <div class="cat"> categorie · platform
-            • <p class="desc">         → wat het is
-            • <p class="note">         → de afweging erachter
-            • App Store-link           → https://apps.apple.com/app/id<APP-ID>
-          Externe links (App Store) openen in een nieuw tabblad met rel="noopener";
-          links naar eigen detailpagina's blijven in hetzelfde tabblad.
-          Nog geen App Store-link? Gebruik <span class="store soon"> in plaats van
-          een <a href="#"> — een knop die niets doet leest als een bug.
-          Vertaling: geef elk tekstelement een uniek data-i18n en vul de NL-string
-          aan in het I18N-object onderaan.
-        -->
+  </div>
+</header>
 
-        <div class="card">
-          <div class="top">
-            <img src="gridbreaker/assets/icon.png" alt="">
+<div class="wrap">
+
+  <!-- ══ WERKLOG ══════════════════════════════════════════════
+       Elke entry kiest zijn kleur met één klasse (.app-gb enz.).
+       Nieuwe app? Kopieer één <li>, hernummer, kies een klasse.
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="sec" id="work">
+    <h2>Work</h2>
+    <div class="body">
+      <ol class="log">
+
+        <li class="entry app-gb reveal">
+          <span class="num" aria-hidden="true">01</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/gridbreaker-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>GRID_BREAKER</h3>
-              <div class="cat" data-i18n="gb.cat">Arcade game · iPhone &amp; iPad</div>
+              <p class="meta">Arcade game · iPhone &amp; iPad · <span class="status">Live</span></p>
             </div>
           </div>
-          <p class="desc" data-i18n="gb.desc">A one-thumb reflex game. Decode the grid before it disappears, chain hits, chase a score.</p>
-          <p class="note" data-i18n="gb.note">Sixteen campaign levels, each one introducing a single mechanic. The game explains itself while you play it, so it opens without a tutorial.</p>
-          <div class="actions">
-            <a class="store" href="https://apps.apple.com/app/id6779888720" target="_blank" rel="noopener">App Store ↗</a>
-            <a class="more" href="gridbreaker/" data-i18n="link.details">Details →</a>
+          <div class="cols">
+            <div>
+              <p class="desc">A one-thumb reflex game. Decode the grid before it disappears,
+              chain hits, chase a score.</p>
+              <dl class="cut">
+                <dt>Cut</dt>
+                <dd>The tutorial. Sixteen campaign levels each introduce one mechanic, so the
+                game teaches itself while you play and there's nothing to read first.</dd>
+              </dl>
+              <p class="stat"><!--rating:6779888720--><span class="score">5.0</span> ★ · 7 ratings<!--/rating--></p>
+              <p class="links">
+                <a href="https://apps.apple.com/app/id6779888720" target="_blank" rel="noopener">App&nbsp;Store ↗</a>
+                <a href="/gridbreaker/">Detail</a>
+              </p>
+            </div>
+            <img class="shot" src="/assets/img/gridbreaker-shot.png" alt="GRID_BREAKER campaign screen: sixteen data cores across four chapters" width="168" height="365" loading="lazy" decoding="async">
           </div>
-        </div>
+        </li>
 
-        <div class="card">
-          <div class="top">
-            <img src="babybeam/icon.png" alt="">
+        <li class="entry app-bb reveal">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/babybeam-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>BabyBeam</h3>
-              <div class="cat" data-i18n="bb.cat">Baby monitor · iPhone &amp; iPad</div>
+              <p class="meta">Baby monitor · iPhone &amp; iPad · <span class="status">Live</span></p>
             </div>
           </div>
-          <p class="desc" data-i18n="bb.desc">Turns two iPhones into a video baby monitor. Sound and picture go straight from one device to the other, encrypted, and nothing is stored.</p>
-          <p class="note" data-i18n="bb.note">Every competing app routes the stream through a cloud account. Keeping it device to device meant giving up watching from outside the house. I decided that trade-off was the point of the app.</p>
-          <div class="actions">
-            <a class="store" href="https://apps.apple.com/app/id6783058581" target="_blank" rel="noopener">App Store ↗</a>
-            <a class="more" href="babybeam/" data-i18n="link.details">Details →</a>
+          <div class="cols">
+            <div>
+              <p class="desc">Turns two iPhones into a video baby monitor. Sound and picture go
+              straight from one device to the other, encrypted, and nothing is stored.</p>
+              <dl class="cut">
+                <dt>Cut</dt>
+                <dd>Watching from outside the house, which is the one feature every competitor
+                leads with. Keeping the stream between the two phones meant giving it up, and
+                that trade-off is the product.</dd>
+              </dl>
+              <p class="stat"><!--rating:6783058581--><span class="none">No ratings yet</span><!--/rating--></p>
+              <p class="links">
+                <a href="https://apps.apple.com/app/id6783058581" target="_blank" rel="noopener">App&nbsp;Store ↗</a>
+                <a href="/babybeam/">Detail</a>
+                <a href="#case">Full case ↓</a>
+              </p>
+            </div>
+            <img class="shot" src="/assets/img/babybeam-shot.png" alt="BabyBeam baby unit showing the pairing code and QR code" width="168" height="365" loading="lazy" decoding="async">
           </div>
-        </div>
+        </li>
 
-        <div class="card">
-          <div class="top">
-            <img src="wristvault/icon.png" alt="">
+        <li class="entry app-wv reveal">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="head">
+            <img class="icon" src="/assets/img/wristvault-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>WristVault</h3>
-              <div class="cat" data-i18n="wv.cat">Watch collection · iPhone &amp; iPad</div>
+              <p class="meta">Watch collection · iPhone &amp; iPad · <span class="status soon">Coming</span></p>
             </div>
           </div>
-          <p class="desc" data-i18n="wv.desc">Catalogues a watch collection, logs what you wear, and exports an insurance PDF. No account — it syncs through your own iCloud and nowhere else.</p>
-          <p class="note" data-i18n="wv.note">One payment instead of a subscription, in a category that has been moving the other way. The free version holds three watches and still exports, so the paid unlock has to be worth buying on its own.</p>
-          <div class="actions">
-            <span class="store soon" data-i18n="link.soon">Coming to the App Store</span>
-            <a class="more" href="wristvault/" data-i18n="link.details">Details →</a>
-          </div>
-        </div>
+          <p class="desc">Catalogues a watch collection, logs what you wear, and exports an
+          insurance PDF. No account — it syncs through your own iCloud and nowhere else.</p>
+          <dl class="cut">
+            <dt>Cut</dt>
+            <dd>Half of what I'd sketched; it went to the App Store without it. What stayed: one
+            payment instead of a subscription, in a category moving the other way, and a free
+            tier that holds three watches and still exports, so the paid unlock has to earn its
+            money on its own.</dd>
+          </dl>
+          <p class="links">
+            <a href="/wristvault/">Detail</a>
+          </p>
+        </li>
 
-        <div class="card">
-          <div class="top">
-            <img src="stillwater/icon.svg" alt="">
+        <li class="entry app-sw reveal">
+          <span class="num" aria-hidden="true">04</span>
+          <div class="head">
+            <img class="icon svg" src="/stillwater/icon.svg" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>Stillwater</h3>
-              <div class="cat" data-i18n="sw.cat">Browser experiment</div>
+              <p class="meta">Browser experiment · <span class="status">Open</span></p>
             </div>
           </div>
-          <p class="desc" data-i18n="sw.desc">A pond in a browser tab. Skip stones across it, ring the lilypads, watch the koi.</p>
-          <p class="note" data-i18n="sw.note">No score, no install, no roadmap. Somewhere to work on timing and weight without a store attached to it.</p>
-          <div class="actions">
-            <a class="store" href="stillwater/" target="_blank" rel="noopener" data-i18n="link.open">Open ↗</a>
-          </div>
+          <p class="desc">A pond in a browser tab. Skip stones across it, ring the lilypads,
+          watch the koi. Written from scratch in WebGL.</p>
+          <dl class="cut">
+            <dt>Cut</dt>
+            <dd>Score, install, roadmap. It's somewhere to work on timing and weight without a
+            store attached.</dd>
+          </dl>
+          <p class="links">
+            <a href="/stillwater/" target="_blank" rel="noopener">Open it ↗</a>
+          </p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══ CASE ═════════════════════════════════════════════════ -->
+  <section class="sec" id="case">
+    <h2>One case</h2>
+    <div class="body">
+      <div class="case-panel app-bb reveal">
+        <div class="case prose">
+          <p class="kicker">BabyBeam — how giving up the headline feature became the product.</p>
+
+          <h3>The problem</h3>
+          <p>A baby monitor is either dedicated hardware you use for two years and then put in a
+          drawer, or an app that routes your child's bedroom through a company's cloud account.
+          The second is what the market sells, and it sells it because of one feature: check in
+          from anywhere. That feature is also the reason the video has to leave the house at all.</p>
+
+          <h3>The call</h3>
+          <p>Video and audio go directly between the two phones over WebRTC, end-to-end encrypted
+          with DTLS-SRTP. Nothing is recorded and nothing is kept, because there is no server to
+          keep it on. The only thing that ever leaves the pair is a small pairing handshake, which
+          passes briefly through iCloud encrypted under a key derived from the pairing code — a
+          key I don't hold and can't recover.</p>
+          <p>The price of that architecture shows up immediately and can't be hidden: you can't
+          watch from outside the house. I decided that wasn't a missing feature but the reason to
+          build it. An app that puts a camera in a nursery and then explains why it needs an
+          account has solved the parent's problem and created a new one.</p>
+
+          <h3>What it cost</h3>
+          <ul class="prices">
+            <li>
+              <b>A setup barrier</b>
+              <span>Both phones have to be signed in to iCloud. Not the same Apple Account, but
+              signed in. Every cloud competitor gets to skip that sentence in their onboarding.</span>
+            </li>
+            <li>
+              <b>Plumbing in the settings screen</b>
+              <span>Two phones on the same Wi-Fi connect directly. If one is on cellular they may
+              not, and the fix is a TURN relay you add yourself under the gear icon. That's
+              network engineering sitting in a consumer app, and it's there because I refused the
+              architecture that would have hidden it.</span>
+            </li>
+            <li>
+              <b>It reaches the marketing</b>
+              <span>The pairing code is the security boundary, so it can't appear anywhere,
+              including in my own App Store screenshots. Those had to be retaken with it blurred.
+              A constraint you take seriously doesn't stop at the code.</span>
+            </li>
+          </ul>
+
+          <h3>Where it stands</h3>
+          <p>Live and free to download. It's been in the store a few weeks, so the honest answer
+          to “did it work” is that I don't know yet. The ratings line in the log above comes from
+          the App Store and will say so when there's something to say.</p>
         </div>
-
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="about">
-      <h2 data-i18n="about.heading">How I work</h2>
-      <p data-i18n="about.p1">AI does most of the typing now, so getting an app built is no longer the hard part. What is left is the product work: deciding whether a problem is worth solving, who exactly has it, and what a first version has to do before anyone will care.</p>
-      <p data-i18n="about.p2">Every app here started with that question. I look for something people already complain about, check whether the apps that exist actually fix it, then write down the smallest version worth downloading and hold that line while I build. WristVault went to the App Store without half the features I had sketched.</p>
-      <p data-i18n="about.p3">Scope is only part of it. I also set the price, write the store listing, sort out the translations and the compliance paperwork, and decide what the free version gives away. Those are product owner calls, and making all of them myself is the quickest way I know to learn what each one costs.</p>
-      <p data-i18n="about.p4">What counts most in the end is how the app feels to use. Something that does less but needs no explaining beats something complete that does.</p>
+  <!-- ══ AI ═══════════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>On AI</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>AI writes most of the code in these apps. That isn't the interesting part; it stopped
+        being a differentiator some time in 2024, and listing the tools I use tells you nothing
+        about whether I can direct them.</p>
 
-      <p class="standing" data-i18n="about.standing">Ten years in e-commerce, four of them leading a team. I have never held a product owner title. What I do have is a decade of being accountable for whether something actually worked commercially, and four apps where every product call was mine to make. Full work history is on <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn</a>.</p>
-    </section>
+        <p class="pull">It doesn't fail at code. It fails at the <em>seam</em> between the text
+        and the product.</p>
 
-    <footer>
-      <span data-i18n="footer.copy">© 2026 Jimmy Rentmeester</span>
-      <span class="spacer"></span>
-      <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
-      <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
-    </footer>
-  </div>
+        <p>Three from this site. All mine, all shipped, all live for weeks. The struck-out line
+        is what the page claimed; underneath is what was true:</p>
 
-<script>
-(function () {
-  "use strict";
+        <ul class="faults">
+          <li class="app-err">
+            <span class="where">GRID_BREAKER · privacy policy</span>
+            <span class="claim">“No network connections, servers, or cloud services.”</span>
+            <span class="truth">The game ships Game Center leaderboards. The document was fluent,
+            confident and wrong about my own app, sitting under a live App Store listing.</span>
+          </li>
+          <li class="app-err">
+            <span class="where">WristVault · landing page</span>
+            <span class="claim">“Your collection never leaves your device.”</span>
+            <span class="truth">The privacy page directly beneath it described iCloud sync. Both
+            sentences were written to reassure and only one of them was accurate.</span>
+          </li>
+          <li class="app-err">
+            <span class="where">WristVault · call to action</span>
+            <span class="claim">“Coming soon to the App Store”</span>
+            <span class="truth">It was a <code>href="#"</code>. The button did nothing, and it
+            shipped.</span>
+          </li>
+        </ul>
 
-  // Engels staat in de HTML zelf, zodat bezoekers zonder JS (en zoekmachines)
-  // altijd een volledige pagina zien. Alleen Nederlands komt uit dit object.
-  var I18N = {
-    nl: {
-      "hero.name": "Jimmy Rentmeester",
-      "hero.tagline": "Lead Product Manager bij Coolblue · Tilburg",
-      "hero.lead": "Ik ontwerp, bouw en publiceer iOS-apps in mijn eentje. Uitzoeken wat er gebouwd moet worden, wat eruit kan en hoe het moet voelen is het deel waar het mij om gaat.",
+        <p>None of these are bugs. They're claims that sounded right and weren't, in the one
+        place only the person who built the thing can check. And I didn't catch them before
+        shipping; I caught them in a review pass weeks later. That changed how I work: generated
+        copy now gets the same treatment as generated code, and nothing goes out until it has
+        been checked against what the product actually does, including the legal pages nobody
+        reads.</p>
 
-      "work.heading": "Apps",
-      "about.heading": "Hoe ik werk",
+        <p>The other half of the work is upstream. Rather than prompt my way through each app
+        from scratch, I built a reusable project structure and a set of written standards that
+        travel between them: what “good” means for this kind of work, written concretely enough
+        to be followed. The tenth app starts where the ninth left off.</p>
+        <p>That transfers directly to working with a team, because it's the same skill. Writing
+        down what “good” means precisely enough that someone else can act on it without you in
+        the room is most of the job either way.</p>
+      </div>
+    </div>
+  </section>
 
-      "gb.cat": "Arcadespel · iPhone &amp; iPad",
-      "gb.desc": "Een reflexspel voor één duim. Ontcijfer het grid voordat het verdwijnt, rijg treffers aaneen, jaag op een score.",
-      "gb.note": "Zestien campagnelevels, elk met één nieuwe mechaniek. Het spel legt zichzelf uit terwijl je speelt, dus het opent zonder uitleg vooraf.",
+  <!-- ══ WERKWIJZE ════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>How I work</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Every app here started with the same question: is this problem worth solving, who
+        exactly has it, and what does a first version have to do before anyone will care? I look
+        for something people already complain about, check whether the apps that exist actually
+        fix it, then write down the smallest version worth downloading and hold that line while
+        I build.</p>
+        <p>Scope is only part of it. I also set the price, write the store listing, sort out the
+        translations and the compliance paperwork, and decide what the free version gives away.
+        Those are product owner calls, and making every one of them myself is the quickest way I
+        know to learn what each one costs.</p>
+        <p>What counts in the end is how the thing feels to use. Something that does less but
+        needs no explaining beats something complete that doesn't.</p>
+      </div>
+    </div>
+  </section>
 
-      "bb.cat": "Babyfoon · iPhone &amp; iPad",
-      "bb.desc": "Maakt van twee iPhones een videobabyfoon. Beeld en geluid gaan rechtstreeks van het ene toestel naar het andere, versleuteld, en er wordt niets bewaard.",
-      "bb.note": "Elke concurrent stuurt de stream via een cloudaccount. Het tussen twee toestellen houden betekende dat meekijken van buiten het huis verviel. Die afweging is wat mij betreft het hele punt van de app.",
+  <!-- ══ ACHTERGROND ══════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Background</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Ten years in e-commerce, four of them leading a team. I currently lead product for
+        Gaming, Printers &amp; Office at Coolblue, where I am responsible for the strategy and
+        commercial performance of those categories and coach six product managers and four
+        product editors.</p>
+        <p>I've never held a product owner title. What I do have is a decade of being accountable
+        for whether something actually worked commercially, and four apps where every product
+        call was mine to make.</p>
+        <p class="contact-links">
+          <a href="/cv/">Full CV</a>
+          <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
-      "wv.cat": "Horlogecollectie · iPhone &amp; iPad",
-      "wv.desc": "Legt een horlogecollectie vast, houdt bij wat je draagt en exporteert een verzekeringsrapport als pdf. Geen account — het synct via je eigen iCloud en verder nergens heen.",
-      "wv.note": "Eenmalig betalen in plaats van een abonnement, in een categorie die juist de andere kant op beweegt. De gratis versie houdt drie horloges bij en exporteert gewoon, dus de betaalde versie moet het op eigen kracht waard zijn.",
+  <!-- ══ CONTACT ══════════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>Contact</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>I'm not looking for anything right now. But if you want to talk about product work,
+        building alone, or how any of this came together, I'm glad to.</p>
+        <p class="contact-links">
+          <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+          <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
-      "sw.cat": "Browser-experiment",
-      "sw.desc": "Een vijver in een browsertabblad. Keil er stenen overheen, laat de waterlelies rinkelen, kijk naar de koi.",
-      "sw.note": "Geen score, geen installatie, geen routekaart. Een plek om aan timing en gewicht te werken zonder winkel eromheen.",
+  <footer>
+    <span>© 2026 Jimmy Rentmeester</span>
+    <span class="spacer"></span>
+    <span class="colophon">One HTML file per page, one stylesheet, one small script for the
+    header animation. No framework, no build step, no analytics, no cookies. The type you are
+    reading was already on your device, and nothing on this page is loaded from anyone else's
+    server. About 14 kB before the screenshots load, 123 kB with them. It reads fine with
+    JavaScript switched off.</span>
+  </footer>
 
-      "link.details": "Details →",
-      "link.soon": "Binnenkort in de App Store",
-      "link.open": "Openen ↗",
+</div>
 
-      "about.p1": "AI typt tegenwoordig het meeste, dus een app gebouwd krijgen is niet meer het lastige deel. Wat overblijft is het productwerk: bepalen of een probleem het oplossen waard is, wie het precies heeft, en wat een eerste versie moet kunnen voordat iemand er iets om geeft.",
-      "about.p2": "Elke app hier begon met die vraag. Ik zoek iets waar mensen al over klagen, kijk of de bestaande apps het echt oplossen, schrijf dan de kleinste versie op die het downloaden waard is en houd die lijn vast tijdens het bouwen. WristVault ging de App Store in zonder de helft van wat ik eerst had bedacht.",
-      "about.p3": "Scope is maar een deel ervan. Ik bepaal ook de prijs, schrijf de App Store listing, regel de vertalingen en het papierwerk rond regelgeving, en beslis wat de gratis versie weggeeft. Dat zijn keuzes van een product owner, en ze allemaal zelf maken is de snelste manier die ik ken om te leren wat elke keuze kost.",
-      "about.p4": "Uiteindelijk telt vooral hoe de app aanvoelt in gebruik. Iets dat minder doet maar geen uitleg nodig heeft, wint van iets compleets dat dat wel heeft.",
-      "about.standing": "Tien jaar e-commerce, waarvan vier jaar leidinggevend. De titel product owner heb ik nooit gehad. Wat ik wel heb: tien jaar verantwoordelijk zijn voor of iets commercieel werkte, en vier apps waarin elke productkeuze van mij was. Het volledige loopbaanoverzicht staat op <a href=\"https://www.linkedin.com/in/jimmyrentmeester\" target=\"_blank\" rel=\"noopener\">LinkedIn</a>.",
-
-      "footer.copy": "© 2026 Jimmy Rentmeester"
-    }
-  };
-
-  var EN = {};                       // vult zich met de originele HTML-tekst
-  var nodes = document.querySelectorAll("[data-i18n]");
-  nodes.forEach(function (el) { EN[el.dataset.i18n] = el.innerHTML; });
-
-  var buttons = document.querySelectorAll(".langswitch button");
-
-  function apply(lang) {
-    var dict = lang === "nl" ? I18N.nl : EN;
-    nodes.forEach(function (el) {
-      var val = dict[el.dataset.i18n];
-      if (val !== undefined) el.innerHTML = val;
-      else if (lang !== "nl") el.innerHTML = EN[el.dataset.i18n];
-    });
-    document.documentElement.lang = lang;
-    buttons.forEach(function (b) {
-      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
-    });
-    try { localStorage.setItem("lang", lang); } catch (e) {}
-  }
-
-  // Voorkeur: ?lang= in de URL (zo is een taal te delen) > eerdere keuze >
-  // browsertaal > Engels.
-  var param = new URLSearchParams(location.search).get("lang");
-  var stored = null;
-  try { stored = localStorage.getItem("lang"); } catch (e) {}
-  var guess = (navigator.language || "").toLowerCase().indexOf("nl") === 0 ? "nl" : "en";
-  apply(param === "nl" || param === "en" ? param : (stored || guess));
-
-  buttons.forEach(function (b) {
-    b.addEventListener("click", function () { apply(b.dataset.lang); });
-  });
-})();
-</script>
+<script src="/assets/hero.js" defer></script>
 </body>
 </html>
