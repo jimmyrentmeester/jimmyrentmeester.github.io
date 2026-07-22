@@ -48,7 +48,8 @@
     <p class="lead">The building stopped being the hard part. Deciding what not to build did not.</p>
     <p class="sub">I design, build and release iOS apps on my own: the whole thing, from the
     first question through to the App Store listing and the support mail afterwards. Below is
-    what I shipped, what I cut from each one, and where this way of working breaks.</p>
+    what I shipped and what I cut from each one. It also covers where this way of working
+    falls over.</p>
 
     <ul class="chips">
       <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
@@ -114,9 +115,10 @@
               straight from one device to the other, encrypted, and nothing is stored.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>Watching from outside the house, which is the one feature every competitor
-                leads with. Keeping the stream between the two phones meant giving it up, and
-                that trade-off is the product.</dd>
+                <dd>The account, and the recordings that come with it. Every competitor asks you
+                to make one so the video can pass through their servers. This pairs two of your
+                own phones instead, so there's no history, no clip library and nowhere for any of
+                it to be stored.</dd>
               </dl>
               <p class="stat"><!--rating:6783058581--><span class="none">No ratings yet</span><!--/rating--></p>
               <p class="links">
@@ -183,13 +185,14 @@
     <div class="body">
       <div class="case-panel app-bb reveal">
         <div class="case prose">
-          <p class="kicker">BabyBeam — how giving up the headline feature became the product.</p>
+          <p class="kicker">BabyBeam — what a baby monitor costs once you refuse the account.</p>
 
           <h3>The problem</h3>
           <p>A baby monitor is either dedicated hardware you use for two years and then put in a
-          drawer, or an app that routes your child's bedroom through a company's cloud account.
-          The second is what the market sells, and it sells it because of one feature: check in
-          from anywhere. That feature is also the reason the video has to leave the house at all.</p>
+          drawer, or an app that asks you to create an account so your child's bedroom can pass
+          through a company's servers. The second is most of the market. An app that puts a
+          camera in a nursery and then explains why it needs an account has solved the parent's
+          problem and quietly created a new one.</p>
 
           <h3>The call</h3>
           <p>Video and audio go directly between the two phones over WebRTC, end-to-end encrypted
@@ -197,30 +200,31 @@
           keep it on. The only thing that ever leaves the pair is a small pairing handshake, which
           passes briefly through iCloud encrypted under a key derived from the pairing code — a
           key I don't hold and can't recover.</p>
-          <p>The price of that architecture shows up immediately and can't be hidden: you can't
-          watch from outside the house. I decided that wasn't a missing feature but the reason to
-          build it. An app that puts a camera in a nursery and then explains why it needs an
-          account has solved the parent's problem and created a new one.</p>
+          <p>This still works when you're not home. The two phones find each other over the
+          internet, not just over your own Wi-Fi. What's gone is the account, the subscription and
+          the company sitting in the middle of the picture.</p>
 
           <h3>What it cost</h3>
           <ul class="prices">
             <li>
               <b>A setup barrier</b>
               <span>Both phones have to be signed in to iCloud. Not the same Apple Account, but
-              signed in. Every cloud competitor gets to skip that sentence in their onboarding.</span>
+              signed in. Every cloud competitor gets to skip that sentence in their
+              onboarding.</span>
             </li>
             <li>
-              <b>Plumbing in the settings screen</b>
-              <span>Two phones on the same Wi-Fi connect directly. If one is on cellular they may
-              not, and the fix is a TURN relay you add yourself under the gear icon. That's
-              network engineering sitting in a consumer app, and it's there because I refused the
-              architecture that would have hidden it.</span>
+              <b>Connecting became the user's problem</b>
+              <span>A service that routes everything through its own servers always connects,
+              because there's only ever one route. Two phones finding each other directly usually
+              works, but when a mobile carrier's network gets in the way the fix is a TURN relay
+              you add yourself under the gear icon. I moved a class of failure off my plate and
+              onto a settings screen.</span>
             </li>
             <li>
               <b>It reaches the marketing</b>
               <span>The pairing code is the security boundary, so it can't appear anywhere,
-              including in my own App Store screenshots. Those had to be retaken with it blurred.
-              A constraint you take seriously doesn't stop at the code.</span>
+              including in my own App Store screenshots. Those had to be retaken with it
+              blurred out.</span>
             </li>
           </ul>
 
@@ -242,11 +246,11 @@
         being a differentiator some time in 2024, and listing the tools I use tells you nothing
         about whether I can direct them.</p>
 
-        <p class="pull">It doesn't fail at code. It fails at the <em>seam</em> between the text
-        and the product.</p>
+        <p class="pull">The failures aren't in the code. They're on the <em>seam</em> between the
+        text and the product.</p>
 
-        <p>Three from this site. All mine, all shipped, all live for weeks. The struck-out line
-        is what the page claimed; underneath is what was true:</p>
+        <p>Three from this site, all of them mine, all live for weeks before I noticed. The
+        struck-out line is what the page claimed; underneath is what was true:</p>
 
         <ul class="faults">
           <li class="app-err">
@@ -301,8 +305,8 @@
         translations and the compliance paperwork, and decide what the free version gives away.
         Those are product owner calls, and making every one of them myself is the quickest way I
         know to learn what each one costs.</p>
-        <p>What counts in the end is how the thing feels to use. Something that does less but
-        needs no explaining beats something complete that doesn't.</p>
+        <p>What counts is how the app feels to use. Something that does less but needs no
+        explaining beats something complete that doesn't.</p>
       </div>
     </div>
   </section>
@@ -313,7 +317,7 @@
     <div class="body">
       <div class="prose reveal">
         <p>Ten years in e-commerce, four of them leading a team. I currently lead product for
-        Gaming, Printers &amp; Office at Coolblue, where I am responsible for the strategy and
+        Gaming, Printers &amp; Office at Coolblue, where I'm responsible for the strategy and
         commercial performance of those categories and coach six product managers and four
         product editors.</p>
         <p>I've never held a product owner title. What I do have is a decade of being accountable

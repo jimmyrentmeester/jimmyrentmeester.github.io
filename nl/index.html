@@ -48,7 +48,8 @@
     <p class="lead">Het bouwen is het lastige deel niet meer. Bepalen wat er níét in moet wel.</p>
     <p class="sub">Ik ontwerp, bouw en publiceer iOS-apps in mijn eentje: het hele traject, van
     de eerste vraag tot de App Store-listing en de supportmail daarna. Hieronder staat wat ik heb
-    opgeleverd, wat ik er telkens uit heb geschrapt, en waar deze manier van werken stukloopt.</p>
+    opgeleverd en wat ik er telkens uit heb geschrapt. Ook staat er waar deze manier van werken
+    stukloopt.</p>
 
     <ul class="chips">
       <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
@@ -115,9 +116,10 @@
               bewaard.</p>
               <dl class="cut">
                 <dt>Geschrapt</dt>
-                <dd>Meekijken van buiten het huis, precies waar elke concurrent mee opent. Het
-                tussen de twee telefoons houden betekende dat die functie verviel, en die
-                afweging ís het product.</dd>
+                <dd>Het account, en de opnames die daarbij horen. Elke concurrent laat je er een
+                aanmaken zodat het beeld via zijn servers kan lopen. Dit koppelt in plaats
+                daarvan twee van je eigen telefoons, dus er is geen geschiedenis, geen
+                clipbibliotheek en nergens een plek om het te bewaren.</dd>
               </dl>
               <p class="stat"><!--rating:6783058581--><span class="none">Nog geen ratings</span><!--/rating--></p>
               <p class="links">
@@ -185,14 +187,15 @@
     <div class="body">
       <div class="case-panel app-bb reveal">
         <div class="case prose">
-          <p class="kicker">BabyBeam — hoe het opgeven van de belangrijkste functie het product werd.</p>
+          <p class="kicker">BabyBeam — wat een babyfoon kost zodra je het account weigert.</p>
 
           <h3>Het probleem</h3>
           <p>Een babyfoon is ofwel losse hardware die je twee jaar gebruikt en daarna in een la
-          legt, ofwel een app die de kamer van je kind via het cloudaccount van een bedrijf laat
-          lopen. Dat tweede is wat de markt verkoopt, en dat komt door één functie: overal kunnen
-          meekijken. Precies die functie is ook de reden dat het beeld het huis überhaupt moet
-          verlaten.</p>
+          legt, ofwel een app die je een account laat aanmaken zodat de kamer van je kind via de
+          servers van een bedrijf kan lopen. Dat tweede is het grootste deel van de markt. Een
+          app die een camera in een babykamer zet en vervolgens uitlegt waarom er een account
+          nodig is, heeft het probleem van de ouder opgelost en er stilletjes een nieuw bij
+          gemaakt.</p>
 
           <h3>De keuze</h3>
           <p>Beeld en geluid gaan rechtstreeks tussen de twee telefoons via WebRTC, end-to-end
@@ -200,11 +203,9 @@
           server om het op te bewaren. Het enige dat het tweetal ooit verlaat is een kleine
           koppel-handshake, die kort via iCloud gaat, versleuteld met een sleutel die van de
           koppelcode is afgeleid — een sleutel die ik niet heb en niet kan achterhalen.</p>
-          <p>De prijs van die architectuur is meteen zichtbaar en valt niet te verbergen: je kunt
-          niet meekijken van buiten het huis. Ik vond dat geen ontbrekende functie maar de reden
-          om het te bouwen. Een app die een camera in een babykamer zet en vervolgens uitlegt
-          waarom er een account nodig is, heeft het probleem van de ouder opgelost en er een
-          nieuw probleem bij gemaakt.</p>
+          <p>Dat werkt ook als je niet thuis bent. De twee telefoons vinden elkaar over het
+          internet, niet alleen over je eigen wifi. Wat eraf is, is het account, het abonnement
+          en het bedrijf dat middenin het beeld zit.</p>
 
           <h3>Wat het kostte</h3>
           <ul class="prices">
@@ -215,18 +216,18 @@
               zijn onboarding.</span>
             </li>
             <li>
-              <b>Techniek in het instellingenscherm</b>
-              <span>Twee telefoons op hetzelfde wifi-netwerk verbinden rechtstreeks. Zit er één
-              op mobiel internet, dan lukt dat soms niet, en de oplossing is een TURN-relay die je
-              zelf toevoegt onder het tandwiel. Dat is netwerkengineering in een consumenten-app,
-              en het staat daar omdat ik de architectuur heb geweigerd die het verstopt zou
-              hebben.</span>
+              <b>Verbinden werd het probleem van de gebruiker</b>
+              <span>Een dienst die alles via de eigen servers stuurt verbindt altijd, want er is
+              maar één route. Twee telefoons die elkaar rechtstreeks zoeken lukt meestal ook,
+              maar zit het netwerk van een provider in de weg, dan is de oplossing een TURN-relay
+              die je zelf toevoegt onder het tandwiel. Ik heb een soort storing van mijn bord
+              gehaald en op een instellingenscherm gelegd.</span>
             </li>
             <li>
               <b>Het reikt tot in de marketing</b>
               <span>De koppelcode is de beveiligingsgrens, dus hij mag nergens te zien zijn, ook
               niet op mijn eigen App Store-screenshots. Die moesten opnieuw gemaakt worden met de
-              code onleesbaar. Een beperking die je serieus neemt houdt niet op bij de code.</span>
+              code onleesbaar gemaakt.</span>
             </li>
           </ul>
 
@@ -248,11 +249,12 @@
         dat hield ergens in 2024 op onderscheidend te zijn, en een opsomming van de tools die ik
         gebruik zegt je niets over de vraag of ik ze kan aansturen.</p>
 
-        <p class="pull">Het gaat niet mis op de code. Het gaat mis op de <em>naad</em> tussen de
+        <p class="pull">De fouten zitten niet in de code. Ze zitten op de <em>naad</em> tussen de
         tekst en het product.</p>
 
-        <p>Drie voorbeelden van deze site zelf. Alle drie van mij, alle drie live, wekenlang. De
-        doorgestreepte regel is wat de pagina beweerde, eronder staat wat waar was:</p>
+        <p>Drie voorbeelden van deze site zelf, alle drie van mij, en alle drie wekenlang live
+        voordat ik het doorhad. De doorgestreepte regel is wat de pagina beweerde, eronder staat
+        wat waar was:</p>
 
         <ul class="faults">
           <li class="app-err">
