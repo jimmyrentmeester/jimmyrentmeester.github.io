@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jimmy Rentmeester — apps and product work</title>
-<meta name="description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them. Day job: Lead Product Manager at Coolblue.">
+<meta name="description" content="Four iOS apps I designed, built and released on my own, and the thinking behind them: the need, the scope, the trade-offs and the user experience.">
 <meta property="og:title" content="Jimmy Rentmeester — apps and product work">
 <meta property="og:description" content="Four iOS apps I designed, built and released on my own, and the reasoning behind them.">
 <meta property="og:type" content="website">
@@ -76,22 +76,6 @@
   .about p { margin:0 0 1rem; max-width:62ch; }
   .about p:last-child { margin-bottom:0; }
 
-  /* ── experience timeline ─────────────────────────── */
-  .timeline { list-style:none; margin:1.8rem 0 0; padding:0; }
-  .timeline > li { position:relative; padding:0 0 1.5rem 1.4rem; border-left:2px solid var(--line); }
-  .timeline > li:last-child { padding-bottom:0; border-left-color:transparent; }
-  .timeline > li::before { content:""; position:absolute; left:-6px; top:.45rem; width:10px;
-    height:10px; border-radius:50%; background:var(--accent); }
-  .timeline .role { display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; }
-  .timeline strong { font-size:1rem; }
-  .timeline .meta { font-size:.85rem; color:var(--muted); }
-  .timeline p { margin:.35rem 0 0; color:var(--muted); font-size:.92rem; max-width:60ch; }
-
-  /* ── education ───────────────────────────────────── */
-  /* Ruim los van de tijdlijn: anders plakt deze regel tegen het laatste item. */
-  .edu { margin:2.2rem 0 0; padding-top:1.4rem; border-top:1px solid var(--line);
-    font-size:.88rem; color:var(--muted); max-width:62ch; }
-
   /* ── footer ──────────────────────────────────────── */
   footer { margin-top:3.4rem; padding-top:1.6rem; border-top:1px solid var(--line);
     display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.2rem;
@@ -119,7 +103,7 @@
     <header class="hero">
       <h1 data-i18n="hero.name">Jimmy Rentmeester</h1>
       <p class="tagline" data-i18n="hero.tagline">Lead Product Manager at Coolblue · Tilburg</p>
-      <p class="lead" data-i18n="hero.lead">I run e-commerce for two categories at Coolblue. Outside that I build and release iOS apps, which is where I get to do the whole product job myself. That part is what this page is mostly about.</p>
+      <p class="lead" data-i18n="hero.lead">I design, build and release iOS apps on my own. Working out what to build, what to leave out, and how it should feel is the part I care about most.</p>
     </header>
 
     <section>
@@ -205,49 +189,11 @@
     </section>
 
     <section class="about">
-      <h2 data-i18n="about.heading">About</h2>
-      <p data-i18n="about.p1">My title at Coolblue is Lead Product Manager, but the job is closer to e-commerce than to product ownership as most companies use the word. I carry the commercial result for the Gaming and Office categories and I am responsible for a customer journey that stays ahead of the competition, with a team of nine specialists.</p>
-      <p data-i18n="about.p2">The product side is the part I like most, and the apps are where I get all of it: deciding what version one contains, what it costs, what gets left out. Moving into a product owner role is the direction I want to take next.</p>
-
-      <ol class="timeline">
-        <li>
-          <div class="role">
-            <strong data-i18n="e1.t">Lead Product Manager</strong>
-            <span class="meta">Coolblue · <span data-i18n="e1.p">2022 – present</span></span>
-          </div>
-          <p data-i18n="e1.d">Commercial results and customer journey for Gaming and Office. I turn targets into quarterly plans, run two-week sprints with the team, and coach nine specialists on making decisions from customer and sales data.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e2.t">Product Manager, Gaming</strong>
-            <span class="meta">Coolblue · <span data-i18n="e2.p">2020 – 2022</span></span>
-          </div>
-          <p data-i18n="e2.d">Responsible for the commercial result in Gaming, including how to sell the PlayStation 5 fairly while almost nobody could get one. The first launch was chaotic, so I turned it into a process that development, the app team and marketing could all follow. Later stock drops ran with far less customer contact and a better NPS.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e3.t">SEO Specialist</strong>
-            <span class="meta">BigSpark · <span data-i18n="e3.p">2019 – 2020</span></span>
-          </div>
-          <p data-i18n="e3.d">Technical and content SEO for client websites. I worked from traffic and ranking data to decide what was worth fixing first, then checked whether it actually moved.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e4.t">Online Marketer, Product Support, Product Editor</strong>
-            <span class="meta">Coolblue · <span data-i18n="e4.p">2016 – 2019</span></span>
-          </div>
-          <p data-i18n="e4.d">Three roles in three years, from writing product content to owning parts of the customer journey: SEO and CRO for Gaming and IT accessories, and reading NPS, returns and customer feedback to find what needed changing.</p>
-        </li>
-        <li>
-          <div class="role">
-            <strong data-i18n="e5.t">Software Research &amp; Concept Development</strong>
-            <span class="meta">U-Approach · <span data-i18n="e5.p">2014 – 2016</span></span>
-          </div>
-          <p data-i18n="e5.d">Bluetooth beacon concepts for GLOW and VisitBrabant, and research into how people use mobile apps in public spaces.</p>
-        </li>
-      </ol>
-
-      <p class="edu" data-i18n="edu.line">Studied Communication &amp; Media at Fontys Academy for the Creative Economy (2012–2016), specialising in trendwatching and futures research, after ICT Media &amp; Design and a network engineering diploma.</p>
+      <h2 data-i18n="about.heading">How I work</h2>
+      <p data-i18n="about.p1">AI does most of the typing now, so getting an app built is no longer the hard part. What is left is the product work: deciding whether a problem is worth solving, who exactly has it, and what a first version has to do before anyone will care.</p>
+      <p data-i18n="about.p2">Every app here started with that question. I look for something people already complain about, check whether the apps that exist actually fix it, then write down the smallest version worth downloading and hold that line while I build. WristVault went to the store without half the features I had sketched. The rest is a list, not a regret.</p>
+      <p data-i18n="about.p3">Scope is only part of it. I also set the price, write the store listing, sort out the translations and the compliance paperwork, and decide what the free version gives away. Those are product owner calls, and making all of them myself is the quickest way I know to learn what each one costs.</p>
+      <p data-i18n="about.p4">The one thing I do not cut is how the app feels to use. Something that does less but needs no explaining beats something complete that does.</p>
     </section>
 
     <footer>
@@ -268,10 +214,10 @@
     nl: {
       "hero.name": "Jimmy Rentmeester",
       "hero.tagline": "Lead Product Manager bij Coolblue · Tilburg",
-      "hero.lead": "Ik stuur de e-commerce van twee categorieën bij Coolblue aan. Daarnaast bouw en publiceer ik iOS-apps, en dat is waar ik het hele productvak zelf doe. Over dat laatste gaat deze pagina vooral.",
+      "hero.lead": "Ik ontwerp, bouw en publiceer iOS-apps in mijn eentje. Uitzoeken wat er gebouwd moet worden, wat eruit kan en hoe het moet voelen is het deel waar het mij om gaat.",
 
       "work.heading": "Apps",
-      "about.heading": "Over mij",
+      "about.heading": "Hoe ik werk",
 
       "gb.cat": "Arcadespel · iPhone &amp; iPad",
       "gb.desc": "Een reflexspel voor één duim. Ontcijfer het grid voordat het verdwijnt, rijg treffers aaneen, jaag op een score.",
@@ -293,26 +239,10 @@
       "link.soon": "Binnenkort in de App Store",
       "link.open": "Openen ↗",
 
-      "about.p1": "Mijn functietitel bij Coolblue is Lead Product Manager, maar het werk ligt dichter bij e-commerce dan bij product ownership zoals de meeste bedrijven dat bedoelen. Ik draag het commerciële resultaat van de categorieën Gaming en Kantoor en ben verantwoordelijk voor een klantreis die voorop blijft lopen, met een team van negen specialisten.",
-      "about.p2": "Het productdeel is wat me het meest trekt, en in de apps krijg ik dat helemaal: bepalen wat er in versie één zit, wat het kost, wat eruit blijft. Doorgroeien naar een rol als product owner is de richting die ik op wil.",
-
-      "e1.t": "Lead Product Manager",
-      "e1.p": "2022 – heden",
-      "e1.d": "Commercieel resultaat en klantreis voor Gaming en Kantoor. Ik vertaal doelstellingen naar kwartaalplannen, werk met het team in sprints van twee weken en begeleid negen specialisten in het maken van keuzes op basis van klant- en verkoopdata.",
-      "e2.t": "Productmanager Gaming",
-      "e2.p": "2020 – 2022",
-      "e2.d": "Verantwoordelijk voor het commerciële resultaat binnen Gaming, inclusief de vraag hoe je de PlayStation 5 eerlijk verkoopt terwijl vrijwel niemand eraan kon komen. De eerste lancering verliep chaotisch, dus heb ik er een proces van gemaakt dat development, het app-team en marketing konden volgen. Latere voorraaddrops verliepen met veel minder klantcontact en een betere NPS.",
-      "e3.t": "SEO-specialist",
-      "e3.p": "2019 – 2020",
-      "e3.d": "Technische en content-SEO voor websites van klanten. Ik werkte vanuit verkeers- en positiedata om te bepalen wat het eerst aandacht verdiende, en controleerde daarna of het ook echt iets deed.",
-      "e4.t": "Online marketeer, productsupport, productredactie",
-      "e4.p": "2016 – 2019",
-      "e4.d": "Drie rollen in drie jaar, van productteksten schrijven naar delen van de klantreis beheren: SEO en CRO voor Gaming en IT-accessoires, en NPS, retouren en klantfeedback lezen om te vinden wat er moest veranderen.",
-      "e5.t": "Software Research &amp; Concept Development",
-      "e5.p": "2014 – 2016",
-      "e5.d": "Concepten met Bluetooth-beacons voor onder andere GLOW en VisitBrabant, plus onderzoek naar hoe mensen mobiele apps gebruiken in de openbare ruimte.",
-
-      "edu.line": "Communicatie &amp; Media gestudeerd aan Fontys Academy for the Creative Economy (2012–2016), met trendwatching en futures research als specialisatie, na ICT Media &amp; Design en een opleiding tot netwerkbeheerder.",
+      "about.p1": "AI typt tegenwoordig het meeste, dus een app gebouwd krijgen is niet meer het lastige deel. Wat overblijft is het productwerk: bepalen of een probleem het oplossen waard is, wie het precies heeft, en wat een eerste versie moet kunnen voordat iemand er iets om geeft.",
+      "about.p2": "Elke app hier begon met die vraag. Ik zoek iets waar mensen al over klagen, kijk of de bestaande apps het echt oplossen, schrijf dan de kleinste versie op die het downloaden waard is en houd die lijn vast tijdens het bouwen. WristVault ging de winkel in zonder de helft van wat ik eerst had bedacht. De rest is een lijst, geen spijt.",
+      "about.p3": "Scope is maar een deel ervan. Ik bepaal ook de prijs, schrijf de winkelvermelding, regel de vertalingen en het papierwerk rond regelgeving, en beslis wat de gratis versie weggeeft. Dat zijn keuzes van een product owner, en ze allemaal zelf maken is de snelste manier die ik ken om te leren wat elke keuze kost.",
+      "about.p4": "Het enige waar ik niet op inlever is hoe de app aanvoelt in gebruik. Iets dat minder doet maar geen uitleg nodig heeft, wint van iets compleets dat dat wel heeft.",
 
       "footer.copy": "© 2026 Jimmy Rentmeester"
     }
