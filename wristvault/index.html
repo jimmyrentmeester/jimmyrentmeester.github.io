@@ -24,11 +24,10 @@
   h1 { font-size: 2rem; margin: 20px 0 6px; }
   .tag { color: #8a8f99; margin: 0 0 26px; }
   .pitch { max-width: 46ch; margin: 0 auto 30px; }
-  /* Nog geen App Store-link: een status-pil, geen knop die niets doet. */
-  .badge { display: inline-block; padding: 12px 22px; border-radius: 12px;
-    border: 1.5px solid #8a6d2f; color: #8a6d2f; font-weight: 600; }
-  @media (prefers-color-scheme: dark) { .badge { border-color: #c9a659; color: #c9a659; } }
-  .notify { margin: 14px 0 0; font-size: .92rem; color: #8a8f99; }
+  .badge { display: inline-block; padding: 12px 22px; border-radius: 12px; background: #8a6d2f;
+    color: #fff; text-decoration: none; font-weight: 600; }
+  .badge:hover { filter: brightness(1.08); }
+  @media (prefers-color-scheme: dark) { .badge { background: #c9a659; color: #16181d; } }
   ul.feats { list-style: none; padding: 0; margin: 34px auto; max-width: 40ch; text-align: left; }
   ul.feats li { margin: 10px 0; padding-left: 26px; position: relative; }
   ul.feats li::before { content: "✓"; position: absolute; left: 0; color: #8a6d2f; font-weight: 700; }
@@ -43,9 +42,7 @@
   <p class="pitch">Catalog every watch, log what you wear, and export an insurance-ready report.
   One-time purchase, no subscription — and no account: your collection lives on your device and
   syncs through your own iCloud, where nobody else can reach it.</p>
-  <span class="badge">Coming soon to the App&nbsp;Store</span>
-  <p class="notify">Want a note when it launches?
-  <a href="mailto:madebyjire@icloud.com?subject=WristVault%20launch">Email me</a>.</p>
+  <a class="badge" href="https://apps.apple.com/app/id6792535679" target="_blank" rel="noopener">Download on the App&nbsp;Store</a>
   <ul class="feats">
     <li>Your whole collection with photos, specs and purchase details</li>
     <li>Two-tap wear logging with streaks and cost-per-wear</li>
