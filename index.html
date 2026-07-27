@@ -45,11 +45,8 @@
 
     <h1>Jimmy Rentmeester</h1>
     <p class="role">Lead Product Manager at Coolblue · Tilburg</p>
-    <p class="lead">The building stopped being the hard part. Deciding what not to build did not.</p>
-    <p class="sub">I design, build and release iOS apps on my own: the whole thing, from the
-    first question through to the App Store listing and the support mail afterwards. Below is
-    what I shipped and what I cut from each one. It also covers where this way of working
-    falls over.</p>
+    <p class="lead">Building an app goes fast these days. The hard part is deciding what to leave out.</p>
+    <p class="sub">I make iOS apps on my own. Everything from the first idea to the App Store listing and the support mail afterwards. Below is what I shipped, what I left out of each one, and where this way of working runs into trouble.</p>
 
     <ul class="chips">
       <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
@@ -83,12 +80,10 @@
           </div>
           <div class="cols">
             <div>
-              <p class="desc">A one-thumb reflex game. Decode the grid before it disappears,
-              chain hits, chase a score.</p>
+              <p class="desc">A reflex game you play with one thumb. Decode the grid before it disappears, chain your hits, chase a high score.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>The tutorial. Sixteen campaign levels each introduce one mechanic, so the
-                game teaches itself while you play and there's nothing to read first.</dd>
+                <dd>The tutorial. There are sixteen campaign levels and each one adds a single mechanic, so you learn it by playing. Nothing to read before you start.</dd>
               </dl>
               <p class="stat"><!--rating:6779888720--><span class="score">5.0</span> ★ · 7 ratings<!--/rating--></p>
               <p class="links">
@@ -111,14 +106,10 @@
           </div>
           <div class="cols">
             <div>
-              <p class="desc">Turns two iPhones into a video baby monitor. Sound and picture go
-              straight from one device to the other, encrypted, and nothing is stored.</p>
+              <p class="desc">Turns two iPhones into a video baby monitor. Picture and sound go straight from one phone to the other, encrypted, and nothing gets stored.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>The account, and the recordings that come with it. Every competitor asks you
-                to make one so the video can pass through their servers. This pairs two of your
-                own phones instead, so there's no history, no clip library and nowhere for any of
-                it to be stored.</dd>
+                <dd>The account, and the recordings that come with it. Every other app asks you to create one so the video can run through their servers. This one pairs two of your own phones, so there's no history, no clip library, and nowhere to store any of it.</dd>
               </dl>
               <p class="stat"><!--rating:6783058581--><span class="none">No ratings yet</span><!--/rating--></p>
               <p class="links">
@@ -140,14 +131,10 @@
               <p class="meta">Watch collection · iPhone &amp; iPad · <span class="status">Live</span></p>
             </div>
           </div>
-          <p class="desc">Catalogues a watch collection, logs what you wear, and exports an
-          insurance PDF. No account — it syncs through your own iCloud and nowhere else.</p>
+          <p class="desc">Keeps track of a watch collection, logs what you wear, and exports a PDF for your insurer. No account: it syncs through your own iCloud and nowhere else.</p>
           <dl class="cut">
             <dt>Cut</dt>
-            <dd>Half of what I'd sketched; it went to the App Store without it. What stayed: one
-            payment instead of a subscription, in a category moving the other way, and a free
-            tier that holds three watches and still exports, so the paid unlock has to earn its
-            money on its own.</dd>
+            <dd>Half of what I'd sketched. It went to the App Store without it. What stayed: one payment instead of a subscription, while the rest of the category moves the other way. The free version holds three watches and still exports, so the paid unlock has to be worth it on its own.</dd>
           </dl>
           <p class="links">
             <a href="https://apps.apple.com/app/id6792535679" target="_blank" rel="noopener">App&nbsp;Store ↗</a>
@@ -168,8 +155,7 @@
           watch the koi. Written from scratch in WebGL.</p>
           <dl class="cut">
             <dt>Cut</dt>
-            <dd>Score, install, roadmap. It's somewhere to work on timing and weight without a
-            store attached.</dd>
+            <dd>Score, install, roadmap. I wanted somewhere to work on timing and weight without a store attached to it.</dd>
           </dl>
           <p class="links">
             <a href="/stillwater/" target="_blank" rel="noopener">Open it ↗</a>
@@ -186,53 +172,33 @@
     <div class="body">
       <div class="case-panel app-bb reveal">
         <div class="case prose">
-          <p class="kicker">BabyBeam — what a baby monitor costs once you refuse the account.</p>
+          <p class="kicker">BabyBeam: what it costs to build a baby monitor without an account.</p>
 
           <h3>The problem</h3>
-          <p>A baby monitor is either dedicated hardware you use for two years and then put in a
-          drawer, or an app that asks you to create an account so your child's bedroom can pass
-          through a company's servers. The second is most of the market. An app that puts a
-          camera in a nursery and then explains why it needs an account has solved the parent's
-          problem and quietly created a new one.</p>
+          <p>A baby monitor is either a separate device you use for two years and then put in a drawer, or an app that wants you to create an account so your child's bedroom runs through someone else's servers. That second option is most of the market. I get why it's built that way, but an app that puts a camera in a nursery and then explains why it needs an account has fixed one problem and created another.</p>
 
           <h3>The call</h3>
-          <p>Video and audio go directly between the two phones over WebRTC, end-to-end encrypted
-          with DTLS-SRTP. Nothing is recorded and nothing is kept, because there is no server to
-          keep it on. The only thing that ever leaves the pair is a small pairing handshake, which
-          passes briefly through iCloud encrypted under a key derived from the pairing code — a
-          key I don't hold and can't recover.</p>
-          <p>This still works when you're not home. The two phones find each other over the
-          internet, not just over your own Wi-Fi. What's gone is the account, the subscription and
-          the company sitting in the middle of the picture.</p>
+          <p>Video and audio go straight between the two phones over WebRTC, end-to-end encrypted with DTLS-SRTP. Nothing gets recorded and nothing gets kept, because there's no server to keep it on. The only thing that ever leaves the two phones is a small pairing handshake. That one goes briefly through iCloud, encrypted with a key derived from the pairing code, which I don't have and can't recover.</p>
+          <p>This still works when you're not home. The two phones find each other over the internet, not just on your own Wi-Fi. What's gone is the account, the subscription, and the company in the middle.</p>
 
           <h3>What it cost</h3>
           <ul class="prices">
             <li>
               <b>A setup barrier</b>
-              <span>Both phones have to be signed in to iCloud. Not the same Apple Account, but
-              signed in. Every cloud competitor gets to skip that sentence in their
-              onboarding.</span>
+              <span>Both phones need to be signed in to iCloud. Not the same Apple Account, but signed in. Every app with a cloud gets to skip that sentence during setup.</span>
             </li>
             <li>
               <b>Connecting became the user's problem</b>
-              <span>A service that routes everything through its own servers always connects,
-              because there's only ever one route. Two phones finding each other directly usually
-              works, but when a mobile carrier's network gets in the way the fix is a TURN relay
-              you add yourself under the gear icon. I moved a class of failure off my plate and
-              onto a settings screen.</span>
+              <span>An app that routes everything through its own servers always connects, because there's only one route. Two phones finding each other directly usually works, but sometimes a mobile network gets in the way. Then you have to add a TURN relay yourself, under the gear icon. I moved a type of problem off my plate and onto a settings screen.</span>
             </li>
             <li>
               <b>It reaches the marketing</b>
-              <span>The pairing code is the security boundary, so it can't appear anywhere,
-              including in my own App Store screenshots. Those had to be retaken with it
-              blurred out.</span>
+              <span>The pairing code is what keeps it secure, so it can't show up anywhere. Not even in my own App Store screenshots, which I had to redo with the code blurred.</span>
             </li>
           </ul>
 
           <h3>Where it stands</h3>
-          <p>Live and free to download. It's been in the store a few weeks, so the honest answer
-          to “did it work” is that I don't know yet. The ratings line in the log above comes from
-          the App Store and will say so when there's something to say.</p>
+          <p>Live and free to download. It's only been in the store a few weeks, so the honest answer to whether it worked is that I don't know yet. The ratings line above comes straight from the App Store and will say something once there's something to say.</p>
         </div>
       </div>
     </div>
@@ -243,51 +209,34 @@
     <h2>On AI</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>AI writes most of the code in these apps. That isn't the interesting part; it stopped
-        being a differentiator some time in 2024, and listing the tools I use tells you nothing
-        about whether I can direct them.</p>
+        <p>AI writes most of the code in these apps. That's not the interesting part. It stopped being special somewhere around 2024, and a list of the tools I use tells you nothing about whether I can steer them.</p>
 
-        <p class="pull">The failures aren't in the code. They're on the <em>seam</em> between the
-        text and the product.</p>
+        <p class="pull">The code is usually fine. It goes wrong in the <em>text</em> around it.</p>
 
-        <p>Three from this site, all of them mine, all live for weeks before I noticed. The
-        struck-out line is what the page claimed; underneath is what was true:</p>
+        <p>Three examples from this site. All mine, and all live for weeks before I spotted them. The crossed-out line is what the page claimed, underneath is what was actually true:</p>
 
         <ul class="faults">
           <li class="app-err">
             <span class="where">GRID_BREAKER · privacy policy</span>
             <span class="claim">“No network connections, servers, or cloud services.”</span>
-            <span class="truth">The game ships Game Center leaderboards. The document was fluent,
-            confident and wrong about my own app, sitting under a live App Store listing.</span>
+            <span class="truth">The game has Game Center leaderboards. The text read well and sounded certain, but it was wrong about my own app, right underneath a live App Store listing.</span>
           </li>
           <li class="app-err">
             <span class="where">WristVault · landing page</span>
             <span class="claim">“Your collection never leaves your device.”</span>
-            <span class="truth">The privacy page directly beneath it described iCloud sync. Both
-            sentences were written to reassure and only one of them was accurate.</span>
+            <span class="truth">The privacy page right below it described iCloud sync. Both sentences were meant to reassure people, but only one of them was true.</span>
           </li>
           <li class="app-err">
             <span class="where">WristVault · call to action</span>
             <span class="claim">“Coming soon to the App Store”</span>
-            <span class="truth">It was a <code>href="#"</code>. The button did nothing, and it
-            shipped.</span>
+            <span class="truth">It was an <code>href="#"</code>. The button did nothing at all, and it went live like that.</span>
           </li>
         </ul>
 
-        <p>None of these are bugs. They're claims that sounded right and weren't, in the one
-        place only the person who built the thing can check. And I didn't catch them before
-        shipping; I caught them in a review pass weeks later. That changed how I work: generated
-        copy now gets the same treatment as generated code, and nothing goes out until it has
-        been checked against what the product actually does, including the legal pages nobody
-        reads.</p>
+        <p>None of these are bugs. They're claims that sounded right but weren't, in the one spot where only the person who built it can check. And I didn't catch them before they went live. I found them weeks later during a review. That changed how I work: text that comes out of AI now gets the same check as code that comes out of AI. Nothing goes live until I've held it against what the app actually does, including the legal pages nobody reads.</p>
 
-        <p>The other half of the work is upstream. Rather than prompt my way through each app
-        from scratch, I built a reusable project structure and a set of written standards that
-        travel between them: what “good” means for this kind of work, written concretely enough
-        to be followed. The tenth app starts where the ninth left off.</p>
-        <p>That transfers directly to working with a team, because it's the same skill. Writing
-        down what “good” means precisely enough that someone else can act on it without you in
-        the room is most of the job either way.</p>
+        <p>The other half of the work happens before that. Instead of prompting my way through every app from scratch, I set up a project structure and a set of written standards that I reuse. They spell out what “good” means for this kind of work, concrete enough that someone can actually follow it. So the tenth app starts where the ninth stopped.</p>
+        <p>That's the same skill you need in a team. Writing down what “good” means clearly enough that someone can work with it without you in the room is most of the job, whether that someone is a developer or a model.</p>
       </div>
     </div>
   </section>
@@ -297,17 +246,9 @@
     <h2>How I work</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>Every app here started with the same question: is this problem worth solving, who
-        exactly has it, and what does a first version have to do before anyone will care? I look
-        for something people already complain about, check whether the apps that exist actually
-        fix it, then write down the smallest version worth downloading and hold that line while
-        I build.</p>
-        <p>Scope is only part of it. I also set the price, write the store listing, sort out the
-        translations and the compliance paperwork, and decide what the free version gives away.
-        Those are product owner calls, and making every one of them myself is the quickest way I
-        know to learn what each one costs.</p>
-        <p>What counts is how the app feels to use. Something that does less but needs no
-        explaining beats something complete that doesn't.</p>
+        <p>Every app here started with the same question. Is this problem worth solving, who exactly has it, and what does a first version need to do before anyone cares? I look for something people already complain about, check whether the apps that exist actually fix it, and then write down the smallest version that's worth downloading. And I stick to that while I build.</p>
+        <p>Scope is only part of it. I also set the price, write the store listing, sort out the translations and the compliance paperwork, and decide what you get for free. Those are product owner decisions, and making all of them yourself is the fastest way I know to find out what each one costs.</p>
+        <p>In the end what matters is how the app feels to use. Something that does less but needs no explaining beats something that does everything and needs a manual.</p>
       </div>
     </div>
   </section>
@@ -317,13 +258,8 @@
     <h2>Background</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>Ten years in e-commerce, four of them leading a team. I currently lead product for
-        Gaming, Printers &amp; Office at Coolblue, where I'm responsible for the strategy and
-        commercial performance of those categories and coach six product managers and four
-        product editors.</p>
-        <p>I've never held a product owner title. What I do have is a decade of being accountable
-        for whether something actually worked commercially, and four apps where every product
-        call was mine to make.</p>
+        <p>Ten years in e-commerce, four of them leading a team. Right now I'm Lead Product Manager for Gaming, Printers &amp; Office at Coolblue. I'm responsible for the strategy and the commercial results of those categories, and I coach six product managers and four product editors.</p>
+        <p>I've never had the product owner title. What I do have is ten years of being accountable for whether something worked commercially, and four apps where every product decision was mine.</p>
         <p class="contact-links">
           <a href="/cv/">Full CV</a>
           <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -337,8 +273,7 @@
     <h2>Contact</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>I'm not looking for anything right now. But if you want to talk about product work,
-        building alone, or how any of this came together, I'm glad to.</p>
+        <p>I'm not looking for anything at the moment. But if you want to talk about product work, building things on your own, or how any of this came about, I'm always up for that.</p>
         <p class="contact-links">
           <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
           <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
@@ -350,11 +285,7 @@
   <footer>
     <span>© 2026 Jimmy Rentmeester</span>
     <span class="spacer"></span>
-    <span class="colophon">One HTML file per page, one stylesheet, one small script for the
-    header animation. No framework, no build step, no analytics, no cookies. The type you are
-    reading was already on your device, and nothing on this page is loaded from anyone else's
-    server. About 14 kB before the screenshots load, 123 kB with them. It reads fine with
-    JavaScript switched off.</span>
+    <span class="colophon">One HTML file per page, one stylesheet, and one small script for the animation up top. No framework, no build step, no analytics, no cookies. The font you're reading was already on your device, and nothing on this page loads from someone else's server. About 14 kB before the screenshots load, 123 kB with them. Works fine with JavaScript turned off.</span>
   </footer>
 
 </div>
