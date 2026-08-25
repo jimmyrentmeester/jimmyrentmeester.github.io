@@ -17,13 +17,18 @@
 </head>
 <body>
   <nav>
-    <a class="brand" href="index-fr.html"><img src="icon.png" alt=""> BabyBeam</a>
+  <a class="brand" href="index-fr.html"><img src="icon.png" alt=""> BabyBeam</a>
+  <div class="navlinks">
     <a href="privacy-fr.html">Confidentialité</a>
     <a href="support-fr.html">Assistance</a>
-    <a class="lang" href="support.html" hreflang="nl">NL</a>
-    <a class="lang" href="support-en.html" hreflang="en">EN</a>
-    <a class="lang" href="support-de.html" hreflang="de">DE</a>
-    <a class="lang" href="support-es.html" hreflang="es">ES</a>
+    <select class="langswitch" aria-label="Language" onchange="if(this.value)location=this.value">
+      <option value="support.html">NL</option>
+      <option value="support-en.html">EN</option>
+      <option value="support-de.html">DE</option>
+      <option value="support-fr.html" selected>FR</option>
+      <option value="support-es.html">ES</option>
+    </select>
+  </div>
   </nav>
   <div class="doc">
   <h1>BabyBeam — Assistance</h1>

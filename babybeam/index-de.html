@@ -24,12 +24,17 @@
 <body>
 <nav>
   <a class="brand" href="index-de.html"><img src="icon.png" alt=""> BabyBeam</a>
-  <a href="privacy-de.html">Datenschutz</a>
-  <a href="support-de.html">Support</a>
-  <a class="lang" href="./" hreflang="nl">NL</a>
-  <a class="lang" href="index-en.html" hreflang="en">EN</a>
-  <a class="lang" href="index-fr.html" hreflang="fr">FR</a>
-  <a class="lang" href="index-es.html" hreflang="es">ES</a>
+  <div class="navlinks">
+    <a href="privacy-de.html">Datenschutz</a>
+    <a href="support-de.html">Support</a>
+    <select class="langswitch" aria-label="Language" onchange="if(this.value)location=this.value">
+      <option value="index.html">NL</option>
+      <option value="index-en.html">EN</option>
+      <option value="index-de.html" selected>DE</option>
+      <option value="index-fr.html">FR</option>
+      <option value="index-es.html">ES</option>
+    </select>
+  </div>
 </nav>
 <main>
   <img class="icon" src="icon.png" alt="BabyBeam-App-Symbol: Mond mit Sternen">

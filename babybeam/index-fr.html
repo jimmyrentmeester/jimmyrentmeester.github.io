@@ -24,12 +24,17 @@
 <body>
 <nav>
   <a class="brand" href="index-fr.html"><img src="icon.png" alt=""> BabyBeam</a>
-  <a href="privacy-fr.html">Confidentialité</a>
-  <a href="support-fr.html">Assistance</a>
-  <a class="lang" href="./" hreflang="nl">NL</a>
-  <a class="lang" href="index-en.html" hreflang="en">EN</a>
-  <a class="lang" href="index-de.html" hreflang="de">DE</a>
-  <a class="lang" href="index-es.html" hreflang="es">ES</a>
+  <div class="navlinks">
+    <a href="privacy-fr.html">Confidentialité</a>
+    <a href="support-fr.html">Assistance</a>
+    <select class="langswitch" aria-label="Language" onchange="if(this.value)location=this.value">
+      <option value="index.html">NL</option>
+      <option value="index-en.html">EN</option>
+      <option value="index-de.html">DE</option>
+      <option value="index-fr.html" selected>FR</option>
+      <option value="index-es.html">ES</option>
+    </select>
+  </div>
 </nav>
 <main>
   <img class="icon" src="icon.png" alt="Icône de l'application BabyBeam : lune avec des étoiles">

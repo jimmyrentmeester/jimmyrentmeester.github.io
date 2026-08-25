@@ -17,13 +17,18 @@
 </head>
 <body>
   <nav>
-    <a class="brand" href="index-en.html"><img src="icon.png" alt=""> BabyBeam</a>
+  <a class="brand" href="index-en.html"><img src="icon.png" alt=""> BabyBeam</a>
+  <div class="navlinks">
     <a href="privacy-en.html">Privacy</a>
     <a href="support-en.html">Support</a>
-    <a class="lang" href="privacy.html" hreflang="nl">NL</a>
-    <a class="lang" href="privacy-de.html" hreflang="de">DE</a>
-    <a class="lang" href="privacy-fr.html" hreflang="fr">FR</a>
-    <a class="lang" href="privacy-es.html" hreflang="es">ES</a>
+    <select class="langswitch" aria-label="Language" onchange="if(this.value)location=this.value">
+      <option value="privacy.html">NL</option>
+      <option value="privacy-en.html" selected>EN</option>
+      <option value="privacy-de.html">DE</option>
+      <option value="privacy-fr.html">FR</option>
+      <option value="privacy-es.html">ES</option>
+    </select>
+  </div>
   </nav>
   <div class="doc">
   <h1>BabyBeam — Privacy Policy</h1>
