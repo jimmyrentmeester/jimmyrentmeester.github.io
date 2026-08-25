@@ -301,6 +301,8 @@ section { margin-bottom: 6rem; }
   color: var(--app); font-size: 1.15rem; font-weight: 700; letter-spacing: 0;
 }
 .stat .none { color: var(--faint); font-style: italic; }
+.stat .dl { color: var(--faint); }
+.stat .dl .n { color: var(--app); font-weight: 700; }
 
 .entry .links { display: flex; flex-wrap: wrap; gap: .5rem .6rem; margin: 0; }
 .entry .links a {

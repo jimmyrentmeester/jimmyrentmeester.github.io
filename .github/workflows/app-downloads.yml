@@ -1,0 +1,59 @@
+# Haalt dagelijks het downloadaantal op uit App Store Connect en commit het
+# in de HTML. Zelfde opzet als app-ratings.yml.
+#
+# Vereist drie repo-secrets (Settings → Secrets and variables → Actions),
+# aan te maken via App Store Connect → Users and Access → Integrations →
+# App Store Connect API (rol "Sales and Reports" volstaat):
+#   ASC_KEY_ID          Key ID van de sleutel
+#   ASC_ISSUER_ID       Issuer ID (zelfde pagina, geldt voor je hele account)
+#   ASC_PRIVATE_KEY     volledige inhoud van het .p8-bestand
+#   ASC_VENDOR_NUMBER   App Store Connect → Business → "Vendor number"
+#
+# Zonder deze secrets doet deze workflow niets (het script stopt stil,
+# zie scripts/update-downloads.py) — dus veilig om nu al te activeren.
+name: App downloads
+
+on:
+  schedule:
+    - cron: "43 6 * * *"   # dagelijks, 06:43 UTC — los van de ratings-cron
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: app-downloads
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencies installeren
+        run: pip install --quiet pyjwt cryptography
+
+      - name: Downloads ophalen en HTML bijwerken
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          ASC_VENDOR_NUMBER: ${{ secrets.ASC_VENDOR_NUMBER }}
+        run: python3 scripts/update-downloads.py
+
+      - name: Committen als er iets veranderd is
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Niets veranderd."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html nl/index.html downloads-cache.json
+          git commit -m "site: downloadcijfers bijgewerkt"
+          git push

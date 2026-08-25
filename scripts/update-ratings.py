@@ -22,7 +22,12 @@ import urllib.request
 
 LOOKUP = "https://itunes.apple.com/lookup?id={}&country=nl"
 
-# Per taal: decimaalteken en de tekst als er nog geen ratings zijn.
+# Onder dit aantal ratings tonen we geen score — 1-2 stemmen naast een
+# "5.0 ★" oogt eerder kwetsbaar dan overtuigend. Zie ook update-downloads.py
+# voor dezelfde afweging bij downloadaantallen.
+MIN_RATINGS_TO_SHOW = 10
+
+# Per taal: decimaalteken en de tekst als er nog geen (genoeg) ratings zijn.
 LOCALES = {
     "index.html":    {"dec": ".", "none": "No ratings yet"},
     "nl/index.html": {"dec": ",", "none": "Nog geen ratings"},
@@ -48,7 +53,7 @@ def fetch(app_id):
 
 
 def render(loc, score, count):
-    if count == 0:
+    if count < MIN_RATINGS_TO_SHOW:
         return f'<span class="none">{loc["none"]}</span>'
     text = f"{score:.1f}".replace(".", loc["dec"])
     word = "rating" if count == 1 else "ratings"
