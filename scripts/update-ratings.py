@@ -22,10 +22,10 @@ import urllib.request
 
 LOOKUP = "https://itunes.apple.com/lookup?id={}&country=nl"
 
-# Onder dit aantal ratings tonen we geen score — 1-2 stemmen naast een
-# "5.0 ★" oogt eerder kwetsbaar dan overtuigend. Zie ook update-downloads.py
-# voor dezelfde afweging bij downloadaantallen.
-MIN_RATINGS_TO_SHOW = 10
+# Drempel voor het tonen van een score. Op 0 gezet: elke rating telt mee,
+# ook een enkele stem — bewuste keuze van Jimmy (09-09-2026), i.p.v. de
+# eerdere afweging dat "1-2 stemmen naast een 5.0 ★" kwetsbaar zou ogen.
+MIN_RATINGS_TO_SHOW = 0
 
 # Per taal: decimaalteken en de tekst als er nog geen (genoeg) ratings zijn.
 LOCALES = {
