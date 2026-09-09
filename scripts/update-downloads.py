@@ -146,11 +146,19 @@ def units_by_app(gz_bytes):
     raw = gzip.decompress(gz_bytes).decode("utf-8", errors="replace")
     reader = csv.DictReader(io.StringIO(raw), delimiter="\t")
     totals = {}
+    # Product Type Identifiers die een nieuwe (of her-)installatie van de
+    # app zelf zijn — dus GEEN in-app purchases en GEEN updates/re-downloads
+    # (code "3"). Volgens Apple's officiële tabel (developer.apple.com/help/
+    # app-store-connect/reference/reporting/product-type-identifiers/):
+    #   "1"  = free/paid app (iOS/iPadOS/visionOS/watchOS)
+    #   "1F" = free/paid app, Universal app (excl. tvOS)
+    #   "1T" = free/paid app, iPad-only
+    # Eerdere versie van dit script telde alleen "1" en negeerde "1F"/"1T"
+    # in de veronderstelling dat dat in-app purchases/updates waren — dat
+    # klopte niet en liet Universal apps (zoals BabyBeam) buiten de telling.
+    APP_DOWNLOAD_CODES = {"1", "1F", "1T"}
     for row in reader:
-        # "1"=app, "1F"=in-app purchase, "1T"=update — alleen "1" telt als
-        # nieuwe download. Updates/herdownloads bewust niet meegeteld,
-        # anders loopt het cijfer sneller op dan de App Store zelf toont.
-        if row.get("Product Type Identifier") != "1":
+        if row.get("Product Type Identifier") not in APP_DOWNLOAD_CODES:
             continue
         app_id = row.get("Apple Identifier", "").strip()
         try:
