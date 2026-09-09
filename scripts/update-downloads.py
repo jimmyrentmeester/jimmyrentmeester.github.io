@@ -77,6 +77,14 @@ APPS = {
     "6792535679": "WristVault",
 }
 
+# Startdatum voor de allereerste run (lege cache): ruim vóór de vroegste
+# app-lancering, zodat downloads sinds launch worden meegeteld i.p.v.
+# alleen vanaf "gisteren" (GRID_BREAKER ~begin juni, WristVault eind juli,
+# BabyBeam 04-07). Een paar weken te vroeg beginnen levert gewoon 404's op
+# die worden overgeslagen (misses-teller reset zodra er weer data is), dus
+# geen risico op vastlopen.
+BACKFILL_START = dt.date(2026, 6, 1)
+
 # Per taal: decimaalscheiding (duizendtal) en tekst als er nog niets te tonen is.
 LOCALES = {
     "index.html":    {"thousands": ",", "none": ""},
@@ -171,15 +179,24 @@ def update_totals(token, vendor_number):
     start = (
         dt.date.fromisoformat(cache["last_date"]) + dt.timedelta(days=1)
         if cache["last_date"]
-        else dt.date.today() - dt.timedelta(days=1)  # zonder cache: alleen gisteren als startpunt
+        else BACKFILL_START  # zonder cache: backfillen vanaf vóór de eerste app-launch
     )
     today = dt.date.today()
     d = start
     misses = 0
-    while d < today and misses < 2:
+    # Bij backfill (potentieel maanden aan dagen) mogen losse dagen zonder
+    # rapport (misses) niet de hele run afkappen zoals bij de normale
+    # dagelijkse catch-up van 1-2 dagen. We tellen alleen na het inlopen
+    # van de achterstand (d dicht bij vandaag) de 2-misses-stop, zodat een
+    # paar ontbrekende dagen uit het verleden de backfill niet vroegtijdig
+    # stoppen terwijl recentere dagen nog niet zijn opgehaald.
+    catching_up = (today - start).days > 7
+    while d < today:
         report = fetch_daily_report(token, d, vendor_number)
         if report is None:
             misses += 1
+            if not catching_up and misses >= 2:
+                break
             d += dt.timedelta(days=1)
             continue
         misses = 0
@@ -187,6 +204,9 @@ def update_totals(token, vendor_number):
             cache["totals"][app_id] = cache["totals"].get(app_id, 0) + units
         cache["last_date"] = d.isoformat()
         d += dt.timedelta(days=1)
+        # Zodra we binnen 7 dagen van vandaag zijn, gedraagt de rest van de
+        # loop zich weer als normale dagelijkse catch-up.
+        catching_up = (today - d).days > 7
     save_cache(cache)
     return cache["totals"]
 
