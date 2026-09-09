@@ -53,7 +53,11 @@ def fetch(app_id):
 
 
 def render(loc, score, count):
-    if count < MIN_RATINGS_TO_SHOW:
+    # score is None zodra fetch() 0 ratings terugkreeg -- dat moet altijd
+    # de "nog geen ratings"-tekst geven, los van de drempel (die typisch
+    # op 0 staat en dus "0 < 0" nooit True is, wat anders een crash op
+    # score.format zou geven zodra een app nog geen enkele rating heeft).
+    if score is None or count < MIN_RATINGS_TO_SHOW:
         return f'<span class="none">{loc["none"]}</span>'
     text = f"{score:.1f}".replace(".", loc["dec"])
     word = "rating" if count == 1 else "ratings"
