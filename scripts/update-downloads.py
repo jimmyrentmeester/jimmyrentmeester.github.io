@@ -224,7 +224,9 @@ def render(loc, total):
         return ""
     # Duizendtallen met de juiste scheiding per taal, geen decimalen.
     text = f"{total:,}".replace(",", "\0").replace(".", loc["thousands"]).replace("\0", loc["thousands"])
-    return f' · <span class="dl"><span class="n">{text}</span> downloads</span>'
+    # Geen handmatig scheidingsteken meer voor dit blok -- de CSS (.stat .dl)
+    # tekent een lijntje links, zodat downloads los oogt van de rating-groep.
+    return f'<span class="dl"><span class="n">{text}</span> downloads</span>'
 
 
 def main():

@@ -296,12 +296,20 @@ section { margin-bottom: 6rem; }
 .stat {
   font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
   color: var(--muted); margin: 0 0 1.2rem; font-variant-numeric: tabular-nums;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .6em;
 }
-.stat .score {
+/* Rating + sterretje + aantal reviews vormen bewust EEN blok (geen los
+   scheidingsteken ertussen) -- downloads staat er met wat lucht naast,
+   als los, secundair gegeven. */
+.stat .rgroup {
+  display: inline-flex; align-items: baseline; gap: .35em;
+}
+.stat .rgroup .score {
   color: var(--app); font-size: 1.15rem; font-weight: 700; letter-spacing: 0;
 }
+.stat .rgroup .count { color: var(--muted); }
 .stat .none { color: var(--faint); font-style: italic; }
-.stat .dl { color: var(--faint); }
+.stat .dl { color: var(--faint); padding-left: .6em; border-left: 1px solid var(--line); }
 .stat .dl .n { color: var(--app); font-weight: 700; }
 
 .entry .links { display: flex; flex-wrap: wrap; gap: .5rem .6rem; margin: 0; }

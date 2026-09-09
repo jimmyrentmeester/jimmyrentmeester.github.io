@@ -57,7 +57,11 @@ def render(loc, score, count):
         return f'<span class="none">{loc["none"]}</span>'
     text = f"{score:.1f}".replace(".", loc["dec"])
     word = "rating" if count == 1 else "ratings"
-    return f'<span class="score">{text}</span> ★ · {count} {word}'
+    # Score, ster en aantal zijn bewust een visueel geheel (geen scheidingsteken
+    # ertussen) -- downloads staat er als los element achteraan, zie de "·"
+    # in update-downloads.py's render(). Feedback Jimmy 09-09-2026:
+    # rating+count moeten samen ogen, downloads los erachter.
+    return f'<span class="rgroup"><span class="score">{text}</span> ★ <span class="count">{count} {word}</span></span>'
 
 
 def main():
