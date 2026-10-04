@@ -190,7 +190,7 @@
           <p class="kicker">BabyBeam: a baby monitor without an account, from first version to 1.5.3.</p>
 
           <h3>The problem</h3>
-          <p>A baby monitor is either a separate device you use for two years and then put in a drawer, or an app that wants you to create an account so your child's bedroom runs through someone else's servers. I get why it's built that way, but an app that puts a camera in a nursery and then explains why it needs an account has fixed one problem and created another.</p>
+          <p>A baby monitor is either a separate device you use for two years and then put in a drawer, or an app. The apps out there are expensive as a one-time purchase or ask for a subscription, and often you have to create an account, after which video sits on someone else's servers. I wanted to make something for every parent, without worrying about privacy or cost. I get why it's built that way, but an app that puts a camera in a nursery and then explains why it needs an account has fixed one problem and created another.</p>
           <p>Before I wrote the backlog, I listed the complaints about well-known monitors and apps: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor and Luna (July 2026). Among them: the connection drops silently with no alarm, the sound stops when the screen locks, you can't see the baby phone's battery running down, and core features sit behind a subscription.</p>
 
           <h3>The call</h3>
@@ -203,14 +203,14 @@
 
           <h3>What shipped</h3>
           <ul class="releases">
-            <li><span class="when">July 2026</span><span>First version in the App Store: live video and sound, cry alerts, talk back, QR pairing and status on the lock screen. Free, instead of paid as I'd first planned.</span></li>
+            <li><span class="when">July 2026</span><span>First version in the App Store, from 7 July: live video and sound, cry alerts, talk back, QR pairing and status on the lock screen. Free, instead of paid as I'd first planned.</span></li>
             <li><span class="when">August</span><span>A tip jar (1.3). A tip unlocks nothing: putting baby monitor features behind money isn't something I can defend. Then German, French and Spanish, and a feedback button in the app (1.5.0).</span></li>
             <li><span class="when">September</span><span>Reliability (1.5.1 to 1.5.3): pairing can no longer hang silently, and cry and connection alerts break through the iPhone's Sleep Focus. A request for a tip only appears after six successful sessions and never during use. Feedback can no longer be sent empty.</span></li>
             <li><span class="when">October</span><span>Version 1.5.4 in preparation: new screenshots with real video, and a dedicated listing for the UK and Mexico.</span></li>
           </ul>
 
           <h3>What went wrong</h3>
-          <p>The first submission was rejected. Apple's reviewer heard no background audio, even though the app asked for permission to play it. The cause: without two paired devices no session starts, so there's nothing to hear. The quick fix was to drop that permission, but continuous sound with the screen locked is exactly what a baby monitor has to do. I sent a screen recording made on two real devices, with test instructions, and after that it was approved.</p>
+          <p>The first submission was rejected. Apple's reviewer heard no background audio, even though the app asked for permission to play it. The cause: without two paired devices no session starts, so there's nothing to hear. The quick fix was to drop that permission, but continuous sound with the screen locked is exactly what a baby monitor has to do. I sent a screen recording made on two real devices, with test instructions, and three days later it was approved.</p>
           <p>In September, feedback emails started arriving empty: just the template, no message. A German-speaking user had tapped the "translation" category, which sits at the top with German settings, and sent it straight away. The same day I added a required text field, and it went out in 1.5.3.</p>
           <p>And the first screenshots were black. The simulator they were made with has no camera, so the most important images of a video baby monitor showed no video. I only found that when I went through the numbers per country.</p>
 
@@ -283,7 +283,7 @@
             <blockquote>
               <p>Rejected under Guideline 2.5.4: the reviewer heard no audio while <code>UIBackgroundModes: audio</code> is declared. Cause: without <em>two</em> paired devices the reviewer can't start a session, so can't hear any audio either. <b>Do NOT remove the audio mode</b> — continuous background audio (the parent keeps hearing the nursery with the screen locked) is the core feature and exactly the permitted use.</p>
             </blockquote>
-            <p class="outcome"><b>Then.</b> A screen recording on two real devices, a reply to App Review with test instructions, and the same instructions fixed in the review notes for every later submission. Approved.</p>
+            <p class="outcome"><b>Then.</b> A screen recording on two real devices, a reply to App Review with test instructions, and the same instructions fixed in the review notes for every later submission. Approved three days later, on 7 July.</p>
           </li>
         </ol>
       </div>
