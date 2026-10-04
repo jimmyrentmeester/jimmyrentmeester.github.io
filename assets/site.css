@@ -19,7 +19,7 @@
   --raise:   #f3f1ec;
   --ink:     #14161c;
   --muted:   #5a616e;
-  --faint:   #8b91a0;
+  --faint:   #676d7b;
   --line:    #e7e4de;
   --accent:  #4d5dfb;
   --shadow:  20 22 40;
@@ -41,7 +41,7 @@
     --raise:   #191c22;
     --ink:     #edeff4;
     --muted:   #98a0af;
-    --faint:   #6b7280;
+    --faint:   #8a919f;
     --line:    #22252e;
     --accent:  #8e99ff;
     --shadow:  0 0 0;
@@ -112,10 +112,10 @@ body {
 }
 .cover-inner {
   position: relative; z-index: 1;
-  max-width: 66rem; margin: 0 auto; padding: 4.5rem 1.5rem 5.5rem;
+  max-width: 66rem; margin: 0 auto; padding: 2.5rem 1.5rem 4.5rem;
 }
 
-.cover .topbar { display: flex; justify-content: flex-end; margin-bottom: 5rem; }
+.cover .topbar { display: flex; justify-content: flex-end; margin-bottom: 3.5rem; }
 .langswitch {
   display: inline-flex; gap: .15rem; font-family: var(--mono);
   font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
@@ -145,14 +145,93 @@ body {
 }
 .cover .lead {
   font-family: var(--serif); font-style: italic;
-  font-size: clamp(1.4rem, 3.4vw, 2.1rem); line-height: 1.35;
-  max-width: 22ch; margin: 0 0 1.8rem; color: var(--moon);
+  font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.35;
+  max-width: 26ch; margin: 0 0 1.8rem; color: var(--moon);
   text-wrap: balance;
 }
 .cover .sub {
   max-width: 54ch; margin: 0; font-size: 1rem; line-height: 1.65;
   color: color-mix(in srgb, var(--moon) 68%, transparent);
 }
+
+/* ── eerste scherm: tekst links, "in het kort" rechts ───────────
+   Op smalle schermen onder elkaar; het kort-blok komt dan na de
+   knoppen, zodat naam, functie en contact altijd eerst staan.
+   ─────────────────────────────────────────────────────────────── */
+.hero { display: grid; gap: 2.6rem; align-items: start; }
+@media (min-width: 62rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) 21rem; gap: 4rem; }
+  .facts { margin-top: .6rem; }
+}
+
+.cta { display: flex; flex-wrap: wrap; gap: .6rem; margin: 2rem 0 0; padding: 0; }
+.cta a {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; padding: .75rem 1.15rem; border-radius: 999px;
+  color: var(--moon); border: 1px solid color-mix(in srgb, var(--moon) 30%, transparent);
+  transition: background .2s, border-color .2s, color .2s;
+}
+.cta a:hover { border-color: var(--moon); }
+.cta a.primary { background: var(--moon); color: var(--cover); border-color: var(--moon); font-weight: 700; }
+.cta a.primary:hover { background: #fff; }
+.cta a:focus-visible { outline: 2px solid var(--moon); outline-offset: 3px; }
+
+.facts {
+  border: 1px solid color-mix(in srgb, var(--moon) 16%, transparent);
+  background: color-mix(in srgb, var(--moon) 4%, transparent);
+  border-radius: 18px; padding: 1.5rem 1.5rem 1.3rem; color: var(--moon);
+}
+.facts .who { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.3rem; }
+.portrait {
+  width: 76px; height: 76px; border-radius: 50%; flex: none; overflow: hidden;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, #2b2f6b, #4d3f8f);
+  font-family: var(--serif); font-size: 1.7rem; color: var(--moon);
+  border: 1px solid color-mix(in srgb, var(--moon) 25%, transparent);
+}
+.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.facts .who p { margin: 0; font-size: .95rem; line-height: 1.4; }
+.facts .who p span {
+  display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--moon) 60%, transparent); margin-top: .25rem;
+}
+.facts dl { margin: 0; display: grid; gap: .8rem; }
+.facts dt {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--moon) 60%, transparent); margin-bottom: .15rem;
+}
+.facts dd { margin: 0; font-size: .92rem; line-height: 1.45; color: color-mix(in srgb, var(--moon) 90%, transparent); }
+
+/* ── vaste navigatie ────────────────────────────────────────────
+   Plakt bovenaan zodra de cover voorbij is. Geen JS nodig.
+   ─────────────────────────────────────────────────────────────── */
+.sitenav {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.sitenav .in {
+  max-width: 66rem; margin: 0 auto; padding: 0 1.5rem;
+  display: flex; align-items: center; gap: 1.4rem; height: 3.2rem;
+  overflow-x: auto; scrollbar-width: none;
+}
+.sitenav .in::-webkit-scrollbar { display: none; }
+.sitenav a {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; white-space: nowrap; padding: .4rem 0;
+}
+.sitenav a:hover { color: var(--ink); }
+.sitenav .name { font-family: var(--serif); font-size: 1rem; letter-spacing: -.01em; text-transform: none; color: var(--ink); margin-right: auto; }
+.sitenav .lang { color: var(--faint); }
+@media (max-width: 34rem) { .sitenav .name { display: none; } .sitenav .in { gap: 1.1rem; } }
+
+/* De nav sluit direct aan op de cover; de witruimte komt eronder. */
+.cover + .sitenav { margin-top: -5.5rem; margin-bottom: 4.5rem; }
+
+/* Ankers niet onder de vaste navigatie laten verdwijnen. */
+section[id], li[id] { scroll-margin-top: 4.5rem; }
 
 /* Rij app-namen onder de kop, elk in zijn eigen kleur. */
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2.6rem 0 0; padding: 0; list-style: none; }
@@ -429,6 +508,42 @@ section { margin-bottom: 6rem; }
 .notes .outcome { margin: 0; color: var(--muted); font-size: .93rem; max-width: 64ch; }
 .notes .outcome b { color: var(--ink); font-weight: 600; }
 
+/* ── inklapbaar (details/summary, werkt zonder JS) ───────────── */
+details > summary { cursor: pointer; list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+.more { margin-top: 2.2rem; }
+.more > summary {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--app); font-weight: 700;
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+.more > summary::after, .notes summary .open::after {
+  content: "+"; font-size: .9rem; line-height: 1; font-weight: 400;
+}
+.more[open] > summary::after, .notes details[open] summary .open::after { content: "–"; }
+.notes summary { display: block; }
+.notes summary .open {
+  display: inline-flex; align-items: center; gap: .5rem; margin-top: .7rem;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--app); font-weight: 700;
+}
+.notes details[open] summary .open { margin-bottom: .9rem; }
+.notes summary .outcome { margin: 0; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+/* Kleinere projecten: één regel onder het werklog. */
+.also { margin: 1.6rem 0 0; color: var(--muted); max-width: 64ch; }
+.also b { color: var(--ink); font-weight: 600; }
+.also a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+
+.print-only { display: none; }
+.intro { margin: 0 0 1.8rem; color: var(--muted); max-width: 64ch; }
+
+/* Compacte cover voor de cv-pagina. */
+.cover.compact .cover-inner { padding-bottom: 3.5rem; }
+.cover.compact h1 { font-size: clamp(2.6rem, 8vw, 4.6rem); }
+.cover.compact .topbar { margin-bottom: 2.5rem; }
+
 /* ══ FOUTENLIJST ══════════════════════════════════════════════
    De onware zin doorgestreept, de werkelijkheid eronder.
    ══════════════════════════════════════════════════════════════ */
@@ -558,8 +673,32 @@ a:focus-visible, button:focus-visible {
 
 @media print {
   .cover { background: none; color: #000; }
-  #field, .topbar, .chips, .entry .links, .entry .shot { display: none; }
-  body { background: #fff; color: #000; font-size: 11pt; }
+  #field, .topbar, .chips, .entry .links, .entry .shot, .sitenav, .cta { display: none !important; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .cover h1, .cover .role, .cover .lead, .cover .sub { color: #000 !important; }
+  .cover-inner { padding: 0 0 1rem !important; }
+  .cover { margin-bottom: 1.5rem; }
+  section { margin-bottom: 1.8rem; break-inside: auto; }
+  .role-entry, .plain li { break-inside: avoid; }
+  body { font-size: 9.5pt; line-height: 1.45; }
+  .cover h1 { font-size: 24pt !important; margin-bottom: .3rem; }
+  .cover .role { margin-bottom: .6rem; }
+  .cover .lead { font-size: 12.5pt; max-width: none; margin-bottom: .6rem; }
+  .cover .sub { max-width: none; }
+  .print-only { display: block !important; margin: .6rem 0 0; font-size: 9pt; color: #000; }
+  .wrap { padding: 0; max-width: none; }
+  section { margin-bottom: 1.1rem; }
+  .sec > h2 { margin: 0 0 .5rem; padding-bottom: .25rem; }
+  .emp, .emp.emp { border: 0 !important; padding: 0; margin-bottom: .6rem; break-inside: auto; background: none; }
+  .emp > .who { margin-bottom: .5rem; break-after: avoid; }
+  .role-entry { padding-bottom: .7rem; }
+  .role-entry p, .role-entry ul { max-width: none; }
+  .prose p { max-width: none; }
+  .contact-links { display: none; }
+  .cover .sub { font-size: 9.5pt; line-height: 1.5; }
+  .sec > h2 { break-after: avoid; }
+  section:has(.contact-links) { display: none; }
+  footer { margin-top: 1rem; padding-top: .6rem; }
   .sec { grid-template-columns: 1fr; }
   .entry, .emp, .case-panel, .faults li, .notes > li { border: 1px solid #ccc; box-shadow: none; }
 }
