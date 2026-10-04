@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jimmy Rentmeester — four iOS apps, and the decisions behind them</title>
-<meta name="description" content="I lead a commercial team at Coolblue, and I build iOS apps on my own outside of work. The work log, one case in full, and an honest account of where AI helps and where it gets things wrong.">
+<meta name="description" content="Lead Product Manager at Coolblue. Alongside that, my own iOS apps: for each one the problem, what I cut, what I shipped and what I measure. One case in full, with real project notes.">
 <link rel="canonical" href="https://jimmyrentmeester.github.io/">
 <link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/">
 <link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/nl/">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Jimmy Rentmeester — four iOS apps, and the decisions behind them">
-<meta property="og:description" content="Four iOS apps I design, build and release on my own, alongside running a commercial team at Coolblue, with what I cut from each, one case in full, and an honest account of how I use AI.">
+<meta property="og:description" content="Lead Product Manager at Coolblue, with my own iOS apps alongside. For each app the decisions, what I cut and what I measure, one case in full, and an honest account of the role AI plays.">
 <meta property="og:url" content="https://jimmyrentmeester.github.io/">
 <meta property="og:image" content="https://jimmyrentmeester.github.io/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -45,13 +45,13 @@
     </div>
 
     <h1>Jimmy Rentmeester</h1>
-    <p class="role">Lead E-commerce at Coolblue · Tilburg</p>
-    <p class="lead">By day I run a commercial team at Coolblue. In my own time I build and ship iOS apps by myself.</p>
-    <p class="sub">Ten years in e-commerce, four of them managing people. Outside of work I build iOS apps alone, from the first idea to the App Store listing and the support inbox afterwards. Below is what I've shipped, what I left out of each one, and where this way of working runs into trouble.</p>
+    <p class="role">Lead Product Manager · Coolblue</p>
+    <p class="lead">At Coolblue I lead a commercial team. Alongside that I ship my own apps and keep them running.</p>
+    <p class="sub">At Coolblue I'm responsible for the commercial results and the online customer journey of Gaming, Printers &amp; Office in the Netherlands, Belgium and Germany, with a team of nine. That's e-commerce, not software. With my own apps I pick the problem, decide what goes in and what stays out, ship releases and maintain them in the App Store. Below is each app with the decisions I made and what I measure. BabyBeam is written up in full, including the notes where I record those decisions.</p>
 
     <ul class="chips">
       <li class="app-gb"><a href="#work"><span class="dot"></span>GRID_BREAKER</a></li>
-      <li class="app-bb"><a href="#work"><span class="dot"></span>BabyBeam</a></li>
+      <li class="app-bb"><a href="#case"><span class="dot"></span>BabyBeam</a></li>
       <li class="app-wv"><a href="#work"><span class="dot"></span>WristVault</a></li>
       <li class="app-sw"><a href="/stillwater/" target="_blank" rel="noopener"><span class="dot"></span>Stillwater</a></li>
     </ul>
@@ -76,7 +76,7 @@
             <img class="icon" src="/assets/img/gridbreaker-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>GRID_BREAKER</h3>
-              <p class="meta">Arcade game · iPhone &amp; iPad · <span class="status">Live</span></p>
+              <p class="meta">Arcade game · iPhone &amp; iPad · <span class="status">Live · 1.3.2</span></p>
             </div>
           </div>
           <div class="cols">
@@ -84,7 +84,11 @@
               <p class="desc">A reflex game you play with one thumb. Decode the grid before it disappears, chain your hits, chase a high score.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>The tutorial. There are sixteen campaign levels and each one adds a single mechanic, so you learn it by playing. Nothing to read before you start.</dd>
+                <dd>The tutorial. The campaign has four chapters that each add one new mechanic, so you learn it by playing. And ads, in-app purchases and tracking: the game is free, I collect nothing, and the leaderboards run through Apple's Game Center.</dd>
+                <dt>Shipped</dt>
+                <dd class="soft">Live since June 2026. Version 1.3 rebuilt the campaign into four chapters, each ending with a boss.</dd>
+                <dt>Next</dt>
+                <dd class="soft">In the US, 1.4% of people who see the game in the App Store tap through to its page (App Analytics, 4 October 2026). So version 1.3.3 is about being found, not about new levels: gameplay as the first screenshot, and a dedicated listing for the UK and for the Netherlands.</dd>
               </dl>
               <p class="stat"><!--rating:6779888720--><span class="rgroup"><span class="score">5.0</span> ★ <span class="count">7 ratings</span></span><!--/rating--><!--downloads:6779888720--><span class="dl"><span class="n">83</span> downloads</span><!--/downloads--></p>
               <p class="links">
@@ -102,7 +106,7 @@
             <img class="icon" src="/assets/img/babybeam-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>BabyBeam</h3>
-              <p class="meta">Baby monitor · iPhone &amp; iPad · <span class="status">Live</span></p>
+              <p class="meta">Baby monitor · iPhone &amp; iPad · <span class="status">Live · 1.5.3</span></p>
             </div>
           </div>
           <div class="cols">
@@ -110,7 +114,9 @@
               <p class="desc">Turns two iPhones into a video baby monitor. Picture and sound go straight from one phone to the other, encrypted, and nothing gets stored.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>The account, and the recordings that come with it. Every other app asks you to create one so the video can run through their servers. This one pairs two of your own phones, so there's no history, no clip library, and nowhere to store any of it.</dd>
+                <dd>The account, and the recordings that come with it. Baby monitor apps with an account send the video through their own servers. This one pairs two of your own phones, so there's no history, no clip library, and nowhere to store any of it.</dd>
+                <dt>Shipped</dt>
+                <dd class="soft">Live since July 2026. Written up in full below: the problem, the priorities, the releases, what went wrong and what I measure.</dd>
               </dl>
               <p class="stat"><!--rating:6783058581--><span class="rgroup"><span class="score">5.0</span> ★ <span class="count">1 rating</span></span><!--/rating--><!--downloads:6783058581--><span class="dl"><span class="n">781</span> downloads</span><!--/downloads--></p>
               <p class="links">
@@ -119,7 +125,7 @@
                 <a href="#case">Full case ↓</a>
               </p>
             </div>
-            <img class="shot" src="/assets/img/babybeam-shot.png" alt="BabyBeam baby unit showing the pairing code and QR code" width="168" height="365" loading="lazy" decoding="async">
+            <img class="shot" src="/assets/img/babybeam-shot.png" alt="BabyBeam baby unit showing its pairing code and QR code" width="168" height="365" loading="lazy" decoding="async">
           </div>
         </li>
 
@@ -129,13 +135,19 @@
             <img class="icon" src="/assets/img/wristvault-icon.png" alt="" width="60" height="60" loading="lazy" decoding="async">
             <div>
               <h3>WristVault</h3>
-              <p class="meta">Watch collection · iPhone &amp; iPad · <span class="status">Live</span></p>
+              <p class="meta">Watch collection · iPhone &amp; iPad · <span class="status">Live · 1.2</span></p>
             </div>
           </div>
           <p class="desc">Keeps track of a watch collection, logs what you wear, and exports a PDF for your insurer. No account: it syncs through your own iCloud and nowhere else.</p>
           <dl class="cut">
+            <dt>Problem</dt>
+            <dd class="soft">Collectors often keep their collection in a spreadsheet; watch forums have had threads about it for years. In reviews of the existing apps, unreliable iCloud sync kept coming up, and no app made a PDF for your insurer. I looked into that before I started (July 2026).</dd>
             <dt>Cut</dt>
-            <dd>Half of what I'd sketched. It went to the App Store without it. What stayed: one payment instead of a subscription, while the rest of the category moves the other way. The free version holds three watches and still exports, so the paid unlock has to be worth it on its own.</dd>
+            <dd>Deliberately left out of version 1: market values, a social feed, accounts, a subscription, widgets and multiple collections. Pro is a one-time purchase. The free version holds three watches, so Pro has to be worth it on its own.</dd>
+            <dt>Shipped</dt>
+            <dd class="soft">A collector with 3,000 watches asked whether the app could handle that. It became an acceptance criterion for the import: a 3,000-row file with a bad row in it still processes the rest. Importing and custom categories, the two things users asked for, came in version 1.1.</dd>
+            <dt>Next</dt>
+            <dd class="soft">Of the people who see the app in the App Store, only 1 to 3% tap through to its page in the ten biggest countries (App Analytics, 4 October 2026). So version 1.3 gets a dedicated listing for the UK and Mexico, and new screenshots.</dd>
           </dl>
           <p class="stat"><!--rating:6792535679--><span class="none">No ratings yet</span><!--/rating--><!--downloads:6792535679--><span class="dl"><span class="n">103</span> downloads</span><!--/downloads--></p>
           <p class="links">
@@ -154,7 +166,7 @@
             </div>
           </div>
           <p class="desc">A pond in a browser tab. Skip stones across it, ring the lilypads,
-          watch the koi. Written from scratch in WebGL.</p>
+          watch the koi. One HTML file with WebGL, no engine or library.</p>
           <dl class="cut">
             <dt>Cut</dt>
             <dd>Score, install, roadmap. I wanted somewhere to work on timing and weight without a store attached to it.</dd>
@@ -165,6 +177,7 @@
         </li>
 
       </ol>
+      <p class="asof">Ratings come from the App Store, downloads (since launch) from App Store Connect. Both update automatically every day. As of <!--asof-->3 October 2026<!--/asof-->.</p>
     </div>
   </section>
 
@@ -174,14 +187,35 @@
     <div class="body">
       <div class="case-panel app-bb reveal">
         <div class="case prose">
-          <p class="kicker">BabyBeam: what it costs to build a baby monitor without an account.</p>
+          <p class="kicker">BabyBeam: a baby monitor without an account, from first version to 1.5.3.</p>
 
           <h3>The problem</h3>
-          <p>A baby monitor is either a separate device you use for two years and then put in a drawer, or an app that wants you to create an account so your child's bedroom runs through someone else's servers. That second option is most of the market. I get why it's built that way, but an app that puts a camera in a nursery and then explains why it needs an account has fixed one problem and created another.</p>
+          <p>A baby monitor is either a separate device you use for two years and then put in a drawer, or an app that wants you to create an account so your child's bedroom runs through someone else's servers. I get why it's built that way, but an app that puts a camera in a nursery and then explains why it needs an account has fixed one problem and created another.</p>
+          <p>Before I wrote the backlog, I listed the complaints about well-known monitors and apps: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor and Luna (July 2026). Among them: the connection drops silently with no alarm, the sound stops when the screen locks, you can't see the baby phone's battery running down, and core features sit behind a subscription.</p>
 
           <h3>The call</h3>
           <p>Video and audio go straight between the two phones over WebRTC, end-to-end encrypted with DTLS-SRTP. Nothing gets recorded and nothing gets kept, because there's no server to keep it on. The only thing that ever leaves the two phones is a small pairing handshake. That one goes briefly through iCloud, encrypted with a key derived from the pairing code, which I don't have and can't recover.</p>
           <p>This still works when you're not home. The two phones find each other over the internet, not just on your own Wi-Fi. What's gone is the account, the subscription, and the company in the middle.</p>
+
+          <h3>How I prioritised</h3>
+          <p>One principle settled most decisions: a baby monitor that fails silently is worse than a bare-bones one. So everything that builds trust came first: a watchdog that notices a frozen picture, the baby phone's battery on the parent screen, sound that keeps playing with the screen locked, and cry detection on the device itself. Only then comfort, like pairing with a QR code and lullabies from the other room. A task was done only once it also worked on two real iPhones.</p>
+          <p>Deliberately postponed: several viewers at once, so both parents can watch. Without a server, the baby phone has to send the video separately to each viewer, and that phone is on all night. I decided to build it only after launch, with at most two viewers and the second one audio-only by default. That decision is below, under <a href="#notes">working notes</a>.</p>
+
+          <h3>What shipped</h3>
+          <ul class="releases">
+            <li><span class="when">July 2026</span><span>First version in the App Store: live video and sound, cry alerts, talk back, QR pairing and status on the lock screen. Free, instead of paid as I'd first planned.</span></li>
+            <li><span class="when">August</span><span>A tip jar (1.3). A tip unlocks nothing: putting baby monitor features behind money isn't something I can defend. Then German, French and Spanish, and a feedback button in the app (1.5.0).</span></li>
+            <li><span class="when">September</span><span>Reliability (1.5.1 to 1.5.3): pairing can no longer hang silently, and cry and connection alerts break through the iPhone's Sleep Focus. A request for a tip only appears after six successful sessions and never during use. Feedback can no longer be sent empty.</span></li>
+            <li><span class="when">October</span><span>Version 1.5.4 in preparation: new screenshots with real video, and a dedicated listing for the UK and Mexico.</span></li>
+          </ul>
+
+          <h3>What went wrong</h3>
+          <p>The first submission was rejected. Apple's reviewer heard no background audio, even though the app asked for permission to play it. The cause: without two paired devices no session starts, so there's nothing to hear. The quick fix was to drop that permission, but continuous sound with the screen locked is exactly what a baby monitor has to do. I sent a screen recording made on two real devices, with test instructions, and after that it was approved.</p>
+          <p>In September, feedback emails started arriving empty: just the template, no message. A German-speaking user had tapped the "translation" category, which sits at the top with German settings, and sent it straight away. The same day I added a required text field, and it went out in 1.5.3.</p>
+          <p>And the first screenshots were black. The simulator they were made with has no camera, so the most important images of a video baby monitor showed no video. I only found that when I went through the numbers per country.</p>
+
+          <h3>What I measure</h3>
+          <p>The app sends nothing to me; what I measure comes from App Store Connect. On 4 October 2026, 2.5% of people who saw BabyBeam in the App Store in the US tapped through to its page, against 12.2% in Germany. The black screenshots are the most likely explanation for the US. Version 1.5.4 gets a new set with real video; whether that helps, I'll measure after the release. I also read every feedback email, and the request for a rating only comes after a session of at least ten minutes without connection trouble.</p>
 
           <h3>What it cost</h3>
           <ul class="prices">
@@ -199,9 +233,59 @@
             </li>
           </ul>
 
-          <h3>Where it stands</h3>
-          <p>Live and free to download. It's only been in the store a few weeks, so the honest answer to whether it worked is that I don't know yet. The ratings line above comes straight from the App Store and will say something once there's something to say.</p>
+          <h3>Next</h3>
+          <p>Several viewers is the biggest piece still open. It's the heaviest change since the start, and the releases after launch went to reliability, feedback and being found first.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WERKSTUKKEN ══════════════════════════════════════════ -->
+  <section class="sec" id="notes">
+    <h2>Working notes</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>Three excerpts from my project notes for BabyBeam. Translated from Dutch and shortened, but not rewritten. I write notes like these together with AI; the decisions in them are mine.</p>
+
+        <ol class="notes">
+          <li class="app-bb">
+            <span class="where">Story · 20 September 2026</span>
+            <h3>Require a message before the feedback email</h3>
+            <blockquote>
+              <p><b>Problem.</b> The feedback flow opens the mail composer straight away, prefilled with just an invitation line and the diagnostics block (version, app language, device, iOS version, role). Nothing forces the user to type their own text above it. Result: emails that look empty — just the template, no message of their own.</p>
+              <p><b>Desired solution.</b></p>
+              <ol>
+                <li>User picks a category as now.</li>
+                <li>Instead of starting the composer straight away, the app shows a small text entry screen: "What would you like to report?", explaining that the diagnostics block is added automatically.</li>
+                <li>Send/next button is disabled while the field is empty (whitespace-only counts as empty).</li>
+                <li>Only once filled in does the mail composer open, with the user's own message at the top followed by the existing diagnostics block.</li>
+                <li>"Connection trouble" (no mail flow) stays unchanged.</li>
+              </ol>
+              <p><b>Constraints.</b> No new backend. New strings in all 5 languages. Existing unit tests must not break; add tests for the new validation (empty/whitespace-only blocks sending).</p>
+            </blockquote>
+            <p class="outcome"><b>Then.</b> Built the same day and shipped in version 1.5.3.</p>
+          </li>
+
+          <li class="app-bb">
+            <span class="where">Decision · 3 July 2026</span>
+            <h3>Several viewers: only after release</h3>
+            <blockquote>
+              <p><b>Context.</b> WebRTC is peer-to-peer and one-to-one. Without an SFU [a server that forwards the video], N viewers means the baby unit maintains N separate peer connections and encodes and uploads the video N times.</p>
+              <p><b>Decision criteria.</b> Principles intact: serverless, no account, nothing stored, reliability first. Battery/heat of the baby unit (which is on all night) manageable.</p>
+              <p><b>Decision.</b> Priority: after the release. First device testing + release with the current features; multi-viewer after that. Max viewers: 2. Extra viewers: 2nd+ audio-only by default, video on request.</p>
+            </blockquote>
+            <p class="outcome"><b>Then.</b> Two technical options worked out, with a preference for the simpler one. Not built yet.</p>
+          </li>
+
+          <li class="app-bb">
+            <span class="where">Rejection · 4 July 2026</span>
+            <h3>App Review, guideline 2.5.4</h3>
+            <blockquote>
+              <p>Rejected under Guideline 2.5.4: the reviewer heard no audio while <code>UIBackgroundModes: audio</code> is declared. Cause: without <em>two</em> paired devices the reviewer can't start a session, so can't hear any audio either. <b>Do NOT remove the audio mode</b> — continuous background audio (the parent keeps hearing the nursery with the screen locked) is the core feature and exactly the permitted use.</p>
+            </blockquote>
+            <p class="outcome"><b>Then.</b> A screen recording on two real devices, a reply to App Review with test instructions, and the same instructions fixed in the review notes for every later submission. Approved.</p>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
@@ -211,9 +295,9 @@
     <h2>On AI</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>AI writes most of the code in these apps. That's not the interesting part. It stopped being special somewhere around 2024, and a list of the tools I use tells you nothing about whether I can steer them.</p>
+        <p>AI writes all the code in these apps; I don't program. My work is everything around it: I decide the problem, the direction and the scope, I set when something is done, I test on real devices and I decide what goes live. That isn't software engineering, and I don't call myself a developer.</p>
 
-        <p class="pull">The code is usually fine. It goes wrong in the <em>text</em> around it.</p>
+        <p class="pull">What the app does is usually right. It goes wrong in the <em>text</em> around it.</p>
 
         <p>Three examples from this site. All mine, and all live for weeks before I spotted them. The crossed-out line is what the page claimed, underneath is what was actually true:</p>
 
@@ -235,7 +319,7 @@
           </li>
         </ul>
 
-        <p>None of these are bugs. They're claims that sounded right but weren't, in the one spot where only the person who built it can check. And I didn't catch them before they went live. I found them weeks later during a review. That changed how I work: text that comes out of AI now gets the same check as code that comes out of AI. Nothing goes live until I've held it against what the app actually does, including the legal pages nobody reads.</p>
+        <p>None of these are bugs. They're claims that sounded right but weren't, in the one spot where only the person who knows the product can check. And I didn't catch them before they went live. I found them weeks later during a review. That changed how I work: text that comes out of AI now gets checked as strictly as the app itself. Nothing goes live until I've held it against what the app actually does, including the legal pages nobody reads.</p>
 
         <p>The other half of the work happens before that. I keep a project structure and a set of written notes I reuse across apps, mostly things I got wrong once and don't want to get wrong again. It means the next app doesn't start from a blank prompt.</p>
       </div>
@@ -247,9 +331,20 @@
     <h2>How I work</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>Every app here started with the same question: is this worth solving, and what does a first version actually need to do? I look for something people already complain about, check whether the apps that exist actually fix it, then write down the smallest version worth downloading. I stick to that while building.</p>
-        <p>Scope is only part of it. I also set the price, write the store listing, handle the translations and compliance paperwork, and decide what's free and what isn't. Doing all of that myself is the fastest way I know to find out what each choice actually costs.</p>
+        <p>Every app starts with the same question: is this worth solving, and what does a first version actually need to do? I list the complaints about existing apps, check whether those apps actually fix them, then write down what goes in, what comes later and what never goes in. For each task I write down when it's done, and I test on real devices myself.</p>
+        <p>Scope is only part of it. I also set the price, write the store listing, handle the translations and compliance paperwork, decide what's free and what isn't, and answer the support inbox. Doing all of that myself is the fastest way I know to find out what each choice actually costs.</p>
         <p>In the end what matters is how the app feels to use. Something that does less but needs no explaining beats something that does everything and needs a manual.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ IN MIJN WERK ═════════════════════════════════════════ -->
+  <section class="sec">
+    <h2>At work</h2>
+    <div class="body">
+      <div class="prose reveal">
+        <p>At Coolblue I work the same way, at a larger scale and with more people. I turn a vision into quarterly roadmaps, prioritise on impact against effort, and bring the interests of commercial, marketing, purchasing and development together. With suppliers I agree on what they'll deliver and hold them to it.</p>
+        <p>One example: the PlayStation 5 launch in 2020. Very little stock and enormous demand. I worked with development, the app team, marketing and operations at the same time. Afterwards I set up a fixed process for every new batch of stock, so every team knew what had to happen and when. That meant less customer contact. Others built the technology; my part was the coordination and the process.</p>
       </div>
     </div>
   </section>
@@ -259,8 +354,8 @@
     <h2>Background</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>Ten years in e-commerce, four of them leading a team. Right now I'm Lead E-commerce for Gaming, Printers &amp; Office at Coolblue. I'm responsible for the strategy and the commercial results of those categories, and I lead a team of nine commercial and customer-journey specialists.</p>
-        <p>I have no professional background in product. What I do have is ten years of being accountable for whether something sold, and four apps where I made every decision myself: the feature list, the price, the copy.</p>
+        <p>In e-commerce since 2016, leading a team since 2022. Since August 2022 I've been Lead Product Manager for Gaming, Printers &amp; Office at Coolblue, in the Netherlands, Belgium and Germany. That's commercial product management: I'm responsible for the commercial results and the online customer journey of those categories, not for a software product.</p>
+        <p>I lead nine people: three commercial product managers, three product journey managers and three product editors.</p>
         <p class="contact-links">
           <a href="/cv/">Full CV</a>
           <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -274,9 +369,9 @@
     <h2>Contact</h2>
     <div class="body">
       <div class="prose reveal">
-        <p>I'm not looking for anything at the moment. But if you want to talk about leading a commercial team, building things on your own, or how any of this came about, I'm always up for that.</p>
+        <p>I'm glad to talk about product work, leading a commercial team, or shipping apps on your own.</p>
         <p class="contact-links">
-          <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>
+          <a href="mailto:jimmy.rentmeester@gmail.com">jimmy.rentmeester@gmail.com</a>
           <a href="https://www.linkedin.com/in/jimmyrentmeester" target="_blank" rel="me noopener">LinkedIn ↗</a>
         </p>
       </div>
@@ -286,7 +381,7 @@
   <footer>
     <span>© 2026 Jimmy Rentmeester</span>
     <span class="spacer"></span>
-    <span class="colophon">One HTML file per page, one stylesheet, and one small script for the animation up top. No framework, no build step, no analytics, no cookies. The font you're reading was already on your device, and nothing on this page loads from someone else's server. About 14 kB before the screenshots load, 123 kB with them. Works fine with JavaScript turned off.</span>
+    <span class="colophon">One HTML file per page, one stylesheet, and one small script for the animation up top. No framework, no build step, no analytics, no cookies. The font you're reading was already on your device, and nothing on this page loads from someone else's server. About 18 kB before the screenshots load, 129 kB with them. Works fine with JavaScript turned off.</span>
   </footer>
 
 </div>

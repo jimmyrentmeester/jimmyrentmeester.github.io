@@ -87,11 +87,18 @@ BACKFILL_START = dt.date(2026, 6, 1)
 
 # Per taal: decimaalscheiding (duizendtal) en tekst als er nog niets te tonen is.
 LOCALES = {
-    "index.html":    {"thousands": ",", "none": ""},
-    "nl/index.html": {"thousands": ".", "none": ""},
+    "index.html":    {"thousands": ",", "none": "", "months": [
+        "January", "February", "March", "April", "May", "June", "July",
+        "August", "September", "October", "November", "December"]},
+    "nl/index.html": {"thousands": ".", "none": "", "months": [
+        "januari", "februari", "maart", "april", "mei", "juni", "juli",
+        "augustus", "september", "oktober", "november", "december"]},
 }
 
 MARKER = re.compile(r"(<!--downloads:(\d+)-->)(.*?)(<!--/downloads-->)", re.S)
+# Peildatum onder het werklog: de laatste dag waarvan een salesrapport is
+# verwerkt (cache["last_date"]). Zo staat er nooit een cijfer zonder datum.
+ASOF = re.compile(r"(<!--asof-->)(.*?)(<!--/asof-->)", re.S)
 
 ASC_API = "https://api.appstoreconnect.apple.com/v1/salesReports"
 CACHE_PATH = pathlib.Path(__file__).resolve().parent.parent / "downloads-cache.json"
@@ -229,6 +236,13 @@ def render(loc, total):
     return f'<span class="dl"><span class="n">{text}</span> downloads</span>'
 
 
+def render_asof(loc, iso_date):
+    if not iso_date:
+        return None
+    d = dt.date.fromisoformat(iso_date)
+    return f"{d.day} {loc['months'][d.month - 1]} {d.year}"
+
+
 def main():
     check = "--check" in sys.argv
     root = pathlib.Path(__file__).resolve().parent.parent
@@ -255,6 +269,9 @@ def main():
             return m.group(1) + render(loc, total) + m.group(4)
 
         out = MARKER.sub(replace, src)
+        asof = render_asof(loc, load_cache().get("last_date"))
+        if asof:
+            out = ASOF.sub(lambda m: m.group(1) + asof + m.group(3), out)
         if out != src:
             changed = True
             print(f"bijgewerkt: {rel}")

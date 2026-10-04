@@ -292,6 +292,8 @@ section { margin-bottom: 6rem; }
   text-transform: uppercase; color: var(--app); margin-bottom: .3rem; font-weight: 700;
 }
 .cut dd { margin: 0; color: var(--ink); }
+.cut dd + dt { margin-top: .9rem; }
+.cut dd.soft { color: var(--muted); }
 
 .stat {
   font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
@@ -371,6 +373,61 @@ section { margin-bottom: 6rem; }
   position: absolute; top: .85rem; right: 1rem; font-weight: 700;
 }
 .prices { counter-reset: price; }
+
+/* Releases als korte tijdlijn: maand links, wat het oploste rechts. */
+.releases { list-style: none; margin: .4rem 0 0; padding: 0; }
+.releases li {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 0 1rem;
+  padding: .7rem 0; border-top: 1px solid var(--line);
+}
+.releases li:first-child { border-top: 0; padding-top: .2rem; }
+.releases .when {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--app); font-weight: 700; padding-top: .3rem;
+}
+.releases span:last-child { color: var(--muted); font-size: .95rem; line-height: 1.6; }
+@media (max-width: 30rem) {
+  .releases li { grid-template-columns: 1fr; }
+  .releases .when { padding: 0 0 .2rem; }
+}
+
+/* Bron en peildatum onder het werklog. */
+.asof { font-size: .82rem; color: var(--faint); margin: 1.2rem 0 0; max-width: 64ch; }
+
+/* ══ WERKSTUKKEN ══════════════════════════════════════════════
+   Letterlijke fragmenten uit projectnotities: label, titel, citaat,
+   en wat er daarna gebeurde.
+   ══════════════════════════════════════════════════════════════ */
+.notes { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 1.2rem; }
+.notes > li {
+  background: var(--surface); border: 1px solid var(--line);
+  border-left: 3px solid color-mix(in srgb, var(--app) 60%, transparent);
+  border-radius: 12px; padding: 1.3rem 1.4rem 1.2rem;
+}
+.notes .where {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--app); font-weight: 700;
+  display: block; margin-bottom: .4rem;
+}
+.notes h3 {
+  font-family: var(--serif); font-weight: 400; font-size: 1.3rem;
+  letter-spacing: -.015em; line-height: 1.25; margin: 0 0 .9rem;
+}
+.notes blockquote {
+  margin: 0 0 1rem; padding: .9rem 1.1rem; border-radius: 9px;
+  background: var(--raise); font-size: .92rem; line-height: 1.6; color: var(--ink);
+}
+.notes blockquote p { margin: 0 0 .7rem; max-width: none; }
+.notes blockquote p:last-child, .notes blockquote ol:last-child { margin-bottom: 0; }
+.notes blockquote ol { margin: 0 0 .7rem; padding-left: 1.3rem; }
+.notes blockquote li { margin: 0 0 .3rem; }
+.notes blockquote b { font-weight: 600; }
+.notes blockquote code {
+  font-family: var(--mono); font-size: .86em;
+  background: var(--surface); padding: .05em .3em; border-radius: 4px;
+}
+.notes .outcome { margin: 0; color: var(--muted); font-size: .93rem; max-width: 64ch; }
+.notes .outcome b { color: var(--ink); font-weight: 600; }
 
 /* ══ FOUTENLIJST ══════════════════════════════════════════════
    De onware zin doorgestreept, de werkelijkheid eronder.
@@ -504,5 +561,5 @@ a:focus-visible, button:focus-visible {
   #field, .topbar, .chips, .entry .links, .entry .shot { display: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .sec { grid-template-columns: 1fr; }
-  .entry, .emp, .case-panel, .faults li { border: 1px solid #ccc; box-shadow: none; }
+  .entry, .emp, .case-panel, .faults li, .notes > li { border: 1px solid #ccc; box-shadow: none; }
 }
