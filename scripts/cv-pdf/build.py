@@ -60,7 +60,7 @@ DATA = {
              [("BabyBeam.", "Videobabyfoon met twee iPhones, zonder account. Live sinds juli 2026."),
               ("WristVault.", "Horlogecollectie bijhouden, eenmalige aankoop. Live sinds juli 2026."),
               ("GRID_BREAKER.", "Reflexspel zonder advertenties. Live sinds juni 2026.")],
-             ("Werkstukken zoals de backlog en een story met acceptatiecriterium staan op ", "jimmyrentmeester.github.io/nl", "https://jimmyrentmeester.github.io/nl/", ".")),
+             ("Projectnotities zoals de backlog en een story met acceptatiecriterium staan op ", "jimmyrentmeester.github.io/nl", "https://jimmyrentmeester.github.io/nl/", ".")),
             ("2020 – 2022", "Productmanager Gaming", "Coolblue",
              "Eindverantwoordelijk voor het commerciële resultaat en de klantreis van de Gaming-categorie. Bij de lancering van de PlayStation 5 in 2020 (weinig voorraad, enorme vraag) werkte ik tegelijk met development, het app-team, marketing, klantenservice en logistiek. Daarna richtte ik een vast proces in voor elke nieuwe levering, wat minder klantcontact opleverde.",
              ["Groei en klantreizen verbeteren op basis van gedrags-, retour- en reviewdata.",

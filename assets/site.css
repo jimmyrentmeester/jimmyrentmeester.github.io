@@ -473,7 +473,7 @@ section { margin-bottom: 6rem; }
 /* Bron en peildatum onder het werklog. */
 .asof { font-size: .82rem; color: var(--faint); margin: 1.2rem 0 0; max-width: 64ch; }
 
-/* ══ WERKSTUKKEN ══════════════════════════════════════════════
+/* ══ PROJECTNOTITIES ══════════════════════════════════════════════
    Letterlijke fragmenten uit projectnotities: label, titel, citaat,
    en wat er daarna gebeurde.
    ══════════════════════════════════════════════════════════════ */
