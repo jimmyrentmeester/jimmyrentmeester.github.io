@@ -497,8 +497,9 @@ section { margin-bottom: 6rem; }
   background: var(--raise); font-size: .92rem; line-height: 1.6; color: var(--ink);
 }
 .notes blockquote p { margin: 0 0 .7rem; max-width: none; }
-.notes blockquote p:last-child, .notes blockquote ol:last-child { margin-bottom: 0; }
+.notes blockquote p:last-child, .notes blockquote ol:last-child, .notes blockquote ul:last-child { margin-bottom: 0; }
 .notes blockquote ol { margin: 0 0 .7rem; padding-left: 1.3rem; }
+.notes blockquote ul { margin: 0 0 .7rem; padding-left: 0; list-style: none; font-family: var(--mono); font-size: .82rem; }
 .notes blockquote li { margin: 0 0 .3rem; }
 .notes blockquote b { font-weight: 600; }
 .notes blockquote code {
