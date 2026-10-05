@@ -135,7 +135,7 @@
                 <dt>Shipped</dt>
                 <dd class="soft">Live since June 2026. In version 1.3 the campaign was rebuilt into four chapters, each with a boss.</dd>
                 <dt>Next</dt>
-                <dd class="soft">Of the people who come across the game in the App Store, only 1.4% in the US tap through to its page (App Analytics, 4 October 2026). New levels won't help with that. So version 1.3.3 puts gameplay on the first screenshot, and adds a dedicated listing for the UK and for the Netherlands.</dd>
+                <dd class="soft">Of the people who come across the game in the App Store, only 1.4% in the US tap through to its page (App Analytics, 4 October 2026). So I'm focusing on being found first, not on new levels. Version 1.3.3 puts gameplay on the first screenshot, and adds a dedicated listing for the UK and for the Netherlands.</dd>
               </dl>
               <p class="stat"><!--rating:6779888720--><span class="rgroup"><span class="score">5.0</span> ★ <span class="count">7 ratings</span></span><!--/rating--><!--downloads:6779888720--><span class="dl"><span class="n">83</span> downloads</span><!--/downloads--></p>
               <p class="links">
@@ -158,10 +158,10 @@
           </div>
           <div class="cols">
             <div>
-              <p class="desc">Turns two iPhones into a video baby monitor. Picture and sound go straight from one phone to the other, encrypted, and nothing gets stored.</p>
+              <p class="desc">Turns two iPhones into a video baby monitor. Picture and sound go encrypted from one phone to the other, with no server of mine in between, and the app records nothing.</p>
               <dl class="cut">
                 <dt>Cut</dt>
-                <dd>The account and the recordings. Apps with an account send the video through their own servers. BabyBeam pairs two of your own phones, so nothing is stored anywhere.</dd>
+                <dd>The account and the recordings. BabyBeam pairs two of your own phones with a code, and the app stores no video.</dd>
                 <dt>Shipped</dt>
                 <dd class="soft">Live since 7 July 2026. The full story is below: the problem, the priorities, the releases, what went wrong and what I measure.</dd>
               </dl>
@@ -222,13 +222,21 @@
         <div class="case prose">
           <p class="kicker">BabyBeam: a baby monitor without an account, from first version to 1.5.3.</p>
 
+          <dl class="summary">
+            <div><dt>Problem</dt><dd>Baby monitor apps are expensive or ask for a subscription, and often an account too. I wanted one every parent could use without worrying about privacy or cost.</dd></div>
+            <div><dt>My main decision</dt><dd>No account and no server of my own. Video and sound go encrypted between two phones, and the app records nothing.</dd></div>
+            <div><dt>Shipped</dt><dd>Live since 7 July 2026, now version 1.5.3: live video and sound, cry alerts, talk back and QR pairing. After launch, mostly reliability and a better feedback button.</dd></div>
+            <div><dt>What I see and don't know yet</dt><dd>Few people in the US tap through to the page in the App Store. My guess is that the black screenshots play a part; whether the new set helps, I'll only know after version 1.5.4. How many people actually use the app, I don't know.</dd></div>
+            <div><dt>What I learned</dt><dd>Reliability first, extra features later. And whatever is claimed about the app, including on the App Store page, I check as strictly as the app itself.</dd></div>
+          </dl>
+
           <h3>The problem</h3>
-          <p>There are standalone baby monitors, which end up in a drawer after a few years, and there are apps. Those apps are expensive if you buy them outright, or you're tied to a subscription. Often you also have to create an account, and then your child's video sits on a company's servers. I wanted a baby monitor every parent could use without worrying about privacy or cost.</p>
+          <p>There are standalone baby monitors, which end up in a drawer after a few years, and there are apps. Those apps are expensive if you buy them outright, or you're tied to a subscription. Often you also have to create an account. I wanted a baby monitor without an account and without stored video, one every parent could use without worrying about privacy or cost.</p>
           <p>Before I wrote the backlog, I collected the complaints about well-known monitors and apps: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor and Luna (July 2026). Among other things, people complained that the connection drops with no alarm, that the sound stops when the screen locks, that you can't see the baby phone's battery running down, and that basic features sit behind a subscription.</p>
 
           <h3>The call</h3>
-          <p>Video and audio go over WebRTC straight from one phone to the other, end-to-end encrypted (DTLS-SRTP). There's no server, so nothing gets recorded or kept either. Only the pairing goes briefly through iCloud. That message is encrypted with a key that comes from the pairing code, and I don't have that key.</p>
-          <p>It also works when you're not home. The phones find each other over the internet and don't need to be on the same Wi-Fi.</p>
+          <p>I don't run a server of my own. Video and audio go over WebRTC between the two phones, encrypted with DTLS-SRTP, and the app records nothing. For pairing, the app uses Apple's iCloud: both phones leave a small message there, encrypted with a key derived from the pairing code. That code only lives on the two phones. Once the connection is up, each phone deletes its own message again.</p>
+          <p>It usually works when you're not home too. The phones look for each other over the internet and, to do that, ask a Google STUN server for their internet address. No video or sound passes through it.</p>
 
           <h3>How I prioritised</h3>
           <p>A baby monitor that stops without warning is worse than one with few features. That was my starting point. So everything that builds trust came first: a watchdog that notices when the picture freezes, the baby phone's battery on the parent screen, sound that keeps playing when the screen locks, and cry detection on the device itself. Only after that came things like QR pairing and lullabies from the other room. I only ticked off a task once it also worked on two real iPhones.</p>
@@ -259,7 +267,7 @@
             </li>
             <li>
               <b>Connecting is partly up to the user</b>
-              <span>An app that sends everything through its own servers always connects, because there's only one route. Two phones looking for each other directly usually find each other too, but sometimes a provider's network gets in the way. Then you have to add a TURN relay yourself, under the gear icon. In effect, I've handed that problem to the user.</span>
+              <span>Two phones looking for each other directly usually find each other, but sometimes a provider's network blocks that. Then you have to add a TURN relay yourself, in the settings. Video and sound then go through that relay, still encrypted. In effect, I've handed that problem to the user.</span>
             </li>
             <li>
               <b>The marketing had to change too</b>

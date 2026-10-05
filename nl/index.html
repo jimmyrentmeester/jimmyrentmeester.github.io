@@ -134,7 +134,7 @@
                 <dt>Uitgebracht</dt>
                 <dd class="soft">Live sinds juni 2026. In versie 1.3 is de campagne omgebouwd naar vier hoofdstukken, elk met een eindbaas.</dd>
                 <dt>Volgende stap</dt>
-                <dd class="soft">Van de mensen die het spel in de App Store voorbij zien komen, klikt in de VS maar 1,4% door naar de pagina (App Analytics, 4 oktober 2026). Nieuwe levels helpen daar niet bij. In versie 1.3.3 staat daarom beeld uit het spel zelf op de eerste screenshot, en komt er een Britse en een Nederlandse versie van de App Store-tekst.</dd>
+                <dd class="soft">Van de mensen die het spel in de App Store voorbij zien komen, klikt in de VS maar 1,4% door naar de pagina (App Analytics, 4 oktober 2026). Daarom zet ik eerst in op vindbaarheid, niet op nieuwe levels. In versie 1.3.3 staat daarom beeld uit het spel zelf op de eerste screenshot, en komt er een Britse en een Nederlandse versie van de App Store-tekst.</dd>
               </dl>
               <p class="stat"><!--rating:6779888720--><span class="rgroup"><span class="score">5,0</span> ★ <span class="count">7 ratings</span></span><!--/rating--><!--downloads:6779888720--><span class="dl"><span class="n">83</span> downloads</span><!--/downloads--></p>
               <p class="links">
@@ -157,10 +157,10 @@
           </div>
           <div class="cols">
             <div>
-              <p class="desc">Maakt van twee iPhones een videobabyfoon. Beeld en geluid gaan rechtstreeks van de ene telefoon naar de andere, versleuteld, en er wordt niks opgeslagen.</p>
+              <p class="desc">Maakt van twee iPhones een videobabyfoon. Beeld en geluid gaan versleuteld van de ene telefoon naar de andere, zonder server van mij ertussen, en de app neemt niets op.</p>
               <dl class="cut">
                 <dt>Geschrapt</dt>
-                <dd>Het account en de opnames. Apps met een account sturen het beeld via hun eigen servers. BabyBeam koppelt twee van je eigen telefoons, dus er wordt nergens iets bewaard.</dd>
+                <dd>Het account en de opnames. BabyBeam koppelt twee van je eigen telefoons met een code, en de app slaat geen beelden op.</dd>
                 <dt>Uitgebracht</dt>
                 <dd class="soft">Live sinds 7 juli 2026. Hieronder staat het hele verhaal: het probleem, de prioriteiten, de releases, wat misging en wat ik meet.</dd>
               </dl>
@@ -221,13 +221,21 @@
         <div class="case prose">
           <p class="kicker">BabyBeam: een babyfoon zonder account, van eerste versie tot 1.5.3.</p>
 
+          <dl class="summary">
+            <div><dt>Probleem</dt><dd>Babyfoon-apps zijn duur of vragen een abonnement, en vaak ook een account. Ik wilde er een die elke ouder kan gebruiken zonder zorgen over privacy of kosten.</dd></div>
+            <div><dt>Mijn belangrijkste keuze</dt><dd>Geen account en geen eigen server. Beeld en geluid gaan versleuteld tussen twee telefoons, en de app neemt niets op.</dd></div>
+            <div><dt>Uitgebracht</dt><dd>Live sinds 7 juli 2026, nu versie 1.5.3: live beeld en geluid, huilalarm, terugpraten en koppelen met een QR-code. Na de lancering vooral betrouwbaarheid en een betere feedbackknop.</dd></div>
+            <div><dt>Wat ik zie en nog niet weet</dt><dd>Weinig mensen in de VS klikken in de App Store door naar de pagina. Mijn vermoeden is dat de zwarte screenshots meespelen; of de nieuwe set helpt, weet ik pas na versie 1.5.4. Hoeveel mensen de app echt gebruiken, weet ik niet.</dd></div>
+            <div><dt>Wat ik leerde</dt><dd>Eerst betrouwbaarheid, dan extra functies. En wat er over de app wordt beweerd, ook op de App Store-pagina, controleer ik net zo streng als de app zelf.</dd></div>
+          </dl>
+
           <h3>Het probleem</h3>
-          <p>Je hebt losse babyfoons, die na een paar jaar in een la belanden, en je hebt apps. Die apps zijn duur als je ze in één keer koopt, of je zit vast aan een abonnement. Vaak moet je ook een account maken, en dan staan de beelden van je kind op de servers van een bedrijf. Ik wilde een babyfoon die elke ouder kan gebruiken zonder zich zorgen te maken over privacy of kosten.</p>
+          <p>Je hebt losse babyfoons, die na een paar jaar in een la belanden, en je hebt apps. Die apps zijn duur als je ze in één keer koopt, of je zit vast aan een abonnement. Vaak moet je ook een account maken. Ik wilde een babyfoon zonder account en zonder opslag van beelden, die elke ouder kan gebruiken zonder zich zorgen te maken over privacy of kosten.</p>
           <p>Voordat ik de backlog maakte, heb ik de klachten over bekende babyfoons en apps verzameld: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor en Luna (juli 2026). Mensen klaagden onder meer dat de verbinding wegvalt zonder alarm, dat het geluid stopt als het scherm op slot gaat, dat je niet ziet dat de batterij van de babytelefoon leegloopt en dat basisfuncties achter een abonnement zitten.</p>
 
           <h3>De keuze</h3>
-          <p>Beeld en geluid gaan via WebRTC rechtstreeks van de ene telefoon naar de andere, end-to-end versleuteld (DTLS-SRTP). Er is geen server, dus er wordt ook niets opgenomen of bewaard. Alleen het koppelen loopt kort via iCloud. Dat bericht is versleuteld met een sleutel die uit de koppelcode komt, en die sleutel heb ik zelf niet.</p>
-          <p>Het werkt ook als je niet thuis bent. De telefoons vinden elkaar via internet en hoeven niet op hetzelfde wifi-netwerk te zitten.</p>
+          <p>Ik draai geen eigen server. Beeld en geluid gaan via WebRTC tussen de twee telefoons, versleuteld met DTLS-SRTP, en de app neemt niets op. Voor het koppelen gebruikt de app iCloud van Apple: beide telefoons zetten daar een klein bericht neer, versleuteld met een sleutel die uit de koppelcode wordt afgeleid. Die code staat alleen op de twee telefoons. Zodra de verbinding staat, verwijdert elke telefoon zijn eigen bericht weer.</p>
+          <p>Meestal werkt het ook als je niet thuis bent. De telefoons zoeken elkaar via internet en vragen daarvoor hun internetadres op bij een STUN-server van Google. Daar gaat geen beeld of geluid langs.</p>
 
           <h3>Hoe ik prioriteerde</h3>
           <p>Een babyfoon die zonder waarschuwing stopt, is erger dan een babyfoon met weinig functies. Dat was mijn uitgangspunt. Daarom kwam eerst alles wat vertrouwen geeft: een controle die merkt wanneer het beeld vastloopt, de batterij van de babytelefoon op het ouderscherm, geluid dat doorloopt als het scherm op slot gaat, en huildetectie op het toestel zelf. Daarna pas dingen als koppelen met een QR-code en slaapliedjes op afstand. Ik vinkte een taak pas af als hij ook op twee echte iPhones werkte.</p>
@@ -258,7 +266,7 @@
             </li>
             <li>
               <b>Soms moet de gebruiker de verbinding zelf regelen</b>
-              <span>Een app die alles via eigen servers stuurt, verbindt altijd, want er is maar één route. Twee telefoons die elkaar rechtstreeks zoeken, vinden elkaar meestal ook, maar soms zit het netwerk van een provider in de weg. Dan moet je zelf een TURN-relay toevoegen in de instellingen. Dat probleem heb ik eigenlijk bij de gebruiker neergelegd.</span>
+              <span>Twee telefoons die elkaar rechtstreeks zoeken, vinden elkaar meestal, maar soms houdt het netwerk van een provider dat tegen. Dan moet je zelf een TURN-relay toevoegen in de instellingen. Beeld en geluid lopen dan via die relay, nog steeds versleuteld. Dat probleem heb ik eigenlijk bij de gebruiker neergelegd.</span>
             </li>
             <li>
               <b>Ook de marketing moest anders</b>
