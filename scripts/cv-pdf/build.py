@@ -80,6 +80,7 @@ DATA = {
     },
     "en": {
         "out": "cv/jimmy-rentmeester-cv-en.pdf",
+        "compact": True,  # Engelse tekst is langer; zo blijft het op twee pagina's
         "site": "jimmyrentmeester.github.io",
         "role": "Lead Product Manager · Coolblue",
         "place": "Tilburg, Netherlands",
@@ -153,30 +154,30 @@ CSS = """
 :root { --ink:#14161c; --muted:#555c69; --faint:#8a909c; --line:#e3e1dc; --accent:#4d5dfb; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { font-family: 'Inter', sans-serif; font-size: 8.6pt; line-height: 1.45; color: var(--ink);
+body { font-family: 'Inter', sans-serif; font-size: 8.9pt; line-height: 1.5; color: var(--ink);
        -webkit-print-color-adjust: exact; print-color-adjust: exact; font-feature-settings: "ss01", "cv11"; }
 a { color: inherit; text-decoration: none; }
 
 header { display: grid; grid-template-columns: 1fr auto; gap: 8mm; align-items: center;
-         padding-bottom: 5mm; border-bottom: 1.5pt solid var(--ink); margin-bottom: 5mm; }
+         padding-bottom: 6mm; border-bottom: 1.5pt solid var(--ink); margin-bottom: 6mm; }
 h1 { font-family: 'Source Serif', serif; font-weight: 600; font-size: 27pt; line-height: 1;
      letter-spacing: -.02em; margin: 0 0 2.2mm; }
 .role { font-size: 10.5pt; font-weight: 500; color: var(--accent); margin: 0 0 3.2mm; }
 .contact { display: flex; flex-wrap: wrap; gap: 1mm 4.5mm; margin: 0; color: var(--muted); font-size: 8.3pt; }
 .contact span::before { content: ""; display: inline-block; width: 1.3mm; height: 1.3mm; border-radius: 50%;
                         background: var(--accent); margin: 0 1.6mm .45mm 0; vertical-align: middle; }
-.photo { width: 25mm; height: 25mm; border-radius: 50%; object-fit: cover; display: block; }
+.photo { width: 27mm; height: 27mm; border-radius: 50%; object-fit: cover; display: block; }
 
 .grid { display: grid; grid-template-columns: 1fr 55mm; gap: 0 8mm; }
 .side { border-left: .6pt solid var(--line); padding-left: 6mm; }
 
 h2 { font-size: 7.2pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
      color: var(--accent); margin: 0 0 2.6mm; }
-section { margin-bottom: 5mm; }
+section { margin-bottom: 6mm; }
 .side section { break-inside: avoid; }
-.profile p { margin: 0; font-family: 'Source Serif', serif; font-size: 10.2pt; line-height: 1.45; color: var(--ink); }
+.profile p { margin: 0; font-family: 'Source Serif', serif; font-size: 10.6pt; line-height: 1.5; color: var(--ink); }
 
-.job { display: grid; grid-template-columns: 24mm 1fr; gap: 0 4mm; padding: 2.2mm 0 2.4mm;
+.job { display: grid; grid-template-columns: 24mm 1fr; gap: 0 4mm; padding: 2.6mm 0 3mm;
        border-top: .6pt solid var(--line); break-inside: avoid; }
 .job:first-of-type { border-top: 0; padding-top: 0; }
 .when { font-size: 7.6pt; color: var(--faint); font-weight: 500; padding-top: .5mm; font-variant-numeric: tabular-nums; }
@@ -184,7 +185,7 @@ section { margin-bottom: 5mm; }
 .job .org { font-size: 8.2pt; color: var(--muted); margin: .3mm 0 1.4mm; }
 .job p { margin: 0; color: #2c313a; }
 .job ul { margin: 1.4mm 0 0; padding-left: 3.6mm; color: #2c313a; }
-.job li { margin: 0 0 .5mm; }
+.job li { margin: 0 0 .7mm; }
 .job li::marker { color: var(--accent); }
 .job li b { font-weight: 600; color: var(--ink); }
 .job .note { margin: 1.4mm 0 0; color: var(--muted); font-size: 8.2pt; }
@@ -192,11 +193,22 @@ section { margin-bottom: 5mm; }
 
 .side dl { margin: 0; }
 .side dt { font-size: 7.4pt; color: var(--faint); font-weight: 500; }
-.side dd { margin: 0 0 1.8mm; }
-.item { margin: 0 0 2mm; break-inside: avoid; }
+.side dd { margin: 0 0 2.2mm; }
+.item { margin: 0 0 2.4mm; break-inside: avoid; }
 .item b { font-weight: 600; display: block; }
 .item span { color: var(--muted); display: block; font-size: 8.2pt; }
 .item i { font-style: normal; color: var(--faint); font-size: 7.6pt; }
+
+/* Compacte variant (EN): iets kleinere maten, zelfde ontwerp. */
+body.compact { font-size: 8.6pt; line-height: 1.45; }
+.compact header { padding-bottom: 5mm; margin-bottom: 5mm; }
+.compact .photo { width: 25mm; height: 25mm; }
+.compact section { margin-bottom: 5mm; }
+.compact .profile p { font-size: 10.2pt; line-height: 1.45; }
+.compact .job { padding: 2.2mm 0 2.4mm; }
+.compact .job li { margin-bottom: .5mm; }
+.compact .side dd { margin-bottom: 1.8mm; }
+.compact .item { margin-bottom: 2mm; }
 
 footer { margin-top: 2mm; padding-top: 2.4mm; border-top: .6pt solid var(--line);
          display: flex; justify-content: space-between; color: var(--faint); font-size: 7.4pt; }
@@ -227,7 +239,7 @@ def page(code, d):
     return f"""<!doctype html>
 <html lang="{code}"><head><meta charset="utf-8"><meta name="robots" content="noindex">
 <title>Jimmy Rentmeester — CV</title><style>{font_face()}{CSS}</style></head>
-<body>
+<body{' class="compact"' if d.get("compact") else ''}>
 <header>
   <div>
     <h1>Jimmy Rentmeester</h1>
