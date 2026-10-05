@@ -32,41 +32,63 @@
   </nav>
   <div class="doc">
   <h1>BabyBeam — Política de privacidad</h1>
-  <p class="muted">Última actualización: 4 de julio de 2026</p>
+  <p class="muted">Última actualización: 5 de octubre de 2026</p>
 
   <p>BabyBeam es un vigilabebés privado que conecta dos de tus propios
-  dispositivos. Está diseñado para que la habitación de tu bebé siga siendo
-  privada. En pocas palabras: <strong>no recopilamos, recibimos ni
-  guardamos ninguno de tus datos, ni tenemos acceso a ellos.</strong></p>
+  dispositivos. La app está hecha para que la habitación de tu bebé siga siendo
+  privada. En pocas palabras: <strong>no recopilamos ni guardamos ningún dato
+  tuyo, y no podemos ver ni oír tu vídeo y audio.</strong> Solo recibimos un
+  correo si nos lo envías tú. Abajo se indica exactamente qué servicios de
+  terceros usa la app.</p>
 
   <h2>Sin cuentas, sin seguimiento</h2>
   <p>BabyBeam no tiene registro ni cuentas de usuario. La app no contiene
-  análisis, publicidad ni ningún tipo de seguimiento de terceros. No existe
+  analíticas, ni anuncios, ni ningún tipo de seguimiento por terceros. No hay
   ningún servidor de BabyBeam.</p>
 
   <h2>Tu vídeo y audio nunca nos llegan</h2>
-  <p>El vídeo y el audio en directo van <strong>directamente entre tus dos
-  dispositivos</strong> mediante WebRTC, cifrados de extremo a extremo
-  (DTLS-SRTP). No se graba nada ni se guarda nada. No hay biblioteca en la
-  nube ni historial.</p>
+  <p>El vídeo y el audio en directo van por WebRTC entre tus dos dispositivos,
+  <strong>cifrados de extremo a extremo</strong> (DTLS-SRTP). Normalmente la
+  conexión es directa. Si tú mismo has configurado un relé TURN en los ajustes, la
+  conexión pasa por ese servidor. El vídeo y el audio siguen cifrados; el relé no
+  puede verlos. No se graba ni se guarda nada. No hay biblioteca en la nube ni
+  historial.</p>
 
   <h2>El protocolo de vinculación</h2>
-  <p>Para que los dos dispositivos se encuentren, un pequeño «handshake» de
-  conexión pasa brevemente por <strong>CloudKit de Apple</strong>. Antes de
-  enviarse, está <strong>cifrado con una clave derivada de tu código de
-  vinculación</strong> (AES-256), que nosotros no conocemos, y se elimina en
-  cuanto los dispositivos se conectan. No podemos leer su contenido.</p>
+  <p>Para que tus dos dispositivos se encuentren, un pequeño «saludo» de conexión
+  pasa brevemente por <strong>CloudKit de Apple</strong>. Antes de enviarse, está
+  <strong>cifrado con una clave derivada de tu código de vinculación</strong>
+  (AES-256), que nosotros no conocemos; se borra en cuanto se establece la
+  conexión. No podemos leer su contenido.</p>
+
+  <h2>Encontrarse por internet (STUN)</h2>
+  <p>Para encontrarse también fuera de tu propia wifi, cada dispositivo pide su
+  dirección pública de internet a un <strong>servidor STUN de Google</strong>
+  (stun.l.google.com). Google ve entonces la dirección IP de tu dispositivo. El
+  vídeo, el audio y tu código de vinculación no pasan por él. A ese tratamiento se
+  aplica la política de privacidad de Google.</p>
+
+  <h2>Comentarios por correo</h2>
+  <p>Si envías comentarios desde la app, tu propia app de correo abre un mensaje
+  dirigido a nosotros. Debajo de tu texto aparecen la versión de la app, el idioma
+  de la app y del dispositivo, el modelo de dispositivo, la versión de iOS y si es
+  el móvil del bebé o el de los padres. Lo ves todo antes de enviarlo y puedes
+  modificarlo. Tu código de vinculación nunca aparece. Solo usamos tu correo para
+  responderte y mejorar la app.</p>
+
+  <h2>Propina</h2>
+  <p>Una propina se paga a través de Apple. No recibimos datos de pago ni otros
+  datos personales.</p>
 
   <h2>Permisos del dispositivo</h2>
-  <p>BabyBeam solicita acceso a la cámara, el micrófono, la red local y las
-  notificaciones únicamente para que el vigilabebés en directo funcione en
-  tus propios dispositivos. Se usan solo en el dispositivo y en la conexión
-  directa; no son datos que nosotros recopilemos.</p>
+  <p>BabyBeam pide acceso a la cámara, el micrófono, la red local y las
+  notificaciones solo para que el vigilabebés en directo funcione en tus propios
+  dispositivos. Se usan únicamente en el propio dispositivo y en la conexión entre
+  tus dispositivos; no son datos que recopilemos.</p>
 
   <h2>Niños</h2>
-  <p>BabyBeam es una herramienta para padres y cuidadores. La app no
-  recopila conscientemente ninguna información sobre nadie, incluidos los
-  niños.</p>
+  <p>BabyBeam es una herramienta para madres, padres y cuidadores. La app no
+  recopila a sabiendas información sobre nadie, niños incluidos.</p>
 
   <h2>Contacto</h2>
   <p>¿Preguntas sobre privacidad? Escribe a

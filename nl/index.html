@@ -97,7 +97,7 @@
       <div class="prose reveal">
         <p>Sinds augustus 2022 ben ik Lead Productmanager in het team Gaming, Printers &amp; Kantoor, voor Nederland, België en Duitsland. Ik ben verantwoordelijk voor het commerciële resultaat en de online klantreis van die categorieën.</p>
         <p>Ik geef leiding aan negen mensen: drie commercieel productmanagers, drie product journey managers en drie productredacteuren. Ik vertaal een visie naar roadmaps per kwartaal, prioriteer op impact en inspanning, en breng commercie, marketing, inkoop en development bij elkaar.</p>
-        <p><b>De LEGO-categorie.</b> Ik heb de LEGO-categorie bij Coolblue opgezet. Mijn deel was de klantreis. Mijn team maakte de storefronts, filters en content, en samen met de manager van het categorieteam werkte ik aan het winkelplan. De afspraken met LEGO maakte inkoop.</p>
+        <p><b>De LEGO-categorie.</b> Ik heb de LEGO-categorie bij Coolblue opgezet en was er eindverantwoordelijk voor, ook voor het commerciële resultaat. Mijn team maakte de storefronts, filters en content, en samen met de manager van het categorieteam werkte ik aan het winkelplan. De afspraken met LEGO maakte inkoop.</p>
         <p><b>De PlayStation 5, 2020.</b> Toen nog als Productmanager Gaming. Bij de lancering van de PlayStation 5 was er weinig voorraad en veel vraag. Ik werkte met development, het app-team, marketing, klantenservice en logistiek. Daarna zette ik een vast proces op voor nieuwe leveringen. De techniek bouwden anderen; ik zorgde voor de afstemming en het proces.</p>
         <p><b>AI in het werk.</b> Bij Coolblue ben ik AI-ambassadeur en power user van Glean, en begeleid ik collega's bij het gebruik en de adoptie ervan.</p>
         <p class="contact-links">
@@ -233,14 +233,14 @@
 
           <h3>Het probleem</h3>
           <p>Je hebt losse babyfoons, die na een paar jaar in een la belanden, en je hebt apps. Die apps zijn duur als je ze in één keer koopt, of je zit vast aan een abonnement. Vaak moet je ook een account maken. Ik wilde een babyfoon zonder account en zonder opslag van beelden, die elke ouder kan gebruiken zonder zich zorgen te maken over privacy of kosten.</p>
-          <p>Voordat ik de backlog maakte, heb ik de klachten over bekende babyfoons en apps verzameld: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor en Luna (juli 2026). Mensen klaagden onder meer dat de verbinding wegvalt zonder alarm, dat het geluid stopt als het scherm op slot gaat, dat je niet ziet dat de batterij van de babytelefoon leegloopt en dat basisfuncties achter een abonnement zitten.</p>
+          <p>Er was al een eerste werkende versie: twee telefoons die met een code koppelen en beeld en geluid doorgeven. Voordat ik daar een backlog voor maakte, heb ik de klachten over bekende babyfoons en apps verzameld: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor en Luna (begin juli 2026). Mensen klaagden onder meer dat de verbinding wegvalt zonder alarm, dat het geluid stopt als het scherm op slot gaat, dat je niet ziet dat de batterij van de babytelefoon leegloopt en dat basisfuncties achter een abonnement zitten.</p>
 
           <h3>De keuze</h3>
           <p>Ik draai geen eigen server. Beeld en geluid gaan via WebRTC tussen de twee telefoons, versleuteld met DTLS-SRTP, en de app neemt niets op. Voor het koppelen gebruikt de app iCloud van Apple: beide telefoons zetten daar een klein bericht neer, versleuteld met een sleutel die uit de koppelcode wordt afgeleid. Die code staat alleen op de twee telefoons. Zodra de verbinding staat, verwijdert elke telefoon zijn eigen bericht weer.</p>
           <p>Meestal werkt het ook als je niet thuis bent. De telefoons zoeken elkaar via internet en vragen daarvoor hun internetadres op bij een STUN-server van Google. Daar gaat geen beeld of geluid langs.</p>
 
           <h3>Hoe ik prioriteerde</h3>
-          <p>Een babyfoon die zonder waarschuwing stopt, is erger dan een babyfoon met weinig functies. Dat was mijn uitgangspunt. Daarom kwam eerst alles wat vertrouwen geeft: een controle die merkt wanneer het beeld vastloopt, de batterij van de babytelefoon op het ouderscherm, geluid dat doorloopt als het scherm op slot gaat, en huildetectie op het toestel zelf. Daarna pas dingen als koppelen met een QR-code en slaapliedjes op afstand. Ik vinkte een taak pas af als hij ook op twee echte iPhones werkte.</p>
+          <p>Een babyfoon die zonder waarschuwing stopt, is erger dan een babyfoon met weinig functies. Dat was mijn uitgangspunt. Daarom kwam eerst alles wat vertrouwen geeft: een controle die merkt wanneer het beeld vastloopt, de batterij van de babytelefoon op het ouderscherm, geluid dat doorloopt als het scherm op slot gaat, en huildetectie op het toestel zelf. Daarna pas dingen als koppelen met een QR-code en slaapliedjes op afstand. Het bouwen ging snel: AI bouwde fase 0 tot en met 3 op 2 en 3 juli. Een taak vinkte ik af als de tests slaagden, en daarna heb ik alles op twee echte iPhones getest.</p>
           <p>Meerdere kijkers tegelijk, zodat beide ouders mee kunnen kijken, heb ik bewust uitgesteld. Zonder server moet de babytelefoon het beeld voor elke kijker apart versturen, en die telefoon staat de hele nacht aan. Ik heb besloten dit pas na de lancering op te pakken, met maximaal twee kijkers en de tweede standaard alleen met geluid. Het besluit zelf staat hieronder bij de <a href="#notes">projectnotities</a>.</p>
 
           <h3>Wat er is uitgebracht</h3>
@@ -296,7 +296,7 @@
             <details>
               <summary>
                 <span class="where">Backlog · vanaf 2 juli 2026</span>
-                <h3>Projectplan "Vertrouwen eerst": fases en taken</h3>
+                <h3>Projectplan v2 "Vertrouwen eerst": fases en taken</h3>
                 <p class="outcome"><b>Daarna.</b> Fase 0 tot en met 2 en de Live Activity zijn gebouwd en op twee echte iPhones getest. Meerdere kijkers en de Watch-app staan nog open.</p>
                 <span class="open">Lees het fragment</span>
               </summary>
@@ -441,7 +441,7 @@
   <footer>
     <span>© 2026 Jimmy Rentmeester</span>
     <span class="spacer"></span>
-    <span class="colophon">Eén HTML-bestand per pagina, één stylesheet en één klein script voor de animatie bovenaan. Geen framework, geen buildstap, geen analytics, geen cookies. Het lettertype dat je nu leest stond al op je toestel, en er wordt op deze pagina niks van andermans server geladen. Ongeveer 20 kB voordat de screenshots laden, 175 kB met alles erbij. Werkt gewoon met JavaScript uit.</span>
+    <span class="colophon">Eén HTML-bestand per pagina, één stylesheet en één klein script voor de animatie bovenaan. Geen framework, geen buildstap, geen analytics, geen cookies. Het lettertype dat je nu leest stond al op je toestel, en er wordt op deze pagina niks van andermans server geladen. Ruim 30 kB voordat de afbeeldingen van de apps laden, ongeveer 180 kB met alles erbij. Werkt gewoon met JavaScript uit.</span>
   </footer>
 
 </div>

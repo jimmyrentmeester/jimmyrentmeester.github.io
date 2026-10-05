@@ -32,39 +32,61 @@
   </nav>
   <div class="doc">
   <h1>BabyBeam — Privacy Policy</h1>
-  <p class="muted">Last updated: 4 July 2026</p>
+  <p class="muted">Last updated: 5 October 2026</p>
 
   <p>BabyBeam is a private baby monitor that connects two of your own devices.
-  It is built so that your baby's room stays private. In plain terms:
-  <strong>we do not collect, receive, store, or have access to any of your
-  data.</strong></p>
+  It is built so your baby's room stays private. In short:
+  <strong>we don't collect or store any of your data, and we can't see or hear
+  your video and audio.</strong> We only receive an email if you send us one
+  yourself. Below is exactly which third-party services the app uses.</p>
 
   <h2>No accounts, no tracking</h2>
-  <p>BabyBeam has no sign-up and no user accounts. It contains no analytics,
-  no advertising, and no third-party tracking of any kind. There is no
+  <p>BabyBeam has no sign-up and no user accounts. The app contains no
+  analytics, no ads and no third-party tracking of any kind. There is no
   BabyBeam server.</p>
 
   <h2>Your video and audio never reach us</h2>
-  <p>Live video and audio travel <strong>directly between your two devices</strong>
-  using WebRTC, end-to-end encrypted (DTLS-SRTP). Nothing is recorded and
-  nothing is stored. There is no cloud library and no history.</p>
+  <p>Live video and audio travel over WebRTC between your two devices,
+  <strong>end-to-end encrypted</strong> (DTLS-SRTP). Normally the connection is
+  direct. If you have set up a TURN relay yourself in Settings, the connection
+  runs through that server. Video and audio stay encrypted; the relay can't view
+  them. Nothing is recorded and nothing is stored. There is no cloud library and
+  no history.</p>
 
   <h2>The pairing handshake</h2>
-  <p>To let the two devices find each other, a small connection "handshake"
+  <p>To let your two devices find each other, a small connection "handshake"
   passes briefly through <strong>Apple's CloudKit</strong>. Before it is sent it
   is <strong>encrypted with a key derived from your pairing code</strong>
-  (AES-256), which we do not know, and it is deleted once the devices connect.
-  We cannot read its contents.</p>
+  (AES-256), which we don't know; it is deleted once you're connected. We can't
+  read its contents.</p>
+
+  <h2>Finding each other over the internet (STUN)</h2>
+  <p>To find each other outside your own Wi-Fi, each device asks a
+  <strong>Google STUN server</strong> (stun.l.google.com) for its public internet
+  address. Google sees your device's IP address when that happens. Video, audio
+  and your pairing code never pass through it. Google's privacy policy applies to
+  that processing.</p>
+
+  <h2>Feedback by email</h2>
+  <p>If you send feedback from the app, your own mail app opens a message to us.
+  Below your text it lists the app version, the app and device language, the
+  device model, the iOS version and whether it is the baby or the parent phone.
+  You see all of it before you send and can edit it. Your pairing code is never
+  included. We only use your email to reply and to improve the app.</p>
+
+  <h2>Tips</h2>
+  <p>A tip is paid through Apple. We receive no payment details or other personal
+  information.</p>
 
   <h2>Device permissions</h2>
-  <p>BabyBeam asks for camera, microphone, local network, and notification
-  permissions solely to provide the live monitor on your own devices. These are
-  used on-device and in the direct connection only; they are not data we
+  <p>BabyBeam asks for camera, microphone, local network and notification access
+  only to run the live monitor on your own devices. These are used on the device
+  itself and in the connection between your devices; they are not data we
   collect.</p>
 
   <h2>Children</h2>
-  <p>BabyBeam is a tool used by parents and carers. It does not knowingly
-  collect any information about anyone, including children.</p>
+  <p>BabyBeam is a tool for parents and caregivers. The app knowingly collects no
+  information about anyone, children included.</p>
 
   <h2>Contact</h2>
   <p>Questions about privacy? Email

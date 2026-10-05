@@ -32,12 +32,13 @@
   </nav>
   <div class="doc">
   <h1>BabyBeam — Privacybeleid</h1>
-  <p class="muted">Laatst bijgewerkt: 4 juli 2026</p>
+  <p class="muted">Laatst bijgewerkt: 5 oktober 2026</p>
 
   <p>BabyBeam is een privé-babyfoon die twee van je eigen apparaten verbindt.
   De app is zo gebouwd dat de kamer van je baby privé blijft. Kort gezegd:
-  <strong>wij verzamelen, ontvangen of bewaren geen enkele gegevens van jou en
-  hebben er ook geen toegang toe.</strong></p>
+  <strong>wij verzamelen en bewaren geen gegevens van jou, en we kunnen je beeld
+  en geluid niet zien of horen.</strong> Alleen als je ons zelf mailt, ontvangen
+  we die mail. Hieronder staat precies welke diensten van anderen de app gebruikt.</p>
 
   <h2>Geen accounts, geen tracking</h2>
   <p>BabyBeam heeft geen registratie en geen gebruikersaccounts. De app bevat
@@ -45,9 +46,12 @@
   derden. Er is geen BabyBeam-server.</p>
 
   <h2>Je beeld en geluid bereiken ons nooit</h2>
-  <p>Live beeld en geluid gaan <strong>rechtstreeks tussen je twee apparaten</strong>
-  via WebRTC, end-to-end versleuteld (DTLS-SRTP). Er wordt niets opgenomen en
-  niets bewaard. Er is geen cloudbibliotheek en geen geschiedenis.</p>
+  <p>Live beeld en geluid gaan via WebRTC tussen je twee apparaten,
+  <strong>end-to-end versleuteld</strong> (DTLS-SRTP). Normaal gaat dat rechtstreeks.
+  Heb je zelf in de instellingen een TURN-relay ingesteld, dan loopt de verbinding
+  via die server. Beeld en geluid blijven dan versleuteld; de relay kan ze niet
+  bekijken. Er wordt niets opgenomen en niets bewaard. Er is geen cloudbibliotheek
+  en geen geschiedenis.</p>
 
   <h2>De koppel-handshake</h2>
   <p>Om de twee apparaten elkaar te laten vinden, gaat een kleine
@@ -56,11 +60,29 @@
   koppelcode is afgeleid</strong> (AES-256) en die wij niet kennen; na het
   verbinden wordt hij verwijderd. Wij kunnen de inhoud niet lezen.</p>
 
+  <h2>Elkaar vinden via internet (STUN)</h2>
+  <p>Om elkaar ook buiten je eigen wifi te vinden, vraagt elk apparaat zijn
+  openbare internetadres op bij een <strong>STUN-server van Google</strong>
+  (stun.l.google.com). Google ziet daarbij het IP-adres van je apparaat. Beeld,
+  geluid en je koppelcode gaan daar niet langs. Voor die verwerking geldt het
+  privacybeleid van Google.</p>
+
+  <h2>Feedback per mail</h2>
+  <p>Stuur je in de app feedback, dan opent je eigen mailapp een bericht aan ons.
+  Onder je tekst staan de versie van de app, de taal van de app en van je toestel,
+  het type toestel, de iOS-versie en of het de babytelefoon of de oudertelefoon is.
+  Je ziet alles voordat je verstuurt en kunt het aanpassen. Je koppelcode staat er
+  nooit in. We gebruiken je mail alleen om te antwoorden en de app te verbeteren.</p>
+
+  <h2>Fooi</h2>
+  <p>Een fooi betaal je via Apple. Wij krijgen daarbij geen betaalgegevens of
+  andere persoonsgegevens.</p>
+
   <h2>Apparaat-toestemmingen</h2>
   <p>BabyBeam vraagt toegang tot camera, microfoon, lokaal netwerk en meldingen
   uitsluitend om de live babyfoon op je eigen apparaten te laten werken. Die
-  worden alleen op het apparaat zelf en in de directe verbinding gebruikt; het
-  zijn geen gegevens die wij verzamelen.</p>
+  worden alleen op het apparaat zelf en in de verbinding tussen je apparaten
+  gebruikt; het zijn geen gegevens die wij verzamelen.</p>
 
   <h2>Kinderen</h2>
   <p>BabyBeam is een hulpmiddel voor ouders en verzorgers. De app verzamelt

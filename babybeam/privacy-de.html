@@ -32,45 +32,69 @@
   </nav>
   <div class="doc">
   <h1>BabyBeam — Datenschutzerklärung</h1>
-  <p class="muted">Zuletzt aktualisiert: 4. Juli 2026</p>
+  <p class="muted">Zuletzt aktualisiert: 5. Oktober 2026</p>
 
-  <p>BabyBeam ist ein privates Babyfon, das zwei deiner eigenen Geräte
-  verbindet. Die App ist so gebaut, dass das Zimmer deines Babys privat
-  bleibt. Kurz gesagt: <strong>wir sammeln, empfangen oder speichern
-  keinerlei Daten von dir und haben auch keinen Zugriff darauf.</strong></p>
+  <p>BabyBeam ist ein privates Babyphone, das zwei deiner eigenen Geräte
+  verbindet. Die App ist so gebaut, dass das Zimmer deines Babys privat bleibt.
+  Kurz gesagt: <strong>Wir sammeln und speichern keine Daten von dir, und wir
+  können dein Video und deinen Ton weder sehen noch hören.</strong> Nur wenn du
+  uns selbst eine E-Mail schreibst, erhalten wir diese. Unten steht genau, welche
+  Dienste anderer Anbieter die App nutzt.</p>
 
   <h2>Keine Konten, kein Tracking</h2>
-  <p>BabyBeam hat keine Registrierung und keine Benutzerkonten. Die App
-  enthält keine Analysen, keine Werbung und keinerlei Tracking durch Dritte.
-  Es gibt keinen BabyBeam-Server.</p>
+  <p>BabyBeam hat keine Registrierung und keine Benutzerkonten. Die App enthält
+  keine Analysen, keine Werbung und keinerlei Tracking durch Dritte. Es gibt
+  keinen BabyBeam-Server.</p>
 
   <h2>Dein Video und Ton erreichen uns nie</h2>
-  <p>Live-Video und -Ton laufen <strong>direkt zwischen deinen beiden
-  Geräten</strong> über WebRTC, Ende-zu-Ende-verschlüsselt (DTLS-SRTP). Es
-  wird nichts aufgenommen und nichts gespeichert. Es gibt keine
-  Cloud-Bibliothek und keinen Verlauf.</p>
+  <p>Live-Video und -Ton laufen über WebRTC zwischen deinen beiden Geräten,
+  <strong>Ende-zu-Ende-verschlüsselt</strong> (DTLS-SRTP). Normalerweise läuft die
+  Verbindung direkt. Hast du selbst in den Einstellungen ein TURN-Relay
+  eingerichtet, läuft die Verbindung über diesen Server. Video und Ton bleiben
+  dabei verschlüsselt; das Relay kann sie nicht ansehen. Es wird nichts
+  aufgenommen und nichts gespeichert. Es gibt keine Cloud-Mediathek und keinen
+  Verlauf.</p>
 
   <h2>Der Kopplungs-Handshake</h2>
-  <p>Damit sich die beiden Geräte finden, läuft ein kleiner
-  Verbindungs-„Handshake" kurz über <strong>Apples CloudKit</strong>. Bevor
-  er gesendet wird, ist er <strong>mit einem Schlüssel verschlüsselt, der
-  von deinem Kopplungscode abgeleitet ist</strong> (AES-256) und den wir
-  nicht kennen; nach dem Verbinden wird er gelöscht. Wir können den Inhalt
-  nicht lesen.</p>
+  <p>Damit sich deine beiden Geräte finden, läuft ein kleiner
+  Verbindungs-„Handshake" kurz über <strong>Apples CloudKit</strong>. Bevor er
+  gesendet wird, ist er <strong>mit einem Schlüssel verschlüsselt, der aus deinem
+  Kopplungscode abgeleitet wird</strong> (AES-256) und den wir nicht kennen; nach
+  dem Verbinden wird er gelöscht. Wir können den Inhalt nicht lesen.</p>
+
+  <h2>Sich über das Internet finden (STUN)</h2>
+  <p>Damit sich die Geräte auch außerhalb deines eigenen WLANs finden, fragt jedes
+  Gerät seine öffentliche Internetadresse bei einem <strong>STUN-Server von
+  Google</strong> (stun.l.google.com) ab. Google sieht dabei die IP-Adresse deines
+  Geräts. Video, Ton und dein Kopplungscode laufen nicht darüber. Für diese
+  Verarbeitung gilt die Datenschutzerklärung von Google.</p>
+
+  <h2>Feedback per E-Mail</h2>
+  <p>Wenn du in der App Feedback sendest, öffnet deine eigene Mail-App eine
+  Nachricht an uns. Unter deinem Text stehen die App-Version, die Sprache der App
+  und deines Geräts, das Gerätemodell, die iOS-Version und ob es das Baby- oder
+  das Eltern-Handy ist. Du siehst alles vor dem Senden und kannst es ändern. Dein
+  Kopplungscode ist nie enthalten. Wir nutzen deine E-Mail nur, um zu antworten
+  und die App zu verbessern.</p>
+
+  <h2>Trinkgeld</h2>
+  <p>Ein Trinkgeld bezahlst du über Apple. Wir erhalten dabei keine
+  Zahlungsdaten oder andere personenbezogene Daten.</p>
 
   <h2>Geräteberechtigungen</h2>
-  <p>BabyBeam fragt Zugriff auf Kamera, Mikrofon, lokales Netzwerk und
-  Mitteilungen ausschließlich an, um das Live-Babyfon auf deinen eigenen
-  Geräten zu ermöglichen. Diese werden nur auf dem Gerät selbst und in der
-  direkten Verbindung verwendet; es sind keine Daten, die wir sammeln.</p>
+  <p>BabyBeam fragt nach Zugriff auf Kamera, Mikrofon, lokales Netzwerk und
+  Mitteilungen, ausschließlich damit das Live-Babyphone auf deinen eigenen
+  Geräten funktioniert. Diese werden nur auf dem Gerät selbst und in der
+  Verbindung zwischen deinen Geräten genutzt; es sind keine Daten, die wir
+  sammeln.</p>
 
   <h2>Kinder</h2>
-  <p>BabyBeam ist ein Hilfsmittel für Eltern und Betreuungspersonen. Die
-  App sammelt bewusst keine Informationen über irgendjemanden, Kinder
-  eingeschlossen.</p>
+  <p>BabyBeam ist ein Hilfsmittel für Eltern und Betreuungspersonen. Die App
+  sammelt bewusst keine Informationen über irgendjemanden, auch nicht über
+  Kinder.</p>
 
   <h2>Kontakt</h2>
-  <p>Fragen zum Datenschutz? Schreib eine E-Mail an
+  <p>Fragen zum Datenschutz? Schreib an
   <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>.</p>
   <p class="muted"><a href="privacy.html">Nederlands</a> · <a href="privacy-en.html">English</a> · <a href="privacy-fr.html">Français</a> · <a href="privacy-es.html">Español</a> · <a href="/">Erstellt von Jimmy Rentmeester</a></p>
   </div>

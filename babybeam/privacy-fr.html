@@ -32,46 +32,69 @@
   </nav>
   <div class="doc">
   <h1>BabyBeam — Politique de confidentialité</h1>
-  <p class="muted">Dernière mise à jour : 4 juillet 2026</p>
+  <p class="muted">Dernière mise à jour : 5 octobre 2026</p>
 
-  <p>BabyBeam est un babyphone privé qui connecte deux de tes propres
-  appareils. Il est conçu pour que la chambre de ton bébé reste privée. En
-  clair : <strong>nous ne collectons, ne recevons, ne stockons et n'avons
-  accès à aucune de tes données.</strong></p>
+  <p>BabyBeam est un babyphone privé qui relie deux de tes propres appareils.
+  L'app est conçue pour que la chambre de ton bébé reste privée. En clair :
+  <strong>nous ne collectons et ne conservons aucune donnée te concernant, et
+  nous ne pouvons ni voir ni entendre ta vidéo et ton audio.</strong> Nous ne
+  recevons un e-mail que si tu nous l'envoies toi-même. Ci-dessous, la liste
+  exacte des services tiers que l'app utilise.</p>
 
   <h2>Aucun compte, aucun suivi</h2>
-  <p>BabyBeam ne nécessite ni inscription ni compte utilisateur. Il ne
-  contient aucun outil d'analyse, aucune publicité et aucun suivi par des
-  tiers, quel qu'il soit. Il n'existe aucun serveur BabyBeam.</p>
+  <p>BabyBeam n'a ni inscription ni compte utilisateur. L'app ne contient ni
+  statistiques, ni publicité, ni aucune forme de suivi par des tiers. Il n'y a
+  pas de serveur BabyBeam.</p>
 
   <h2>Ta vidéo et ton audio ne nous parviennent jamais</h2>
-  <p>La vidéo et l'audio en direct passent <strong>directement entre tes
-  deux appareils</strong> via WebRTC, chiffrés de bout en bout (DTLS-SRTP).
-  Rien n'est enregistré et rien n'est stocké. Il n'y a ni bibliothèque
-  cloud ni historique.</p>
+  <p>La vidéo et l'audio en direct passent par WebRTC entre tes deux appareils,
+  <strong>chiffrés de bout en bout</strong> (DTLS-SRTP). Normalement, la connexion
+  est directe. Si tu as toi-même configuré un relais TURN dans les réglages, la
+  connexion passe par ce serveur. La vidéo et l'audio restent chiffrés ; le relais
+  ne peut pas les voir. Rien n'est enregistré ni conservé. Il n'y a ni
+  bibliothèque dans le cloud ni historique.</p>
 
   <h2>La prise de contact d'association</h2>
-  <p>Pour que les deux appareils se trouvent, une petite « prise de
-  contact » de connexion transite brièvement par <strong>CloudKit
-  d'Apple</strong>. Avant d'être envoyée, elle est <strong>chiffrée avec une
-  clé dérivée de ton code d'association</strong> (AES-256), que nous ne
-  connaissons pas, et elle est supprimée une fois les appareils connectés.
-  Nous ne pouvons pas lire son contenu.</p>
+  <p>Pour que tes deux appareils se trouvent, une petite « prise de contact » de
+  connexion transite brièvement par <strong>CloudKit d'Apple</strong>. Avant
+  d'être envoyée, elle est <strong>chiffrée avec une clé dérivée de ton code
+  d'association</strong> (AES-256), que nous ne connaissons pas ; elle est
+  supprimée une fois la connexion établie. Nous ne pouvons pas en lire le
+  contenu.</p>
+
+  <h2>Se trouver via Internet (STUN)</h2>
+  <p>Pour se trouver aussi en dehors de ton propre Wi-Fi, chaque appareil demande
+  son adresse Internet publique à un <strong>serveur STUN de Google</strong>
+  (stun.l.google.com). Google voit alors l'adresse IP de ton appareil. La vidéo,
+  l'audio et ton code d'association n'y passent pas. Ce traitement est régi par
+  la politique de confidentialité de Google.</p>
+
+  <h2>Retours par e-mail</h2>
+  <p>Si tu envoies un retour depuis l'app, ta propre app de messagerie ouvre un
+  message qui nous est adressé. Sous ton texte figurent la version de l'app, la
+  langue de l'app et de ton appareil, le modèle d'appareil, la version d'iOS et
+  s'il s'agit du téléphone du bébé ou du parent. Tu vois tout avant l'envoi et tu
+  peux le modifier. Ton code d'association n'y figure jamais. Nous utilisons ton
+  e-mail uniquement pour te répondre et améliorer l'app.</p>
+
+  <h2>Pourboire</h2>
+  <p>Un pourboire se paie via Apple. Nous ne recevons aucune donnée de paiement
+  ni autre donnée personnelle.</p>
 
   <h2>Autorisations de l'appareil</h2>
   <p>BabyBeam demande l'accès à la caméra, au micro, au réseau local et aux
-  notifications uniquement pour faire fonctionner le babyphone en direct
-  sur tes propres appareils. Elles sont utilisées uniquement sur l'appareil
-  et dans la connexion directe ; ce ne sont pas des données que nous
+  notifications uniquement pour faire fonctionner le babyphone en direct sur tes
+  propres appareils. Ces accès sont utilisés seulement sur l'appareil lui-même et
+  dans la connexion entre tes appareils ; ce ne sont pas des données que nous
   collectons.</p>
 
   <h2>Enfants</h2>
-  <p>BabyBeam est un outil destiné aux parents et aux personnes qui
-  s'occupent d'enfants. L'application ne collecte sciemment aucune
-  information sur qui que ce soit, enfants compris.</p>
+  <p>BabyBeam est un outil destiné aux parents et aux personnes qui gardent des
+  enfants. L'app ne collecte sciemment aucune information sur qui que ce soit,
+  enfants compris.</p>
 
   <h2>Contact</h2>
-  <p>Des questions sur la confidentialité&nbsp;? Écris à
+  <p>Des questions sur la confidentialité ? Écris à
   <a href="mailto:madebyjire@icloud.com">madebyjire@icloud.com</a>.</p>
   <p class="muted"><a href="privacy.html">Nederlands</a> · <a href="privacy-en.html">English</a> · <a href="privacy-de.html">Deutsch</a> · <a href="privacy-es.html">Español</a> · <a href="/">Créé par Jimmy Rentmeester</a></p>
   </div>

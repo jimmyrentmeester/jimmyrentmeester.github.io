@@ -98,7 +98,7 @@
       <div class="prose reveal">
         <p>Since August 2022 I've been Lead Product Manager in the Gaming, Printers &amp; Office team, covering the Netherlands, Belgium and Germany. I'm responsible for the commercial results and the online customer journey of those categories.</p>
         <p>I lead nine people: three commercial product managers, three product journey managers and three product editors. I turn a vision into quarterly roadmaps, prioritise on impact and effort, and bring commercial, marketing, purchasing and development together.</p>
-        <p><b>The LEGO category.</b> I set up the LEGO category at Coolblue. My part was the customer journey. My team built the storefronts, filters and content, and together with the category team's manager I worked on the store plan. Purchasing made the agreements with LEGO.</p>
+        <p><b>The LEGO category.</b> I set up the LEGO category at Coolblue and was fully responsible for it, commercial results included. My team built the storefronts, filters and content, and together with the category team's manager I worked on the store plan. Purchasing made the agreements with LEGO.</p>
         <p><b>PlayStation 5, 2020.</b> Back then as Product Manager, Gaming. At the PlayStation 5 launch there was little stock and a lot of demand. I worked with development, the app team, marketing, customer service and logistics. Afterwards I set up a fixed process for new deliveries. Others built the technology; I took care of the coordination and the process.</p>
         <p><b>AI at work.</b> At Coolblue I'm an AI ambassador and power user of Glean, and I help colleagues use and adopt it.</p>
         <p class="contact-links">
@@ -234,14 +234,14 @@
 
           <h3>The problem</h3>
           <p>There are standalone baby monitors, which end up in a drawer after a few years, and there are apps. Those apps are expensive if you buy them outright, or you're tied to a subscription. Often you also have to create an account. I wanted a baby monitor without an account and without stored video, one every parent could use without worrying about privacy or cost.</p>
-          <p>Before I wrote the backlog, I collected the complaints about well-known monitors and apps: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor and Luna (July 2026). Among other things, people complained that the connection drops with no alarm, that the sound stops when the screen locks, that you can't see the baby phone's battery running down, and that basic features sit behind a subscription.</p>
+          <p>There was already a first working version: two phones that pair with a code and pass on video and sound. Before I wrote a backlog for it, I collected the complaints about well-known monitors and apps: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor and Luna (early July 2026). Among other things, people complained that the connection drops with no alarm, that the sound stops when the screen locks, that you can't see the baby phone's battery running down, and that basic features sit behind a subscription.</p>
 
           <h3>The call</h3>
           <p>I don't run a server of my own. Video and audio go over WebRTC between the two phones, encrypted with DTLS-SRTP, and the app records nothing. For pairing, the app uses Apple's iCloud: both phones leave a small message there, encrypted with a key derived from the pairing code. That code only lives on the two phones. Once the connection is up, each phone deletes its own message again.</p>
           <p>It usually works when you're not home too. The phones look for each other over the internet and, to do that, ask a Google STUN server for their internet address. No video or sound passes through it.</p>
 
           <h3>How I prioritised</h3>
-          <p>A baby monitor that stops without warning is worse than one with few features. That was my starting point. So everything that builds trust came first: a watchdog that notices when the picture freezes, the baby phone's battery on the parent screen, sound that keeps playing when the screen locks, and cry detection on the device itself. Only after that came things like QR pairing and lullabies from the other room. I only ticked off a task once it also worked on two real iPhones.</p>
+          <p>A baby monitor that stops without warning is worse than one with few features. That was my starting point. So everything that builds trust came first: a watchdog that notices when the picture freezes, the baby phone's battery on the parent screen, sound that keeps playing when the screen locks, and cry detection on the device itself. Only after that came things like QR pairing and lullabies from the other room. Building went fast: AI built phases 0 to 3 on 2 and 3 July. I ticked off a task once its tests passed, and then tested everything on two real iPhones.</p>
           <p>I deliberately postponed several viewers at once, so both parents can watch. Without a server, the baby phone has to send the video separately to each viewer, and that phone is on all night. I decided to pick this up only after launch, with at most two viewers and the second one audio-only by default. The decision itself is below, under <a href="#notes">working notes</a>.</p>
 
           <h3>What shipped</h3>
@@ -297,7 +297,7 @@
             <details>
               <summary>
                 <span class="where">Backlog · from 2 July 2026</span>
-                <h3>Project plan "Trust first": phases and tasks</h3>
+                <h3>Project plan v2 "Trust first": phases and tasks</h3>
                 <p class="outcome"><b>Then.</b> Phases 0 to 2 and the Live Activity have been built and tested on two real iPhones. Several viewers and the Watch app are still open.</p>
                 <span class="open">Read the excerpt</span>
               </summary>
@@ -442,7 +442,7 @@
   <footer>
     <span>© 2026 Jimmy Rentmeester</span>
     <span class="spacer"></span>
-    <span class="colophon">One HTML file per page, one stylesheet, and one small script for the animation up top. No framework, no build step, no analytics, no cookies. The font you're reading was already on your device, and nothing on this page loads from someone else's server. About 20 kB before the screenshots load, 175 kB with them. Works fine with JavaScript turned off.</span>
+    <span class="colophon">One HTML file per page, one stylesheet, and one small script for the animation up top. No framework, no build step, no analytics, no cookies. The font you're reading was already on your device, and nothing on this page loads from someone else's server. Just over 30 kB before the app images load, about 180 kB with everything. Works fine with JavaScript turned off.</span>
   </footer>
 
 </div>
