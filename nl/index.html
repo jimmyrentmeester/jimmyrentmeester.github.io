@@ -164,7 +164,7 @@
                 <dt>Geschrapt</dt>
                 <dd>Het account en de opnames. BabyBeam koppelt twee van je eigen telefoons met een code, en de app slaat geen beelden op.</dd>
                 <dt>Uitgebracht</dt>
-                <dd class="soft">Live sinds 7 juli 2026. Hieronder staat het hele verhaal: het probleem, de prioriteiten, de releases, wat misging en wat ik meet.</dd>
+                <dd class="soft">Live sinds 13 juli 2026. Hieronder staat het hele verhaal: het probleem, de prioriteiten, de releases, wat misging en wat ik meet.</dd>
               </dl>
               <p class="stat"><!--rating:6783058581--><span class="rgroup"><span class="score">5,0</span> ★ <span class="count">1 rating</span></span><!--/rating--><!--downloads:6783058581--><span class="dl"><span class="n">783</span> downloads</span><!--/downloads--></p>
               <p class="links">
@@ -226,14 +226,14 @@
           <dl class="summary">
             <div><dt>Probleem</dt><dd>Babyfoon-apps zijn duur of vragen een abonnement, en vaak ook een account. Ik wilde er een die elke ouder kan gebruiken zonder zorgen over privacy of kosten.</dd></div>
             <div><dt>Mijn belangrijkste keuze</dt><dd>Geen account en geen eigen server. Beeld en geluid gaan versleuteld tussen twee telefoons, en de app neemt niets op.</dd></div>
-            <div><dt>Uitgebracht</dt><dd>Live sinds 7 juli 2026, nu versie 1.5.4: live beeld en geluid, huilalarm, terugpraten en koppelen met een QR-code. Na de lancering vooral betrouwbaarheid en een betere feedbackknop.</dd></div>
+            <div><dt>Uitgebracht</dt><dd>Live sinds 13 juli 2026, nu versie 1.5.4: live beeld en geluid, huilalarm, terugpraten en koppelen met een QR-code. Na de lancering vooral betrouwbaarheid en een betere feedbackknop.</dd></div>
             <div><dt>Wat ik zie en nog niet weet</dt><dd>Weinig mensen in de VS klikken in de App Store door naar de pagina. Mijn vermoeden is dat de zwarte screenshots meespelen. Sinds versie 1.5.4 staat er een nieuwe set; of die helpt, weet ik over een paar weken. Hoeveel mensen de app echt gebruiken, weet ik niet.</dd></div>
             <div><dt>Wat ik leerde</dt><dd>Eerst betrouwbaarheid, dan extra functies. En wat er over de app wordt beweerd, ook op de App Store-pagina, controleer ik net zo streng als de app zelf.</dd></div>
           </dl>
 
           <h3>Het probleem</h3>
           <p>Je hebt losse babyfoons, die na een paar jaar in een la belanden, en je hebt apps. Die apps zijn duur als je ze in één keer koopt, of je zit vast aan een abonnement. Vaak moet je ook een account maken. Ik wilde een babyfoon zonder account en zonder opslag van beelden, die elke ouder kan gebruiken zonder zich zorgen te maken over privacy of kosten.</p>
-          <p>Er was al een eerste werkende versie: twee telefoons die met een code koppelen en beeld en geluid doorgeven. Voordat ik daar een backlog voor maakte, heb ik de klachten over bekende babyfoons en apps verzameld: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor en Luna (begin juli 2026). Mensen klaagden onder meer dat de verbinding wegvalt zonder alarm, dat het geluid stopt als het scherm op slot gaat, dat je niet ziet dat de batterij van de babytelefoon leegloopt en dat basisfuncties achter een abonnement zitten.</p>
+          <p>Er was al een eerste werkende versie uit juni: twee telefoons die met een code koppelen en beeld en geluid doorgeven. Voordat ik daar een backlog voor maakte, heb ik de klachten over bekende babyfoons en apps verzameld: Nanit, Owlet, Annie, Bibino, Cloud Baby Monitor en Luna (begin juli 2026). Mensen klaagden onder meer dat de verbinding wegvalt zonder alarm, dat het geluid stopt als het scherm op slot gaat, dat je niet ziet dat de batterij van de babytelefoon leegloopt en dat basisfuncties achter een abonnement zitten.</p>
 
           <h3>De keuze</h3>
           <p>Ik draai geen eigen server. Beeld en geluid gaan via WebRTC tussen de twee telefoons, versleuteld met DTLS-SRTP, en de app neemt niets op. Voor het koppelen gebruikt de app iCloud van Apple: beide telefoons zetten daar een klein bericht neer, versleuteld met een sleutel die uit de koppelcode wordt afgeleid. Die code staat alleen op de twee telefoons. Zodra de verbinding staat, verwijdert elke telefoon zijn eigen bericht weer.</p>
@@ -245,14 +245,14 @@
 
           <h3>Wat er is uitgebracht</h3>
           <ul class="releases">
-            <li><span class="when">Juli 2026</span><span>Eerste versie in de App Store, live op 7 juli. Met live beeld en geluid, huilalarm, terugpraten, koppelen via een QR-code en de status op het vergrendelscherm. Ik had de app eerst als betaalde app gepland, maar hij ging gratis live.</span></li>
+            <li><span class="when">Juli 2026</span><span>Eerste versie in de App Store, live op 13 juli. Met live beeld en geluid, huilalarm, terugpraten, koppelen via een QR-code en de status op het vergrendelscherm. Ik had de app eerst als betaalde app gepland, maar hij ging gratis live.</span></li>
             <li><span class="when">Augustus</span><span>Een fooienpot (1.3). Met een fooi koop je niets extra's; functies van een babyfoon achter geld zetten vind ik niet te verdedigen. Daarna kwamen Duits, Frans en Spaans en een feedbackknop in de app (1.5.0).</span></li>
             <li><span class="when">September</span><span>Vooral betrouwbaarheid (1.5.1 tot 1.5.3). De koppeling kan niet meer ongemerkt blijven hangen, en huil- en verbindingsmeldingen komen door de slaapfocus van de iPhone heen. De app vraagt pas om een fooi na zes geslaagde sessies, nooit tijdens gebruik. En een lege feedbackmail versturen kan niet meer.</span></li>
             <li><span class="when">Oktober</span><span>Versie 1.5.4, live op 5 oktober: nieuwe screenshots en een preview-video, en een Britse en een Mexicaanse versie van de App Store-tekst. De simulator heeft geen camera, dus in de monitor speelt daarin een stockvideo van een baby af.</span></li>
           </ul>
 
           <h3>Wat misging</h3>
-          <p>Mijn eerste inzending werd op 4 juli afgewezen. De beoordelaar bij Apple hoorde geen geluid op de achtergrond, terwijl de app daar wel toestemming voor vroeg. Dat kwam doordat er zonder twee gekoppelde toestellen geen sessie start, dus was er ook niets te horen. Ik had die toestemming kunnen schrappen, maar doorlopend geluid met het scherm op slot is juist waar een babyfoon voor is. Ik heb een schermopname op twee echte toestellen gestuurd, met testinstructies. Drie dagen later was de app goedgekeurd.</p>
+          <p>Mijn eerste inzending werd op 4 juli afgewezen. De beoordelaar bij Apple hoorde geen geluid op de achtergrond, terwijl de app daar wel toestemming voor vroeg. Dat kwam doordat er zonder twee gekoppelde toestellen geen sessie start, dus was er ook niets te horen. Ik had die toestemming kunnen schrappen, maar doorlopend geluid met het scherm op slot is juist waar een babyfoon voor is. Ik heb een schermopname op twee echte toestellen gestuurd, met testinstructies. Op 12 juli heb ik opnieuw ingediend, en op 13 juli was de app goedgekeurd en live.</p>
           <p>In september kreeg ik feedbackmails zonder bericht, alleen met het sjabloon. Een Duitstalige gebruiker had de categorie "vertaling" aangetikt, die bij Duitse instellingen bovenaan staat, en de mail direct verstuurd. Diezelfde dag heb ik een verplicht tekstveld laten toevoegen. Dat zat in versie 1.5.3.</p>
           <p>De eerste screenshots bleken zwart. De simulator waarmee ze gemaakt zijn heeft geen camera, dus juist de belangrijkste beelden van een videobabyfoon lieten geen video zien. Daar kwam ik pas achter toen ik de cijfers per land bekeek.</p>
 
@@ -374,7 +374,7 @@
               <summary>
                 <span class="where">Afwijzing · 4 juli 2026</span>
                 <h3>App Review, richtlijn 2.5.4</h3>
-                <span class="outcome"><b>Daarna.</b> Schermopname op twee echte toestellen, een antwoord aan App Review met testinstructies, en dezelfde instructies vast in de reviewnotities voor elke volgende inzending. Drie dagen later goedgekeurd, op 7 juli.</span>
+                <span class="outcome"><b>Daarna.</b> Schermopname op twee echte toestellen, een antwoord aan App Review met testinstructies, en dezelfde instructies vast in de reviewnotities voor elke volgende inzending. Op 12 juli opnieuw ingediend, op 13 juli goedgekeurd en live.</span>
                 <span class="open">Lees het fragment</span>
               </summary>
               <blockquote>
