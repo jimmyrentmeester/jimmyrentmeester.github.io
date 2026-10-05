@@ -121,7 +121,7 @@ DATA = {
               ("GRID_BREAKER.", "Reflex game without ads. Live since June 2026.")],
              ("Working notes such as the backlog and a story with an acceptance criterion are on ", "jimmyrentmeester.github.io", "https://jimmyrentmeester.github.io/", ".")),
             ("2020 – 2022", "Product Manager, Gaming", "Coolblue",
-             "End-to-end owner of the commercial performance and customer journey of the Gaming category. For the PlayStation 5 launch in 2020 (little stock, a lot of demand) I worked with development, the app team, marketing, customer service and logistics at the same time. Afterwards I set up a fixed process for new deliveries.",
+             "Fully responsible for the commercial results and the customer journey of the Gaming category. For the PlayStation 5 launch in 2020 (little stock, a lot of demand) I worked with development, the app team, marketing, customer service and logistics at the same time. Afterwards I set up a fixed process for new deliveries.",
              ["Improving growth and customer journeys using behavioural, returns and review data.",
               "Coaching fellow product managers on data, experimentation and the craft."]),
             ("2019 – 2020", "SEO Specialist", "BigSpark B.V. · Nijmegen",

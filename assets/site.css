@@ -515,7 +515,7 @@ section { margin-bottom: 6rem; }
   font-family: var(--mono); font-size: .86em;
   background: var(--surface); padding: .05em .3em; border-radius: 4px;
 }
-.notes .outcome { margin: 0; color: var(--muted); font-size: .93rem; max-width: 64ch; }
+.notes .outcome { display: block; margin: 0; color: var(--muted); font-size: .93rem; max-width: 64ch; }
 .notes .outcome b { color: var(--ink); font-weight: 600; }
 
 /* ── inklapbaar (details/summary, werkt zonder JS) ───────────── */
