@@ -606,6 +606,9 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; b
 .role-entry ul { margin: 0; padding-left: 1.1rem; color: var(--muted); max-width: 62ch; }
 .role-entry li { margin: 0 0 .35rem; }
 .role-entry li::marker { color: var(--accent); }
+.role-entry a { color: var(--accent); text-decoration: none;
+                border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.role-entry a:hover { border-bottom-color: var(--accent); }
 
 .emp {
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px;

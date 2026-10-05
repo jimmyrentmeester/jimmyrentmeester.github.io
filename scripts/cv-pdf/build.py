@@ -31,17 +31,13 @@ DATA = {
         "role": "Lead Productmanager · Coolblue",
         "place": "Tilburg",
         "labels": {"profile": "Profiel", "experience": "Ervaring", "glance": "In het kort",
-                   "apps": "Eigen apps", "skills": "Vaardigheden", "education": "Opleiding",
+                   "skills": "Vaardigheden", "education": "Opleiding",
                    "languages": "Talen", "now": "heden"},
-        "profile": "Ik ben Lead Productmanager bij Coolblue en verantwoordelijk voor het commerciële resultaat en de online klantreis van twee productcategorieën in Nederland, België en Duitsland. Ik maak keuzes op basis van klantinzicht en data, en breng daarbij de belangen van commercie, marketing, inkoop en development bij elkaar. Waar ik goed in ben: prioriteren, afspraken maken met stakeholders en leveranciers, en structuur aanbrengen als veel dingen van elkaar afhangen.",
+        "profile": "Ik ben Lead Productmanager bij Coolblue en verantwoordelijk voor het commerciële resultaat en de online klantreis van twee productcategorieën in Nederland, België en Duitsland. Ik maak keuzes op basis van klantinzicht en data, en breng daarbij de belangen van commercie, marketing, inkoop en development bij elkaar. Waar ik goed in ben: prioriteren, afspraken maken met stakeholders en leveranciers, en structuur aanbrengen als veel dingen van elkaar afhangen. Daarnaast breng ik eigen iOS-apps uit, waarin elke productkeuze van mij is.",
         "glance": [("Team", "9 mensen: 3 commercieel productmanagers, 3 product journey managers, 3 productredacteuren"),
                    ("Werkgebied", "Nederland, België, Duitsland"),
                    ("E-commerce", "Sinds 2016"),
                    ("Leidinggevend", "Sinds 2022")],
-        "apps_intro": "Buiten werktijd breng ik eigen iOS-apps uit. AI schrijft de code; ik bepaal het probleem, de scope, de prioriteiten en wat live gaat.",
-        "apps": [("BabyBeam", "Videobabyfoon met twee iPhones, zonder account. Live sinds juli 2026."),
-                 ("WristVault", "Horlogecollectie bijhouden, eenmalige aankoop. Live sinds juli 2026."),
-                 ("GRID_BREAKER", "Reflexspel zonder advertenties. Live sinds juni 2026.")],
         "skills": [("Strategisch productmanagement", "visie, roadmap, prioritering"),
                    ("Data-analyse en procesoptimalisatie", "Looker, funnelanalyse, experimenten"),
                    ("Stakeholdermanagement", "business reviews, cross-functionele afstemming"),
@@ -53,11 +49,18 @@ DATA = {
         "languages": "Nederlands, Engels",
         "jobs": [
             ("Aug 2022 – heden", "Lead Productmanager", "Coolblue · Gaming, Printers & Kantoor",
-             "Verantwoordelijk voor het commerciële resultaat en de online klantreis van twee productcategorieën in Nederland, België en Duitsland. Dit is commercieel productmanagement, geen softwareproduct. Ik geef direct leiding aan negen mensen en coach ze op hun werk en ontwikkeling.",
+             "Verantwoordelijk voor het commerciële resultaat en de online klantreis van twee productcategorieën in Nederland, België en Duitsland. Ik geef direct leiding aan negen mensen en coach ze op hun werk en ontwikkeling.",
              ["Visies en roadmaps opstellen en uitrollen voor meerdere categorieteams, vertaald naar kwartaalmijlpalen.",
               "Strategie vertalen naar projectplannen, geprioriteerd op klant- en businesswaarde.",
               "Multidisciplinaire projectteams leiden: afstemming, voortgang en prioritering.",
-              "Looker en AI-platformen inzetten voor rapportage en procesoptimalisatie."]),
+              "Afspraken maken met leveranciers over resultaat en voortgang, en hen daarop aanspreken.",
+              "Met developmentteams van andere domeinen nieuwe features op hun roadmap krijgen."]),
+            ("Apr 2026 – heden", "Eigen apps", "Buiten werktijd · iOS, App Store",
+             "AI schrijft de code; ik bepaal het probleem, de scope, de prioriteiten en wat live gaat.",
+             [("BabyBeam.", "Videobabyfoon met twee iPhones, zonder account. Live sinds juli 2026."),
+              ("WristVault.", "Horlogecollectie bijhouden, eenmalige aankoop. Live sinds juli 2026."),
+              ("GRID_BREAKER.", "Reflexspel zonder advertenties. Live sinds juni 2026.")],
+             ("Werkstukken zoals de backlog en een story met acceptatiecriterium staan op ", "jimmyrentmeester.github.io/nl", "https://jimmyrentmeester.github.io/nl/", ".")),
             ("2020 – 2022", "Productmanager Gaming", "Coolblue",
              "Eindverantwoordelijk voor het commerciële resultaat en de klantreis van de Gaming-categorie. Bij de lancering van de PlayStation 5 in 2020 (weinig voorraad, enorme vraag) werkte ik tegelijk met development, het app-team, marketing, klantenservice en logistiek. Daarna richtte ik een vast proces in voor elke nieuwe voorraadbatch, wat minder klantcontact opleverde.",
              ["Groei en klantreizen verbeteren op basis van gedrags-, retour- en reviewdata.",
@@ -81,17 +84,13 @@ DATA = {
         "role": "Lead Product Manager · Coolblue",
         "place": "Tilburg, Netherlands",
         "labels": {"profile": "Profile", "experience": "Experience", "glance": "At a glance",
-                   "apps": "Own apps", "skills": "Skills", "education": "Education",
+                   "skills": "Skills", "education": "Education",
                    "languages": "Languages", "now": "present"},
-        "profile": "I'm Lead Product Manager at Coolblue, responsible for the commercial results and the online customer journey of two product categories in the Netherlands, Belgium and Germany. I make decisions based on customer insight and data, and bring the interests of commercial, marketing, purchasing and development together along the way. What I'm good at: prioritising, making agreements with stakeholders and suppliers, and bringing structure when a lot of things depend on each other.",
+        "profile": "I'm Lead Product Manager at Coolblue, responsible for the commercial results and the online customer journey of two product categories in the Netherlands, Belgium and Germany. I make decisions based on customer insight and data, and bring the interests of commercial, marketing, purchasing and development together along the way. What I'm good at: prioritising, making agreements with stakeholders and suppliers, and bringing structure when a lot of things depend on each other. Alongside that I ship my own iOS apps, where every product call is mine.",
         "glance": [("Team", "9 people: 3 commercial product managers, 3 product journey managers, 3 product editors"),
                    ("Market", "Netherlands, Belgium, Germany"),
                    ("E-commerce", "Since 2016"),
                    ("Leading a team", "Since 2022")],
-        "apps_intro": "Outside work I ship my own iOS apps. AI writes the code; I decide the problem, the scope, the priorities and what goes live.",
-        "apps": [("BabyBeam", "Video baby monitor using two iPhones, no account. Live since July 2026."),
-                 ("WristVault", "Watch collection tracker, one-time purchase. Live since July 2026."),
-                 ("GRID_BREAKER", "Reflex game without ads. Live since June 2026.")],
         "skills": [("Strategic product management", "vision, roadmap, prioritisation"),
                    ("Data analysis and process optimisation", "Looker, funnel analysis, experiments"),
                    ("Stakeholder management", "business reviews, cross-functional alignment"),
@@ -103,11 +102,18 @@ DATA = {
         "languages": "Dutch, English",
         "jobs": [
             ("Aug 2022 – present", "Lead Product Manager", "Coolblue · Gaming, Printers & Office",
-             "Responsible for the commercial results and the online customer journey of two product categories in the Netherlands, Belgium and Germany. This is commercial product management, not a software product. I directly lead nine people and coach them on their work and development.",
+             "Responsible for the commercial results and the online customer journey of two product categories in the Netherlands, Belgium and Germany. I directly lead nine people and coach them on their work and development.",
              ["Setting and rolling out vision and roadmaps across several category teams, broken down into quarterly milestones.",
               "Turning strategy into project plans, prioritised on customer and business value.",
               "Leading multidisciplinary project teams: alignment, progress and prioritisation.",
-              "Using Looker and AI platforms for reporting and process optimisation."]),
+              "Making agreements with suppliers on results and progress, and holding them to it.",
+              "Getting new features onto the roadmaps of development teams in other domains."]),
+            ("Apr 2026 – present", "Own apps", "Outside work · iOS, App Store",
+             "AI writes the code; I decide the problem, the scope, the priorities and what goes live.",
+             [("BabyBeam.", "Video baby monitor using two iPhones, no account. Live since July 2026."),
+              ("WristVault.", "Watch collection tracker, one-time purchase. Live since July 2026."),
+              ("GRID_BREAKER.", "Reflex game without ads. Live since June 2026.")],
+             ("Working notes such as the backlog and a story with an acceptance criterion are on ", "jimmyrentmeester.github.io", "https://jimmyrentmeester.github.io/", ".")),
             ("2020 – 2022", "Product Manager, Gaming", "Coolblue",
              "End-to-end owner of the commercial performance and customer journey of the Gaming category. For the PlayStation 5 launch in 2020 (little stock, enormous demand) I worked with development, the app team, marketing, customer service and logistics at the same time. Afterwards I set up a fixed process for every new batch of stock, which meant less customer contact.",
              ["Improving growth and customer journeys using behavioural, returns and review data.",
@@ -147,29 +153,30 @@ CSS = """
 :root { --ink:#14161c; --muted:#555c69; --faint:#8a909c; --line:#e3e1dc; --accent:#4d5dfb; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { font-family: 'Inter', sans-serif; font-size: 8.9pt; line-height: 1.5; color: var(--ink);
+body { font-family: 'Inter', sans-serif; font-size: 8.6pt; line-height: 1.45; color: var(--ink);
        -webkit-print-color-adjust: exact; print-color-adjust: exact; font-feature-settings: "ss01", "cv11"; }
 a { color: inherit; text-decoration: none; }
 
 header { display: grid; grid-template-columns: 1fr auto; gap: 8mm; align-items: center;
-         padding-bottom: 6mm; border-bottom: 1.5pt solid var(--ink); margin-bottom: 6mm; }
+         padding-bottom: 5mm; border-bottom: 1.5pt solid var(--ink); margin-bottom: 5mm; }
 h1 { font-family: 'Source Serif', serif; font-weight: 600; font-size: 27pt; line-height: 1;
      letter-spacing: -.02em; margin: 0 0 2.2mm; }
 .role { font-size: 10.5pt; font-weight: 500; color: var(--accent); margin: 0 0 3.2mm; }
 .contact { display: flex; flex-wrap: wrap; gap: 1mm 4.5mm; margin: 0; color: var(--muted); font-size: 8.3pt; }
 .contact span::before { content: ""; display: inline-block; width: 1.3mm; height: 1.3mm; border-radius: 50%;
                         background: var(--accent); margin: 0 1.6mm .45mm 0; vertical-align: middle; }
-.photo { width: 27mm; height: 27mm; border-radius: 50%; object-fit: cover; display: block; }
+.photo { width: 25mm; height: 25mm; border-radius: 50%; object-fit: cover; display: block; }
 
 .grid { display: grid; grid-template-columns: 1fr 55mm; gap: 0 8mm; }
 .side { border-left: .6pt solid var(--line); padding-left: 6mm; }
 
 h2 { font-size: 7.2pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
      color: var(--accent); margin: 0 0 2.6mm; }
-section { margin-bottom: 6mm; }
-.profile p { margin: 0; font-family: 'Source Serif', serif; font-size: 10.6pt; line-height: 1.5; color: var(--ink); }
+section { margin-bottom: 5mm; }
+.side section { break-inside: avoid; }
+.profile p { margin: 0; font-family: 'Source Serif', serif; font-size: 10.2pt; line-height: 1.45; color: var(--ink); }
 
-.job { display: grid; grid-template-columns: 24mm 1fr; gap: 0 4mm; padding: 2.6mm 0 3mm;
+.job { display: grid; grid-template-columns: 24mm 1fr; gap: 0 4mm; padding: 2.2mm 0 2.4mm;
        border-top: .6pt solid var(--line); break-inside: avoid; }
 .job:first-of-type { border-top: 0; padding-top: 0; }
 .when { font-size: 7.6pt; color: var(--faint); font-weight: 500; padding-top: .5mm; font-variant-numeric: tabular-nums; }
@@ -177,17 +184,19 @@ section { margin-bottom: 6mm; }
 .job .org { font-size: 8.2pt; color: var(--muted); margin: .3mm 0 1.4mm; }
 .job p { margin: 0; color: #2c313a; }
 .job ul { margin: 1.4mm 0 0; padding-left: 3.6mm; color: #2c313a; }
-.job li { margin: 0 0 .7mm; }
+.job li { margin: 0 0 .5mm; }
 .job li::marker { color: var(--accent); }
+.job li b { font-weight: 600; color: var(--ink); }
+.job .note { margin: 1.4mm 0 0; color: var(--muted); font-size: 8.2pt; }
+.job .note a { color: var(--accent); }
 
 .side dl { margin: 0; }
 .side dt { font-size: 7.4pt; color: var(--faint); font-weight: 500; }
-.side dd { margin: 0 0 2.2mm; }
-.item { margin: 0 0 2.4mm; break-inside: avoid; }
+.side dd { margin: 0 0 1.8mm; }
+.item { margin: 0 0 2mm; break-inside: avoid; }
 .item b { font-weight: 600; display: block; }
 .item span { color: var(--muted); display: block; font-size: 8.2pt; }
 .item i { font-style: normal; color: var(--faint); font-size: 7.6pt; }
-.intro { color: var(--muted); margin: 0 0 2.4mm; font-size: 8.2pt; }
 
 footer { margin-top: 2mm; padding-top: 2.4mm; border-top: .6pt solid var(--line);
          display: flex; justify-content: space-between; color: var(--faint); font-size: 7.4pt; }
@@ -201,12 +210,17 @@ def esc(s):
 def page(code, d):
     L = d["labels"]
     jobs = []
-    for when, title, org, text, bullets in d["jobs"]:
-        ul = ("<ul>" + "".join(f"<li>{esc(b)}</li>" for b in bullets) + "</ul>") if bullets else ""
+    for job in d["jobs"]:
+        when, title, org, text, bullets = job[:5]
+        note = job[5] if len(job) > 5 else None
+        def li(b):
+            return f"<li><b>{esc(b[0])}</b> {esc(b[1])}</li>" if isinstance(b, tuple) else f"<li>{esc(b)}</li>"
+        ul = ("<ul>" + "".join(li(b) for b in bullets) + "</ul>") if bullets else ""
+        if note:
+            ul += f'<p class="note">{esc(note[0])}<a href="{note[2]}">{esc(note[1])}</a>{esc(note[3])}</p>'
         jobs.append(f'<div class="job"><div class="when">{esc(when)}</div><div><h3>{esc(title)}</h3>'
                     f'<p class="org">{esc(org)}</p><p>{esc(text)}</p>{ul}</div></div>')
     glance = "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in d["glance"])
-    apps = "".join(f'<div class="item"><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in d["apps"])
     skills = "".join(f'<div class="item"><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in d["skills"])
     edu = "".join(f'<div class="item"><b>{esc(a)}</b><span>{esc(b)}</span><i>{esc(c)}</i></div>' for a, b, c in d["education"])
     photo = base64.b64encode((HERE / "photo.jpg").read_bytes()).decode()
@@ -230,7 +244,6 @@ def page(code, d):
   <aside class="side">
     <section><h2>{L["glance"]}</h2><dl>{glance}</dl></section>
     <section><h2>{L["skills"]}</h2>{skills}</section>
-    <section><h2>{L["apps"]}</h2><p class="intro">{esc(d["apps_intro"])}</p>{apps}</section>
     <section><h2>{L["education"]}</h2>{edu}</section>
     <section><h2>{L["languages"]}</h2><p style="margin:0">{esc(d["languages"])}</p></section>
   </aside>
