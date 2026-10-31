@@ -56,6 +56,7 @@
 .app-gb { --app: #0d93a6; }   /* GRID_BREAKER — cyaan   */
 .app-bb { --app: #5b4ee0; }   /* BabyBeam     — perigrijs-paars */
 .app-wv { --app: #8a6d2f; }   /* WristVault   — goud    */
+.app-bf { --app: #c2189b; }   /* BattleFold   — magenta */
 .app-sw { --app: #3f76a8; }   /* Stillwater   — maanblauw */
 .app-err{ --app: #c2352b; }   /* foutenlijst            */
 
@@ -63,6 +64,7 @@
   .app-gb { --app: #33f2ff; }
   .app-bb { --app: #8e83ff; }
   .app-wv { --app: #c9a659; }
+  .app-bf { --app: #ff40d9; }
   .app-sw { --app: #8fb3d9; }
   .app-err{ --app: #ff7d72; }
 }
@@ -70,6 +72,7 @@
 .cover .app-gb { --app: #33f2ff; }
 .cover .app-bb { --app: #8e83ff; }
 .cover .app-wv { --app: #c9a659; }
+.cover .app-bf { --app: #ff40d9; }
 .cover .app-sw { --app: #8fb3d9; }
 
 * { box-sizing: border-box; }

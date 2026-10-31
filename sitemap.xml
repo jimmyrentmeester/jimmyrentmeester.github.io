@@ -106,6 +106,55 @@
   </url>
 
   <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/index-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/index-nl.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/index-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/support.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/support.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/support-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/support.html"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/support-nl.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/support.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/support-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/support.html"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/privacy.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/privacy-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://jimmyrentmeester.github.io/battlefold/privacy-nl.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimmyrentmeester.github.io/battlefold/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://jimmyrentmeester.github.io/battlefold/privacy-nl.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimmyrentmeester.github.io/battlefold/privacy.html"/>
+  </url>
+
+  <url>
     <loc>https://jimmyrentmeester.github.io/stillwater/</loc>
     <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>

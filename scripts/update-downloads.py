@@ -75,6 +75,7 @@ APPS = {
     "6783058581": "BabyBeam",
     "6779888720": "GRID_BREAKER",
     "6792535679": "WristVault",
+    "6822167409": "BattleFold",
 }
 
 # Startdatum voor de allereerste run (lege cache): ruim vóór de vroegste
